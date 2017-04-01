@@ -15,6 +15,8 @@ export class AuthService {
 
             af.auth.subscribe((auth) => {
               this.authState = auth;
+              console.log(this.af.auth)
+              console.log(this.authState)
               console.log(this.authState)
             });
           }
@@ -32,6 +34,11 @@ export class AuthService {
   // Returns current user UID
   get currentUserId(): string {
     return this.authenticated ? this.authState.uid : '';
+  }
+
+  // Returns current user display name or Guest
+  get currentUserDisplayName(): string {
+    return this.authenticated ? this.authState.auth.displayName : 'GUEST';
   }
 
 
@@ -55,7 +62,7 @@ export class AuthService {
 
   private socialSignIn(provider: number): firebase.Promise<FirebaseAuthState> {
     return this.af.auth.login({provider, method: AuthMethods.Popup})
-      .then(() => this.writeUserData() )
+      .then(() => this.updateUserData() )
       .catch(error => console.log(error));
     }
 
@@ -94,7 +101,7 @@ export class AuthService {
 
   //// Helpers ////
 
-  private writeUserData(): void {
+  private updateUserData(): void {
   // Writes user name and email to realtime db
   // useful if your app displays information about users or for admin features
 

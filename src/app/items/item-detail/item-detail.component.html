@@ -1,0 +1,13 @@
+{{ item.title || 'no title' }}<br>
+{{ item.body || 'no body' }}<br>
+Active: {{ item.active }}<br>
+{{ item.lastClick | date: 'medium' }}<br>
+
+
+<span (click)='deleteItem()'>Delete</span>
+<span (click)='updateTimeStamp()'>Log Timestamp</span>
+
+<span *ngIf='item.active' (click)='updateActive(false)'>Mark Active</span>
+<span *ngIf='!item.active' (click)='updateActive(true)'>Mark Complete</span>
+
+<hr>

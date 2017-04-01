@@ -1,0 +1,8 @@
+<h3>Multiple Files</h3>
+<input type="file" (change)="detectFiles($event)" multiple>
+<button (click)="uploadMulti()">Upload!</button>
+
+<hr>
+<h3>Single File</h3>
+<input type="file" (change)="detectFiles($event)">
+<button (click)="upload()">Upload!</button>

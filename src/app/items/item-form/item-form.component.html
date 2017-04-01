@@ -1,0 +1,26 @@
+<h3>New Task Form</h3>
+
+<div>
+  <label>Name: </label>
+  <input placeholder="Item Title" class="form-control"
+  [(ngModel)]="item.title"
+  required minlength="2" maxlength="23"
+  #title='ngModel'>
+
+  <div *ngIf="title.dirty || title.touched">
+    <p *ngIf='title.errors; then errors else valid'>template renders here...</p>
+  </div>
+
+  <br>
+  <label>Body: </label>
+  <textarea  placeholder="Item Body" class="form-control"
+  [(ngModel)]="item.body"
+  required minlength="2" maxlength="23"
+  #body='ngModel'>
+  </textarea>
+  <br>
+  <button (click)='createItem()' [disabled]="!title.valid || !body.valid">Create</button>
+</div>
+
+<ng-template #valid>looks good!</ng-template>
+<ng-template #errors>form contains errors!</ng-template>

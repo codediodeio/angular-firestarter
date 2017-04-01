@@ -10,7 +10,7 @@ import { AuthService } from "../../core/auth.service";
 })
 export class UserLoginComponent implements OnInit {
 
-  constructor(private _auth: AuthService,
+  constructor(private auth: AuthService,
               private router: Router) { }
 
 
@@ -21,30 +21,30 @@ export class UserLoginComponent implements OnInit {
   /// Social Login
 
   signInWithGithub(): void {
-    this._auth.githubLogin()
-    .then(() => this.postSignIn());
+    this.auth.githubLogin()
+    .then(() => this.afterSignIn());
   }
 
   signInWithGoogle(): void {
-    this._auth.googleLogin()
-      .then(() => this.postSignIn());
+    this.auth.googleLogin()
+      .then(() => this.afterSignIn());
   }
 
   signInWithFacebook(): void {
-    this._auth.facebookLogin()
-      .then(() => this.postSignIn());
+    this.auth.facebookLogin()
+      .then(() => this.afterSignIn());
   }
 
   signInWithTwitter(): void {
-    this._auth.twitterLogin()
-      .then(() => this.postSignIn());
+    this.auth.twitterLogin()
+      .then(() => this.afterSignIn());
   }
 
   /// Anonymous Sign In
 
   // signInAnonymously() {
   //   this._auth.anonymousLogin()
-  //     .then(() => this.postSignIn());
+  //     .then(() => this.afterSignIn());
   // }
 
 
@@ -54,7 +54,7 @@ export class UserLoginComponent implements OnInit {
 
   /// Shared
 
-  private postSignIn(): void {
+  private afterSignIn(): void {
     // Do after login stuff here, such router redirects, toast messages, etc.
     this.router.navigate(['/']);
   }

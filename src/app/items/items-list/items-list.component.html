@@ -1,0 +1,17 @@
+<h1>Items</h1>
+
+<div *ngFor="let item of items | async">
+  <item-detail [item]='item'></item-detail>
+</div>
+
+
+
+<button (click)='addEmptyItem()'>Add Item</button>
+<button (click)='deleteItems()'>Delete Entire List</button>
+
+<hr>
+
+<item-form></item-form>
+
+
+<!-- These temples will appear contionally -->
