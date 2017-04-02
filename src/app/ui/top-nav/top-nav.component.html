@@ -1,0 +1,26 @@
+<nav class="navbar  navbar-light">
+    <button (click)="toggleCollapse()" class="navbar-toggler navbar-toggler-right" type="button">
+      <span [hidden]="collapse=='open'" class="fa fa-bars fa-lg"></span>
+      <span [hidden]="collapse=='closed'" class="fa fa-times fa-lg"></span>
+   </button>
+
+  <a class="navbar-brand" routerLink="/">
+    <i class="fa fa-fire"></i> FireStarter
+  </a>
+
+  <!-- [class.show]="collapse==open" -->
+
+    <div class="collapse show"  [@collapse]="collapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/items">Items (Realtime DB Example)</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/uploads">Uploads (File Upload Example)</a>
+        </li>
+      </ul>
+    </div>
+  </nav>

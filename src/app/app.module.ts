@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,6 +28,11 @@ import { UploadFormComponent } from './uploads/upload-form/upload-form.component
 import { UploadsListComponent } from './uploads/uploads-list/uploads-list.component';
 import { UploadDetailComponent } from './uploads/upload-detail/upload-detail.component';
 
+// FireStarter Navigation
+import { NavService } from './ui/shared/nav.service';
+import { TopNavComponent } from './ui/top-nav/top-nav.component';
+
+
 export const firebaseConfig = environment.firebaseConfig;
 
 ///// End FireStarter
@@ -42,19 +48,22 @@ export const firebaseConfig = environment.firebaseConfig;
     ItemDetailComponent,
     UploadFormComponent,
     UploadsListComponent,
-    UploadDetailComponent
+    UploadDetailComponent,
+    TopNavComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireModule.initializeApp(firebaseConfig),
+    BrowserAnimationsModule,
   ],
   providers: [
     AuthService,
     ItemService,
     UploadService,
+    NavService,
 
   ],
   bootstrap: [

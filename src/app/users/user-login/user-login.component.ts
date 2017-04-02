@@ -10,7 +10,7 @@ import { AuthService } from "../../core/auth.service";
 })
 export class UserLoginComponent implements OnInit {
 
-  constructor(private auth: AuthService,
+  constructor(public auth: AuthService,
               private router: Router) { }
 
 

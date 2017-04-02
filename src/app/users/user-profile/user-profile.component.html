@@ -1,15 +1,18 @@
-<!-- User logged in -->
-<div *ngIf="auth.currentUser">
-  UserID: {{ auth.currentUserId }} <br>
-  DisplayName: {{ auth.currentUser.displayName}} <br>
-  <img [src]="auth.currentUser.photoURL || 'https://api.adorable.io/avatars/109/fire.png'" width="50px"> <br>
-  <!-- TIP: Call {{ auth.currentUser | json }} to see full Auth object -->
-  <!-- {{ auth.currentUser | json }} -->
+  <div class="card">
 
-  <a (click)="logout()">Logout</a>
-</div>
+    <!-- User logged in -->
+    <div class="card-block" *ngIf="auth.currentUser">
+      <h3 class="card-title">Howdy, {{ auth.currentUserDisplayName }}</h3>
+      <img class="card-img-top" [src]="auth.currentUser.photoURL || 'https://api.adorable.io/avatars/109/fire.png'" width=50px>
+      <p class="card-text">This is my profile</p>
+      <button class="btn btn-secondary" (click)="logout()">Logout</button>
+   </div>
 
-<!-- User NOT logged in -->
-<div *ngIf="!auth.currentUser">
-  <a routerLink="/login">Login</a>
-</div>
+    <!-- User NOT logged in -->
+    <div class="card-block" *ngIf="!auth.currentUser">
+      <h3 class="card-title">Howdy, {{ auth.currentUserDisplayName }}</h3>
+      <p class="card-text">Login to get started...</p>
+      <button class="btn btn-primary" routerLink="/login">Login</button>
+    </div>
+
+  </div>

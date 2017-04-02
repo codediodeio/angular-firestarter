@@ -1,0 +1,62 @@
+@import 'variables';
+
+////// Top Nav
+
+.navbar {
+  margin-bottom: 20px;
+}
+
+.navbar-toggler {
+  border: none;
+  margin-top: 5px;
+  &:focus {
+    outline:0;
+  }
+}
+
+
+///// Content
+
+.card {
+  margin-bottom: 20px;
+}
+
+.form-control {
+  margin-bottom: 20px;
+}
+
+///// Social Buttons
+
+.btn {
+  cursor: pointer;
+  border-radius: 0;
+}
+
+.btn-social {
+  color: #fff;
+  &:hover {
+    box-shadow: 0 14px 26px -12px rgba(0, 0, 0, 0.2), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.1);
+  }
+  .btn-block {
+    margin-bottom: 10px;
+  }
+}
+
+.btn-twitter {
+  background-color: #55ACEE;
+}
+.btn-facebook {
+  background-color: #3B5998;
+}
+
+.btn-github {
+  background-color: #333333;
+}
+
+.btn-google {
+  background-color: #DD4B39;
+}
+
+// .btn:hover{
+//   box-shadow: 0 14px 26px -12px rgba(0, 0, 0, 0.2), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.1);
+// }

@@ -18,7 +18,7 @@ export class ItemDetailComponent implements OnInit {
 
   updateTimeStamp() {
     let date = new Date()
-    this.itemSvc.updateItem(this.item.$key, { lastClick: date })
+    this.itemSvc.updateItem(this.item.$key, { timeStamp: date })
   }
 
   updateActive(value: boolean) {

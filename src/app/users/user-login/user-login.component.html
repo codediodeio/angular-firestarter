@@ -1,28 +1,28 @@
+<div *ngIf="!auth.currentUser; else alreadyLoggedIn">
+
 <h3>Social Login</h3>
 
-<a (click)="signInWithGithub()" class="btn btn-github">
+<button (click)="signInWithGithub()" class="btn btn-social btn-block btn-github">
   <i class="fa fa-github fa-lg"></i> Connect GitHub
-</a>
+</button>
 
 
-<a (click)="signInWithGoogle()" class="btn btn-google">
+<button (click)="signInWithGoogle()" class="btn btn-social btn-block btn-google">
   <i class="fa fa-google-plus fa-lg"></i> Connect Google
-</a>
+</button>
 
-
-<a (click)="signInWithFacebook()" class="btn btn-facebook">
+<button (click)="signInWithFacebook()" class="btn btn-social btn-block btn-facebook">
   <i class="fa fa-facebook fa-lg"></i> Connect Facebook
-</a>
+</button>
 
-<a (click)="signInWithTwitter()" class="btn btn-facebook">
-  <i class="fa fa-twitter fa-lg"></i> Connect Facebook
-</a>
+<button (click)="signInWithTwitter()" class="btn btn-social btn-block btn-twitter">
+  <i class="fa fa-twitter fa-lg"></i> Connect Twitter
+</button>
 
-<h3>Email/Password Login</h3>
+</div>
 
-
-<h3>Anonymous Sign In</h3>
-
-<a (click)="signInAnonymously()" class="btn btn-primary btn-block">
-    Sign In as Guest
-</a>
+<ng-template #alreadyLoggedIn>
+  <p class="text-success">
+    Alerady logged in!
+  </p>
+</ng-template>

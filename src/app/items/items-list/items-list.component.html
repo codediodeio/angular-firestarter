@@ -1,13 +1,12 @@
 <h1>Items</h1>
 
-<div *ngFor="let item of items | async">
+<div *ngFor="let item of items | async" class="card">
   <item-detail [item]='item'></item-detail>
 </div>
 
 
 
-<button (click)='addEmptyItem()'>Add Item</button>
-<button (click)='deleteItems()'>Delete Entire List</button>
+<button type="button" class="btn btn-danger" (click)='deleteItems()'>Delete Entire List</button>
 
 <hr>
 

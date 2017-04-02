@@ -1,8 +1,30 @@
-<h3>Multiple Files</h3>
-<input type="file" (change)="detectFiles($event)" multiple>
-<button (click)="uploadMulti()">Upload!</button>
+<h3>Single or Multiple File Uploads</h3>
 
-<hr>
-<h3>Single File</h3>
-<input type="file" (change)="detectFiles($event)">
-<button (click)="upload()">Upload!</button>
+<div class="card card-outline-primary">
+  <div class="card-block">
+
+
+    <label class="btn btn-default btn-file">
+       <input type="file" (change)="detectFiles($event)">
+    </label>
+
+    <button class="btn btn-primary"
+            [disabled]="!selectedFiles"
+            (click)="upload()">
+
+      Upload Single
+    </button>
+
+    <label class="btn btn-default btn-file">
+       <input type="file" (change)="detectFiles($event)" multiple>
+    </label>
+
+
+      <button class="btn btn-primary"
+              [disabled]="!selectedFiles"
+              (click)="uploadMulti()">
+
+        Upload Multiple
+      </button>
+  </div>
+</div>

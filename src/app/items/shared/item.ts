@@ -9,5 +9,5 @@ export class Item {
   title: string;
   body: string;
   active: boolean = true;
-  lastClick: Date = new Date();
+  timeStamp: Date = new Date();
 }

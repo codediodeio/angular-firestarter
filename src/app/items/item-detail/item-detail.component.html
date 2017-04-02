@@ -1,13 +1,15 @@
-{{ item.title || 'no title' }}<br>
-{{ item.body || 'no body' }}<br>
-Active: {{ item.active }}<br>
-{{ item.lastClick | date: 'medium' }}<br>
 
+<h5 class="card-header">{{ item.title || 'missing title' }}</h5>
+<div class="card-block">
 
-<span (click)='deleteItem()'>Delete</span>
-<span (click)='updateTimeStamp()'>Log Timestamp</span>
+  Active: {{ item.active }}<br>
+  {{ item.timeStamp | date: 'medium' }}
 
-<span *ngIf='item.active' (click)='updateActive(false)'>Mark Active</span>
-<span *ngIf='!item.active' (click)='updateActive(true)'>Mark Complete</span>
+</div>
 
-<hr>
+<div class="card-footer text-muted text-xs-center">
+  <span class="btn btn-sm btn-secondary" (click)='updateTimeStamp()'>Update Timestamp</span>
+  <span class="btn btn-sm btn-success" *ngIf='item.active' (click)='updateActive(false)'>Mark Complete</span>
+  <span class="btn btn-sm btn-primary" *ngIf='!item.active' (click)='updateActive(true)'>Mark Active</span>
+  <span class="btn btn-sm btn-danger" (click)='deleteItem()'>Delete</span>
+</div>

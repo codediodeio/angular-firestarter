@@ -1,5 +1,28 @@
-<h1>{{title}}</h1>
+  <top-nav></top-nav>
 
-<user-profile></user-profile>
+<!-- <div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-3"><i class="fa fa-fire"></i> {{title}}</h1>
+    <p class="lead">Angular v4 starter app wired up with Firebase</p>
+  </div>
+</div> -->
 
-<router-outlet></router-outlet>
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-3 align-self-start">
+
+      <user-profile></user-profile>
+
+      <a routerLink="/items">Realtime DB Demo</a><br>
+      <a routerLink="/uploads">File Uploads Demo</a>
+
+
+    </div>
+    <div class="col-md-9">
+
+      <router-outlet></router-outlet>
+
+    </div>
+  </div>
+</div>
