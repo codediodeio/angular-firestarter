@@ -13,6 +13,7 @@ import { AngularFireModule } from 'angularfire2';
 
 // FireStarter Users
 import { AuthService } from './core/auth.service';
+import { AuthGuard} from './core/auth.guard';
 import { UserLoginComponent } from './users/user-login/user-login.component';
 import { UserProfileComponent } from './users/user-profile/user-profile.component';
 
@@ -31,6 +32,7 @@ import { UploadDetailComponent } from './uploads/upload-detail/upload-detail.com
 // FireStarter Navigation
 import { NavService } from './ui/shared/nav.service';
 import { TopNavComponent } from './ui/top-nav/top-nav.component';
+import { FooterNavComponent } from './ui/footer-nav/footer-nav.component';
 
 
 export const firebaseConfig = environment.firebaseConfig;
@@ -49,7 +51,8 @@ export const firebaseConfig = environment.firebaseConfig;
     UploadFormComponent,
     UploadsListComponent,
     UploadDetailComponent,
-    TopNavComponent
+    TopNavComponent,
+    FooterNavComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +64,7 @@ export const firebaseConfig = environment.firebaseConfig;
   ],
   providers: [
     AuthService,
+    AuthGuard,
     ItemService,
     UploadService,
     NavService,

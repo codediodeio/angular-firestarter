@@ -14,7 +14,6 @@
   }
 }
 
-
 ///// Content
 
 .card {
@@ -23,6 +22,22 @@
 
 .form-control {
   margin-bottom: 20px;
+}
+
+.text-sm {
+  font-size: 0.8em;
+}
+
+.main-content {
+  min-height: 75vh;
+  margin-bottom: 20px;
+}
+
+.footer {
+  flex: 1;
+  border-top: 1px solid $gray-lightest;
+  padding: 40px;
+  min-height: 100px;
 }
 
 ///// Social Buttons

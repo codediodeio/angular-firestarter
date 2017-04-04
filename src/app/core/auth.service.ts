@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth, AngularFireDatabase, FirebaseAuthState, AuthProviders, AuthMethods, AngularFire } from "angularfire2";
-// import { User } from "../users/user";
 import { Router } from "@angular/router";
 
 
 @Injectable()
 export class AuthService {
 
-  public authState: FirebaseAuthState = null;
+  authState: FirebaseAuthState = null;
 
   constructor(private af: AngularFire,
               private db: AngularFireDatabase,
@@ -15,9 +14,6 @@ export class AuthService {
 
             af.auth.subscribe((auth) => {
               this.authState = auth;
-              console.log(this.af.auth)
-              console.log(this.authState)
-              console.log(this.authState)
             });
           }
 
@@ -36,11 +32,20 @@ export class AuthService {
     return this.authenticated ? this.authState.uid : '';
   }
 
-  // Returns current user display name or Guest
-  get currentUserDisplayName(): string {
-    return this.authenticated ? this.authState.auth.displayName : 'GUEST';
+  // Anonymous User
+  get currentUserAnonymous(): boolean {
+    return this.authenticated ? this.authState.anonymous : false
   }
 
+  // Returns current user display name or Guest
+  get currentUserDisplayName(): string {
+    if (!this.authenticated) { return 'GUEST' }
+
+    else if (this.currentUserAnonymous) { return 'ANONYMOUS' }
+
+    else { return this.authState.auth.displayName || 'OAUTH USER' }
+
+  }
 
   //// Social Auth ////
 
@@ -64,7 +69,19 @@ export class AuthService {
     return this.af.auth.login({provider, method: AuthMethods.Popup})
       .then(() => this.updateUserData() )
       .catch(error => console.log(error));
-    }
+  }
+
+
+  //// Anonymous Auth ////
+
+  anonymousLogin() {
+    return this.af.auth.login({
+      provider: AuthProviders.Anonymous,
+      method: AuthMethods.Anonymous,
+    })
+    .then(() => this.updateUserData())
+    .catch(error => console.log(error));
+  }
 
   //// Email/Password Auth ////
 
@@ -80,16 +97,6 @@ export class AuthService {
   //      .catch(error => console.log(error));
   // }
 
-  //// Anonymous Auth ////
-
-  // anonymousLogin() {
-  //   return this.af.auth.login({
-  //     provider: AuthProviders.Anonymous,
-  //     method: AuthMethods.Anonymous,
-  //   })
-  //   .then(() => this.writeUserData())
-  //   .catch(error => console.log(error));
-  // }
 
   //// Sign Out ////
 

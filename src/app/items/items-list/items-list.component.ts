@@ -21,8 +21,6 @@ export class ItemsListComponent implements OnInit {
 
   addEmptyItem() {
     let item = new Item()
-    console.log(item)
-    // let item = new Item(data.title, data.body)
     this.itemSvc.createItem(item)
   }
 

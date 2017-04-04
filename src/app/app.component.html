@@ -1,16 +1,9 @@
-  <top-nav></top-nav>
+<top-nav></top-nav>
 
-<!-- <div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-3"><i class="fa fa-fire"></i> {{title}}</h1>
-    <p class="lead">Angular v4 starter app wired up with Firebase</p>
-  </div>
-</div> -->
-
-<div class="container">
+<div class="container main-content">
 
   <div class="row">
-    <div class="col-md-3 align-self-start">
+    <div class="col-md-4 align-self-start">
 
       <user-profile></user-profile>
 
@@ -19,10 +12,14 @@
 
 
     </div>
-    <div class="col-md-9">
+    <main class="col-md-8 main">
 
       <router-outlet></router-outlet>
 
-    </div>
+    </main>
   </div>
+
 </div>
+
+
+<footer-nav></footer-nav>

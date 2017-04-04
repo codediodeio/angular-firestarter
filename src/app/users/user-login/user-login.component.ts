@@ -15,7 +15,6 @@ export class UserLoginComponent implements OnInit {
 
 
   ngOnInit() {
-
   }
 
   /// Social Login
@@ -42,15 +41,11 @@ export class UserLoginComponent implements OnInit {
 
   /// Anonymous Sign In
 
-  // signInAnonymously() {
-  //   this._auth.anonymousLogin()
-  //     .then(() => this.afterSignIn());
-  // }
+  signInAnonymously() {
+    this.auth.anonymousLogin()
+      .then(() => this.afterSignIn());
+  }
 
-
-  //// Email Login
-
-  /// See Tutorial...
 
   /// Shared
 

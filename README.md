@@ -1,28 +1,51 @@
-# Firestarter
+# FireStarter - Angular4 + Firebase Starter App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0-rc.2.
+FireStarter is designed to handle the basic features most Angular+Firebase apps need. It can serve as a foundation to quickly roll out more complex features.
 
-## Development server
+Demo
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Features
 
-## Code scaffolding
+- Authentication w/ Router Guard
+- Realtime Database CRUD Demo
+- File Uploads to Firebase Storage
+- SASS-based
+- Bootstrap 4
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
+## Usage
 
-## Build
+Create an account at https://firebase.google.com/
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+`git clone`
+`cd firestarter`
+`npm install`
 
-## Running unit tests
+Create two new files in the `/environments` dir.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+environment.ts
+```typescript
+export const environment = {
+  production: false,
+  firebaseConfig: {
+    apiKey: "APIKEY",
+    authDomain: "DEV-APP.firebaseapp.com",
+    databaseURL: "https://DEV-APP.firebaseio.com",
+    storageBucket: "DEV-APP.appspot.com"
+  }
+};
+```
+environment.prod.ts
+```typescript
+export const environment = {
+  production: true,
+  firebaseConfig: {
+    // same as above, or use a different firebase project to isolate environments
+  }
+};
+```
 
-## Running end-to-end tests
+And finally `ng serve`
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+## Apps Using FireStarter in Production
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+- [ArtiFilter](https://app.artifilter.com) - Neural Art Generator

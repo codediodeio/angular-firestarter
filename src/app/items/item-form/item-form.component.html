@@ -7,7 +7,7 @@
     <input placeholder="Item Title" class="form-control"
     [(ngModel)]="item.title"
     required minlength="2" maxlength="23"
-    #title='ngModel'>
+    #title='ngModel' autofocus>
 
     <div *ngIf="title.dirty">
       <span *ngIf='title.errors; then errors else valid'>template renders here...</span>

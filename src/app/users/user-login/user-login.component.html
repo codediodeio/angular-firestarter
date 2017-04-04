@@ -1,21 +1,29 @@
 <div *ngIf="!auth.currentUser; else alreadyLoggedIn">
 
-<h3>Social Login</h3>
+<h3>Anonymous Login</h3>
 
-<button (click)="signInWithGithub()" class="btn btn-social btn-block btn-github">
-  <i class="fa fa-github fa-lg"></i> Connect GitHub
+<button (click)="signInAnonymously()" class="btn btn-block btn-secondary">
+  <i class="fa fa-user-secret fa-lg"></i> Connect Anonymously
 </button>
+
+<hr>
+
+<h3>Social Login</h3>
 
 
 <button (click)="signInWithGoogle()" class="btn btn-social btn-block btn-google">
   <i class="fa fa-google-plus fa-lg"></i> Connect Google
 </button>
 
-<button (click)="signInWithFacebook()" class="btn btn-social btn-block btn-facebook">
+<button (click)="signInWithGithub()" class="btn btn-social btn-block btn-github" disabled>
+  <i class="fa fa-github fa-lg"></i> Connect GitHub
+</button>
+
+<button (click)="signInWithFacebook()" class="btn btn-social btn-block btn-facebook" disabled>
   <i class="fa fa-facebook fa-lg"></i> Connect Facebook
 </button>
 
-<button (click)="signInWithTwitter()" class="btn btn-social btn-block btn-twitter">
+<button (click)="signInWithTwitter()" class="btn btn-social btn-block btn-twitter" disabled>
   <i class="fa fa-twitter fa-lg"></i> Connect Twitter
 </button>
 

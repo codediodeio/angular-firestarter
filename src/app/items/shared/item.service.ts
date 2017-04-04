@@ -7,8 +7,8 @@ export class ItemService {
 
   private basePath: string = '/items';
 
-  items: FirebaseListObservable<Item[]> = null; // entire list of objects
-  item: FirebaseObjectObservable<Item> = null; // single focused object
+  items: FirebaseListObservable<Item[]> = null; //  list of objects
+  item: FirebaseObjectObservable<Item> = null; //   single object
 
   constructor(private af: AngularFire,
               private db: AngularFireDatabase) { }

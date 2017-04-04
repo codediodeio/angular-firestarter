@@ -23,14 +23,11 @@ export class UploadService {
 
   singleUpload(file: File) {
     let upload = new Upload(file);
-    console.log(upload)
     this.pushUpload(upload)
   }
 
 
   multiUpload(files:FileList) {
-    // console.log( Array(files.length))
-    // for (var i = 0; i < files.length; i++ ) {
     let filesIndex = _.range(files.length)
     _.each(filesIndex, (idx) => {
       this.singleUpload(files[idx])}
@@ -72,7 +69,6 @@ export class UploadService {
 
   // Writes the file details to the realtime db
   private saveFileData(upload: Upload) {
-    console.log(upload)
     this.db.list(`${this.basePath}/`).push(upload);
   }
 
