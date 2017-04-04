@@ -8,17 +8,16 @@ Demo
 
 - Authentication w/ Router Guard
 - Realtime Database CRUD Demo
-- File Uploads to Firebase Storage
-- SASS-based
-- Bootstrap 4
+- File Uploads to Firebase Storage Demo
+- SASS + Bootstrap 4 + FontAwesome
 
 ## Usage
 
 Create an account at https://firebase.google.com/
 
-`git clone`
-`cd firestarter`
-`npm install`
+- `git clone`
+- `cd firestarter`
+- `npm install`
 
 Create two new files in the `/environments` dir.
 
