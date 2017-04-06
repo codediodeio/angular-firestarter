@@ -15,13 +15,13 @@ Demo
 
 Create an account at https://firebase.google.com/
 
-- `git clone`
+- `git clone https://github.com/codediodeio/angular-firestarter.git firestarter`
 - `cd firestarter`
 - `npm install`
 
 Create two new files in the `/environments` dir.
 
-environment.ts
+#### environment.ts
 ```typescript
 export const environment = {
   production: false,
@@ -33,7 +33,7 @@ export const environment = {
   }
 };
 ```
-environment.prod.ts
+#### environment.prod.ts
 ```typescript
 export const environment = {
   production: true,

@@ -3,6 +3,7 @@
 /src/environments/environment.prod.ts
 /src/environments/environment.ts
 NOTES.md
+functions/*
 
 # compiled output
 /dist
