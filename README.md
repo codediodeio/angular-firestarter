@@ -19,7 +19,7 @@ Create an account at https://firebase.google.com/
 - `cd firestarter`
 - `npm install`
 
-Create two new files in the `/environments` dir.
+Create the environment files below in `src/environments/`.
 
 #### environment.ts
 ```typescript
