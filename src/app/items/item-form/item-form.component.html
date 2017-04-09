@@ -13,18 +13,6 @@
       <span *ngIf='title.errors; then errors else valid'>template renders here...</span>
     </div>
 
-    <!-- <br>
-    <label class="control-label">Body</label>
-    <textarea  placeholder="Item Body" class="form-control" rows="5"
-    [(ngModel)]="item.body"
-    required minlength="5" maxlength="200"
-    #body='ngModel'>
-    </textarea>
-
-    <div *ngIf="body.dirty">
-      <span *ngIf='body.errors; then errors else valid'>template renders here...</span>
-    </div> -->
-
 
     <button class="btn btn-primary" (click)='createItem()' [disabled]="!title.valid">Create</button>
   </fieldset>

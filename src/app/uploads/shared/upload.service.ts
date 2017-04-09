@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFire, AngularFireDatabase, FirebaseListObservable } from 'angularfire2';
-import * as firebase from 'firebase';
 import { Upload } from './upload';
-import * as _ from "lodash";
+import * as firebase from 'firebase';
+
 
 @Injectable()
 export class UploadService {
@@ -21,18 +21,6 @@ export class UploadService {
     return this.uploads
   }
 
-  singleUpload(file: File) {
-    let upload = new Upload(file);
-    this.pushUpload(upload)
-  }
-
-
-  multiUpload(files:FileList) {
-    let filesIndex = _.range(files.length)
-    _.each(filesIndex, (idx) => {
-      this.singleUpload(files[idx])}
-    )
-  }
 
   deleteUpload(upload: Upload) {
     this.deleteFileData(upload.$key)
@@ -43,7 +31,7 @@ export class UploadService {
   }
 
   // Executes the file uploading to firebase https://firebase.google.com/docs/storage/web/upload-files
-  private pushUpload(upload: Upload) {
+  pushUpload(upload: Upload) {
     let storageRef = firebase.storage().ref();
     this.uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
 

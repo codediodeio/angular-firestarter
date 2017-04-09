@@ -1,3 +1,12 @@
+<div *ngIf="currentUpload">
+  <div class="progress">
+    <div class="progress-bar progress-bar-animated" [ngStyle]="{ 'width': currentUpload?.progress + '%' }"></div>
+  </div>
+
+  Progress: {{currentUpload?.name}} | {{currentUpload?.progress}}% Complete
+</div>
+
+
 <div class="card card-outline-primary">
   <div class="card-block">
 
@@ -8,7 +17,7 @@
 
     <button class="btn btn-primary"
             [disabled]="!selectedFiles"
-            (click)="upload()">
+            (click)="uploadSingle()">
 
       Upload Single
     </button>
