@@ -2,8 +2,6 @@
 
 FireStarter is designed to handle the basic features most Angular+Firebase apps need. It can serve as a foundation to quickly roll out more complex features.
 
-Demo
-
 ## Features
 
 - Authentication w/ Router Guard
