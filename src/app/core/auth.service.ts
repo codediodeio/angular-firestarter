@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth, AngularFireDatabase, FirebaseAuthState, AuthProviders, AuthMethods, AngularFire } from "angularfire2";
 import { Router } from "@angular/router";
+import * as firebase from 'firebase';
+
+export class EmailPasswordCredentials {
+  email: string;
+  password: string;
+}
 
 
 @Injectable()
@@ -39,11 +45,11 @@ export class AuthService {
 
   // Returns current user display name or Guest
   get currentUserDisplayName(): string {
-    if (!this.authenticated) { return 'GUEST' }
+    if (!this.authenticated) { return 'Guest' }
 
-    else if (this.currentUserAnonymous) { return 'ANONYMOUS' }
+    else if (this.currentUserAnonymous) { return 'Anonymous' }
 
-    else { return this.authState.auth.displayName || 'OAUTH USER' }
+    else { return this.authState.auth.displayName || 'User without a Name' }
 
   }
 
@@ -83,19 +89,45 @@ export class AuthService {
     .catch(error => console.log(error));
   }
 
+  // anonymousUpgrade(): firebase.Promise<FirebaseAuthState> {
+  //
+  //   let anonId = this.currentUserId
+  //
+  //   // Login with google
+  //   return this.googleLogin().then( () => {
+  //     // get the data snapshot from anonymous account account
+  //     this.db.object(anonId).subscribe(snapshot => {
+  //       // map the anonymous user data to the new account.
+  //       this.db.object(this.currentUserId).update(snapshot)
+  //     })
+  //   });
+  // }
+
   //// Email/Password Auth ////
 
-  // emailSignUp(email: string, password: string): firebase.Promise<FirebaseAuthState> {
-  //   return this.af.auth.createUser({ email, password })
-  //     .then(() => this.writeUserData())
-  //     .catch(error => console.log(error));
-  // }
-  //
-  // emailLogin(email: string, password: string): firebase.Promise<FirebaseAuthState> {
-  //    return this.af.auth.login({email, password})
-  //      .then(() => this.writeUserData())
-  //      .catch(error => console.log(error));
-  // }
+  emailSignUp(credentials: EmailPasswordCredentials): firebase.Promise<FirebaseAuthState> {
+    return this.af.auth.createUser(credentials)
+      .then(() => this.updateUserData())
+      .catch(error => console.log(error));
+  }
+
+  emailLogin(credentials: EmailPasswordCredentials): firebase.Promise<FirebaseAuthState> {
+     return this.af.auth.login(credentials,
+       { provider: AuthProviders.Password,
+         method: AuthMethods.Password
+        })
+       .then(() => this.updateUserData())
+       .catch(error => console.log(error));
+  }
+
+  // Sends email allowing user to reset password
+  resetPassword(email: string) {
+    var auth = firebase.auth();
+
+    return auth.sendPasswordResetEmail(email)
+      .then(() => console.log("email sent"))
+      .catch((error) => console.log(error))
+  }
 
 
   //// Sign Out ////

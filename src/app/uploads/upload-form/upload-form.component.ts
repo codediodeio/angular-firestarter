@@ -22,11 +22,6 @@ export class UploadFormComponent implements OnInit {
       this.selectedFiles = event.target.files;
   }
 
-  // upload() {
-  //   let file = this.selectedFiles.item(0)
-  //   this.upSvc.singleUpload(file)
-  // }
-
   uploadSingle() {
     let file = this.selectedFiles.item(0)
     this.currentUpload = new Upload(file);
@@ -41,12 +36,6 @@ export class UploadFormComponent implements OnInit {
       this.upSvc.pushUpload(this.currentUpload)}
     )
   }
-
-
-  // uploadMulti() {
-  //   let files = this.selectedFiles
-  //   this.upSvc.multiUpload(files);
-  // }
 
 
 

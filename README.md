@@ -8,6 +8,7 @@ FireStarter is designed to handle the basic features most Angular+Firebase apps 
 - Realtime Database CRUD Demo
 - File Uploads to Firebase Storage Demo
 - SASS + Bootstrap 4 + FontAwesome
+- Reactive Form Validation
 
 ## Usage
 

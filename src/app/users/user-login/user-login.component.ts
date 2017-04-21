@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { AuthService } from "../../core/auth.service";
 
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'user-login',

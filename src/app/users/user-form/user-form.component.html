@@ -1,0 +1,62 @@
+
+<form [formGroup]="userForm"  *ngIf="newUser"  (ngSubmit)="signup()">
+
+  <h3>New User Signup</h3>
+  <p class="btn btn-sm btn-secondary" (click)="toggleForm()">Already Registered?</p>
+  <hr>
+
+  <label for="email">Email</label>
+  <input type="email" id="email" class="form-control"
+         formControlName="email" required >
+
+  <div *ngIf="formErrors.email" class="alert alert-danger">
+    {{ formErrors.email }}
+  </div>
+
+  <label for="password">Password</label>
+  <input type="password" id="password" class="form-control"
+         formControlName="password" required >
+
+  <div *ngIf="formErrors.password" class="alert alert-danger">
+    {{ formErrors.password }}
+  </div>
+
+  <button type="submit" class="btn btn-block btn-primary" [disabled]="!userForm.valid">Submit</button>
+
+  <span *ngIf="userForm.valid" class="text-success">Form is valid</span>
+
+
+</form>
+
+
+<form [formGroup]="userForm"  *ngIf="!newUser"  (ngSubmit)="login()">
+
+  <h3>Existing User Login</h3>
+  <p class="btn btn-sm btn-secondary" (click)="toggleForm()">New User?</p>
+  <hr>
+
+  <label for="email">Email</label>
+  <input type="email" id="email" class="form-control"
+         formControlName="email" required >
+
+  <div *ngIf="formErrors.email" class="alert alert-danger">
+    {{ formErrors.email }}
+  </div>
+
+  <label for="password">Password</label>
+  <input type="password" id="password" class="form-control"
+         formControlName="password" required >
+
+  <div *ngIf="formErrors.password" class="alert alert-danger">
+    {{ formErrors.password }}
+  </div>
+
+  <button type="submit" class="btn btn-block btn-primary" [disabled]="!userForm.valid">Submit</button>
+
+  <span *ngIf="userForm.valid" class="text-success">Form Looks Valid</span>
+
+  <p *ngIf="!passReset && userForm.controls.email.valid" class="btn btn-sm btn-secondary" (click)="resetPassword()">Reset Password for {{userForm.value.email}}?</p>
+  <p *ngIf="passReset" class="text-warning">Reset requested. Check your email instructions.</p>
+
+
+</form>

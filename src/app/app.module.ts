@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -16,6 +16,9 @@ import { AuthService } from './core/auth.service';
 import { AuthGuard} from './core/auth.guard';
 import { UserLoginComponent } from './users/user-login/user-login.component';
 import { UserProfileComponent } from './users/user-profile/user-profile.component';
+import { UserFormComponent } from './users/user-form/user-form.component';
+
+
 
 // FireStarter Items
 import { ItemService } from './items/shared/item.service';
@@ -52,11 +55,13 @@ export const firebaseConfig = environment.firebaseConfig;
     UploadsListComponent,
     UploadDetailComponent,
     TopNavComponent,
-    FooterNavComponent
+    FooterNavComponent,
+    UserFormComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),
