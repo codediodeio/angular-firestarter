@@ -36,6 +36,7 @@ import { UploadDetailComponent } from './uploads/upload-detail/upload-detail.com
 import { NavService } from './ui/shared/nav.service';
 import { TopNavComponent } from './ui/top-nav/top-nav.component';
 import { FooterNavComponent } from './ui/footer-nav/footer-nav.component';
+import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.component';
 
 
 export const firebaseConfig = environment.firebaseConfig;
@@ -56,7 +57,8 @@ export const firebaseConfig = environment.firebaseConfig;
     UploadDetailComponent,
     TopNavComponent,
     FooterNavComponent,
-    UserFormComponent
+    UserFormComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,
