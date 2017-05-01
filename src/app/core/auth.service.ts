@@ -33,6 +33,11 @@ export class AuthService {
     return this.authenticated ? this.authState.auth : null;
   }
 
+  // Returns
+  get currentUserObservable(): any {
+    return this.af.auth
+  }
+
   // Returns current user UID
   get currentUserId(): string {
     return this.authenticated ? this.authState.uid : '';
