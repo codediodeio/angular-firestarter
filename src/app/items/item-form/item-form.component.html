@@ -1,10 +1,8 @@
 <h3>New Task Form</h3>
 
-<div class='form-group'>
-  <fieldset>
-    <label class="control-label">Name: </label>
+    <label class="label">Name: </label>
 
-    <input placeholder="Item Title" class="form-control"
+    <input placeholder="Item Title" class="input"
     [(ngModel)]="item.title"
     required minlength="2" maxlength="23"
     #title='ngModel' autofocus>
@@ -14,14 +12,13 @@
     </div>
 
 
-    <button class="btn btn-primary" (click)='createItem()' [disabled]="!title.valid">Create</button>
-  </fieldset>
-</div>
+    <button class="button" (click)='createItem()' [disabled]="!title.valid">Create</button>
+
 
 <ng-template #valid>
-  <p class="text-success">looks good!</p>
+  <p class="help is-success">looks good!</p>
 </ng-template>
 
 <ng-template #errors>
-  <p class="text-danger">form contains errors!</p>
+  <p class="help is-danger">form contains errors!</p>
 </ng-template>

@@ -37,6 +37,7 @@ import { NavService } from './ui/shared/nav.service';
 import { TopNavComponent } from './ui/top-nav/top-nav.component';
 import { FooterNavComponent } from './ui/footer-nav/footer-nav.component';
 import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.component';
+import { ReadmePageComponent } from './ui/readme-page/readme-page.component';
 
 
 export const firebaseConfig = environment.firebaseConfig;
@@ -58,7 +59,8 @@ export const firebaseConfig = environment.firebaseConfig;
     TopNavComponent,
     FooterNavComponent,
     UserFormComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    ReadmePageComponent
   ],
   imports: [
     BrowserModule,

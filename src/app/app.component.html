@@ -1,25 +1,20 @@
 <top-nav></top-nav>
 
-<div class="container main-content">
+  <div class="content columns">
 
-  <div class="row">
-    <div class="col-md-4 align-self-start">
-
-      <user-profile></user-profile>
-
-      <a routerLink="/items">Realtime DB Demo</a><br>
-      <a routerLink="/uploads">File Uploads Demo</a>
+    <aside class="column is-2 is-offset-1">
+        <user-profile></user-profile>
+    </aside>
 
 
-    </div>
-    <main class="col-md-8 main">
-
+    <main class="column is-8">
       <router-outlet></router-outlet>
-
     </main>
-  </div>
 
-</div>
+    <aside class="column is-1">
+    </aside>
+
+  </div>
 
 
 <footer-nav></footer-nav>

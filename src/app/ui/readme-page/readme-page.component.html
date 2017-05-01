@@ -1,0 +1,42 @@
+<h1><a id="FireStarter__Angular4__Firebase_Starter_App_0"></a>FireStarter - Angular4 + Firebase Starter App</h1>
+<p>FireStarter is designed to handle the basic features most Angular+Firebase apps need. It can serve as a foundation to quickly roll out more complex features.</p>
+<h2><a id="Features_4"></a>Features</h2>
+<ul>
+<li>Authentication w/ Router Guard</li>
+<li>Realtime Database CRUD Demo</li>
+<li>File Uploads to Firebase Storage Demo</li>
+<li>SASS + Bulma + FontAwesome</li>
+<li>Reactive Form Validation</li>
+</ul>
+<h2><a id="Usage_12"></a>Usage</h2>
+<p>Create an account at <a href="https://firebase.google.com/">https://firebase.google.com/</a></p>
+<ul>
+<li><code>git clone https://github.com/codediodeio/angular-firestarter.git firestarter</code></li>
+<li><code>cd firestarter</code></li>
+<li><code>npm install</code></li>
+</ul>
+<p>Create the environment files below in <code>src/environments/</code>.</p>
+<h4><a id="environmentts_22"></a>environment.ts</h4>
+<pre><code class="language-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> environment = {{'{'}}
+  production: <span class="hljs-literal">false</span>,
+  firebaseConfig: {{'{'}}
+    apiKey: <span class="hljs-string">"APIKEY"</span>,
+    authDomain: <span class="hljs-string">"DEV-APP.firebaseapp.com"</span>,
+    databaseURL: <span class="hljs-string">"https://DEV-APP.firebaseio.com"</span>,
+    storageBucket: <span class="hljs-string">"DEV-APP.appspot.com"</span>
+  {{'}'}}
+{{'}'}};
+</code></pre>
+<h4><a id="environmentprodts_34"></a>environment.prod.ts</h4>
+<pre><code class="language-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> environment = {{'{'}}
+  production: <span class="hljs-literal">true</span>,
+  firebaseConfig: {{'{'}}
+    <span class="hljs-comment">// same as above, or use a different firebase project to isolate environments</span>
+  {{'}'}}
+{{'}'}};
+</code></pre>
+<p>And finally <code>ng serve</code></p>
+<h2><a id="Apps_Using_FireStarter_in_Production_46"></a>Apps Using FireStarter in Production</h2>
+<ul>
+<li><a href="https://app.artifilter.com">ArtiFilter</a> - Neural Art Generator</li>
+</ul>

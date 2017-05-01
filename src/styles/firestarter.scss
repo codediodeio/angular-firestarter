@@ -1,60 +1,37 @@
 @import 'variables';
 
-////// Top Nav
 
-.navbar {
-  margin-bottom: 20px;
-}
-
-.navbar-toggler {
-  border: none;
-  margin-top: 5px;
-  &:focus {
-    outline:0;
-  }
-}
 
 ///// Content
 
-.card {
-  margin-bottom: 20px;
-}
-
-.form-control {
-  margin-bottom: 20px;
-}
-
-.text-sm {
-  font-size: 0.8em;
-}
-
-.main-content {
-  min-height: 75vh;
-  margin-bottom: 20px;
-}
 
 .footer {
-  flex: 1;
+  // flex: 1;
   border-top: 1px solid $gray-lightest;
-  padding: 40px;
+  // padding: 40px;
   min-height: 100px;
+  text-align: center;
+}
+
+.text-truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 ///// Social Buttons
 
-.btn {
-  cursor: pointer;
-  border-radius: 0;
-}
 
 .btn-social {
   color: #fff;
   &:hover {
+    color: #fff;
     box-shadow: 0 14px 26px -12px rgba(0, 0, 0, 0.2), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.1);
   }
   .btn-block {
     margin-bottom: 10px;
   }
+
 }
 
 .btn-twitter {
@@ -72,6 +49,10 @@
   background-color: #DD4B39;
 }
 
-// .btn:hover{
-//   box-shadow: 0 14px 26px -12px rgba(0, 0, 0, 0.2), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.1);
-// }
+.btn-social.button[disabled] {
+  color: #333333;
+  background-color: #fff;
+  border-color: #dbdbdb;
+  box-shadow: none;
+  opacity: .6;
+}

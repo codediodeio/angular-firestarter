@@ -24,8 +24,8 @@ import { trigger,state,style,animate,transition } from '@angular/animations';
 })
 export class TopNavComponent implements OnInit {
 
-  collapse:string = "closed";
-  // show:boolean = false;
+  // collapse:string = "closed";
+  show:boolean = false;
 
   constructor() { }
 
@@ -33,8 +33,8 @@ export class TopNavComponent implements OnInit {
   }
 
   toggleCollapse() {
-    // this.show = !this.show
-    this.collapse = this.collapse == "open" ? 'closed' : 'open';
+    this.show = !this.show
+    // this.collapse = this.collapse == "open" ? 'closed' : 'open';
 
   }
 

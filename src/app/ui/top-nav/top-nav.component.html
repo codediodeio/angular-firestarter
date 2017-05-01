@@ -1,4 +1,4 @@
-<nav class="navbar  navbar-light">
+<!-- <nav class="navbar  navbar-light">
     <button (click)="toggleCollapse()" class="navbar-toggler navbar-toggler-right" type="button">
       <span [hidden]="collapse=='open'" class="fa fa-bars fa-lg"></span>
       <span [hidden]="collapse=='closed'" class="fa fa-times fa-lg"></span>
@@ -8,7 +8,6 @@
     <img src="assets/images/angularfirebase.png" width="30px" /> FireStarter
   </a>
 
-  <!-- [class.show]="collapse==open" -->
 
     <div class="collapse show"  [@collapse]="collapse">
       <ul class="navbar-nav mr-auto">
@@ -23,4 +22,62 @@
         </li>
       </ul>
     </div>
-  </nav>
+  </nav> -->
+
+
+
+  <nav class="nav">
+  <div class="nav-left">
+    <a class="nav-item" routerLink="/">
+      <img src="assets/images/angularfirebase.png" width="30px" alt="Firestarter Angular4 Demo App"/> FireStarter
+    </a>
+  </div>
+
+  <div class="nav-center">
+    <a class="nav-item" href="https://github.com/codediodeio/angular-firestarter">
+      <span class="icon">
+        <i class="fa fa-github"></i>
+      </span>
+    </a>
+    <a class="nav-item" href="https://twitter.com/angularfirebase">
+      <span class="icon">
+        <i class="fa fa-twitter"></i>
+      </span>
+    </a>
+  </div>
+
+  <!-- This "nav-toggle" hamburger menu is only visible on mobile -->
+  <!-- You need JavaScript to toggle the "is-active" class on "nav-menu" -->
+  <span class="nav-toggle" (click)="toggleCollapse()" [ngClass]="{'is-active': show}">
+    <span></span>
+    <span></span>
+    <span></span>
+  </span>
+
+  <!-- This "nav-menu" is hidden on mobile -->
+  <!-- Add the modifier "is-active" to display it on mobile -->
+  <div class="nav-right nav-menu" [ngClass]="{'is-active': show}">
+    <a class="nav-item" routerLink="/login">
+      Login
+    </a>
+    <a class="nav-item" routerLink="/items">
+      Items
+    </a>
+    <a class="nav-item" routerLink="/uploads">
+      Uploads
+    </a>
+
+    <div class="nav-item">
+      <div class="field is-grouped">
+        <p class="control">
+          <a class="button is-primary" href="https://angularfirebase.com">
+            <span class="icon">
+              <i class="fa fa-code"></i>
+            </span>
+            <span>Build Me</span>
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</nav>

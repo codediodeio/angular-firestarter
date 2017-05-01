@@ -1,15 +1,18 @@
+<div class="card-header">
+  <p class="card-header-title">{{ item.title || 'missing title' }}</p>
+</div>
 
-<h5 class="card-header">{{ item.title || 'missing title' }}</h5>
-<div class="card-block">
+
+<div class="card-content">
 
   Active: {{ item.active }}<br>
   {{ item.timeStamp | date: 'medium' }}
 
 </div>
 
-<div class="card-footer text-muted text-xs-center">
-  <span class="btn btn-sm btn-secondary" (click)='updateTimeStamp()'>Update Timestamp</span>
-  <span class="btn btn-sm btn-success" *ngIf='item.active' (click)='updateActive(false)'>Mark Complete</span>
-  <span class="btn btn-sm btn-primary" *ngIf='!item.active' (click)='updateActive(true)'>Mark Active</span>
-  <span class="btn btn-sm btn-danger" (click)='deleteItem()'>Delete</span>
+<div class="card-footer">
+  <span class="button is-small is-info card-footer-item" (click)='updateTimeStamp()'>Update Timestamp</span>
+  <span class="button is-small is-success card-footer-item" *ngIf='item.active' (click)='updateActive(false)'>Mark Complete</span>
+  <span class="button is-small is-primary card-footer-item" *ngIf='!item.active' (click)='updateActive(true)'>Mark Active</span>
+  <span class="button is-small is-danger card-footer-item" (click)='deleteItem()'>Delete</span>
 </div>

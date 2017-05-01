@@ -1,18 +1,18 @@
-  <div class="card">
+
 
     <!-- User logged in -->
-    <div class="card-block" *ngIf="auth.currentUser">
-      <h3 class="card-title">Howdy, {{ auth.currentUserDisplayName }}</h3>
-      <img class="card-img-top" [src]="auth.currentUser.photoURL || 'https://api.adorable.io/avatars/109/fire.png'" width=50px>
-      <p class="card-text text-sm">UID: {{ auth.currentUserId }}</p>
-      <button class="btn btn-secondary" (click)="logout()">Logout</button>
+    <div class="box" *ngIf="auth.currentUser">
+        <h3>Howdy, {{ auth.currentUserDisplayName }}</h3>
+        <img class="card-img-top" [src]="auth.currentUser.photoURL || 'https://api.adorable.io/avatars/109/fire.png'" width=50px>
+        <p class="text-truncate">UID: {{ auth.currentUserId }}</p>
+        <button class="button" (click)="logout()">Logout</button>
+
    </div>
 
     <!-- User NOT logged in -->
-    <div class="card-block" *ngIf="!auth.currentUser">
-      <h3 class="card-title">Howdy, {{ auth.currentUserDisplayName }}</h3>
-      <p class="card-text">Login to get started...</p>
-      <button class="btn btn-primary" routerLink="/login">Login</button>
-    </div>
+    <div class="box" *ngIf="!auth.currentUser">
+        <h3>Howdy, {{ auth.currentUserDisplayName }}</h3>
+        <p class="card-text">Login to get started...</p>
+        <button class="button" routerLink="/login">Login</button>
 
-  </div>
+    </div>
