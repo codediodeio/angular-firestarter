@@ -4,6 +4,8 @@
   <upload-detail [upload]='upload'></upload-detail>
 </div>
 
+<loading-spinner *ngIf="showSpinner"></loading-spinner>
+
 <hr>
 
 <upload-form></upload-form>

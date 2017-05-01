@@ -11,11 +11,13 @@ import { Upload } from '../shared/upload';
 export class UploadsListComponent implements OnInit {
 
   uploads: FirebaseListObservable<Upload[]>;
+  showSpinner: boolean = true;
 
   constructor(private upSvc: UploadService) { }
 
   ngOnInit() {
     this.uploads = this.upSvc.getUploads({limitToLast: 5})
+    this.uploads.subscribe(() => this.showSpinner = false)
   }
 
 

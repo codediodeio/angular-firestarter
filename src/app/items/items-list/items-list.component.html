@@ -4,7 +4,7 @@
   <item-detail [item]='item'></item-detail>
 </div>
 
-<loading-spinner></loading-spinner>
+<loading-spinner *ngIf="showSpinner"></loading-spinner>
 
 
 

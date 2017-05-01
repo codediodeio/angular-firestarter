@@ -10,18 +10,16 @@ import { FirebaseListObservable } from "angularfire2";
 })
 export class ItemsListComponent implements OnInit {
 
-  public items: FirebaseListObservable<Item[]>;
+  items: FirebaseListObservable<Item[]>;
+
+  showSpinner: boolean = true;
+
 
   constructor(private itemSvc: ItemService) { }
 
   ngOnInit() {
     this.items = this.itemSvc.getItemsList({limitToLast: 5})
-  }
-
-
-  addEmptyItem() {
-    let item = new Item()
-    this.itemSvc.createItem(item)
+    this.items.subscribe(() => this.showSpinner = false)
   }
 
   deleteItems() {

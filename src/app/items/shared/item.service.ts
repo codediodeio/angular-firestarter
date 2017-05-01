@@ -17,7 +17,7 @@ export class ItemService {
   // Return an observable list with optional query
   // You will usually call this from OnInit in a component
   getItemsList(query={}): FirebaseListObservable<Item[]> {
-    this.items = this.db.list(this.basePath, {
+    this.items = this.db.list('/items', {
       query: query
     });
     return this.items
