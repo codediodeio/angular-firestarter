@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FirebaseListObservable } from "angularfire2";
+import { FirebaseListObservable } from 'angularfire2/database';
 import { UploadService } from '../shared/upload.service';
 import { Upload } from '../shared/upload';
 

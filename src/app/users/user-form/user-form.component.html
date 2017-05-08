@@ -52,12 +52,12 @@
     {{ formErrors.password }}
   </div>
 
-  <button type="submit" class="btn btn-block btn-primary" [disabled]="!userForm.valid">Submit</button>
+  <button type="submit" class="button" [disabled]="!userForm.valid">Submit</button>
 
   <span *ngIf="userForm.valid" class="help is-success">Form Looks Valid</span>
 
-  <p *ngIf="!passReset && userForm.controls.email.valid" class="btn btn-sm btn-secondary" (click)="resetPassword()">Reset Password for {{userForm.value.email}}?</p>
-  <p *ngIf="passReset" class="text-warning">Reset requested. Check your email instructions.</p>
+  <a *ngIf="!passReset && userForm.controls.email.valid" class="help is-info" (click)="resetPassword()">Reset Password for {{userForm.value.email}}?</a>
+  <p *ngIf="passReset" class="help is-info">Reset requested. Check your email instructions.</p>
 
 
 </form>

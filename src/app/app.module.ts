@@ -9,7 +9,11 @@ import { AppComponent } from './app.component';
 
 ///// Start FireStarter
 import { environment } from '../environments/environment';
+import * as firebase from 'firebase/app';
 import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule} from 'angularfire2/auth';
+
 
 // FireStarter Users
 import { AuthService } from './core/auth.service';
@@ -67,9 +71,11 @@ export const firebaseConfig = environment.firebaseConfig;
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    BrowserAnimationsModule,
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   providers: [
     AuthService,

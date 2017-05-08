@@ -24,11 +24,11 @@ export class UserFormComponent implements OnInit {
    }
 
    signup(): void {
-     this.auth.emailSignUp(this.userForm.value)
+     this.auth.emailSignUp(this.userForm.value['email'], this.userForm.value['password'])
    }
 
    login(): void {
-     this.auth.emailLogin(this.userForm.value)
+     this.auth.emailLogin(this.userForm.value['email'], this.userForm.value['password'])
    }
 
    resetPassword() {

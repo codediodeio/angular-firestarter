@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
-import { AngularFire, AngularFireDatabase, FirebaseListObservable } from 'angularfire2';
+// import { AngularFire, AngularFireDatabase, FirebaseListObservable } from 'angularfire2';
 import { Upload } from './upload';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import * as firebase from 'firebase';
 
 
 @Injectable()
 export class UploadService {
 
-  constructor(private af: AngularFire, private db: AngularFireDatabase) { }
+  constructor(private db: AngularFireDatabase) { }
 
   private basePath:string = '/uploads';
   private uploadTask: firebase.storage.UploadTask;

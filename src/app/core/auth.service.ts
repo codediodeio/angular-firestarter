@@ -1,25 +1,21 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth, AngularFireDatabase, FirebaseAuthState, AuthProviders, AuthMethods, AngularFire } from "angularfire2";
+import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from "@angular/router";
 import * as firebase from 'firebase';
-
-export class EmailPasswordCredentials {
-  email: string;
-  password: string;
-}
 
 
 @Injectable()
 export class AuthService {
 
-  authState: FirebaseAuthState = null;
+  authState: any = null;
 
-  constructor(private af: AngularFire,
+  constructor(private afAuth: AngularFireAuth,
               private db: AngularFireDatabase,
               private router:Router) {
 
-            af.auth.subscribe((auth) => {
-              this.authState = auth;
+            this.afAuth.authState.subscribe((auth) => {
+              this.authState = auth
             });
           }
 
@@ -28,14 +24,14 @@ export class AuthService {
     return this.authState !== null;
   }
 
-  // Returns current user
+  // Returns current user data
   get currentUser(): any {
-    return this.authenticated ? this.authState.auth : null;
+    return this.authenticated ? this.authState : null;
   }
 
   // Returns
   get currentUserObservable(): any {
-    return this.af.auth
+    return this.afAuth.authState
   }
 
   // Returns current user UID
@@ -45,40 +41,44 @@ export class AuthService {
 
   // Anonymous User
   get currentUserAnonymous(): boolean {
-    return this.authenticated ? this.authState.anonymous : false
+    return this.authenticated ? this.authState.isAnonymous : false
   }
 
   // Returns current user display name or Guest
   get currentUserDisplayName(): string {
-    if (!this.authenticated) { return 'Guest' }
-
+    if (!this.authState) { return 'Guest' }
     else if (this.currentUserAnonymous) { return 'Anonymous' }
-
-    else { return this.authState.auth.displayName || 'User without a Name' }
-
+    else { return this.authState['displayName'] || 'User without a Name' }
   }
 
   //// Social Auth ////
 
-  githubLogin(): firebase.Promise<FirebaseAuthState> {
-    return this.socialSignIn(AuthProviders.Github);
+  githubLogin() {
+    const provider = new firebase.auth.GithubAuthProvider()
+    return this.socialSignIn(provider);
   }
 
-  googleLogin(): firebase.Promise<FirebaseAuthState> {
-    return this.socialSignIn(AuthProviders.Google);
+  googleLogin() {
+    const provider = new firebase.auth.GoogleAuthProvider()
+    return this.socialSignIn(provider);
   }
 
-  facebookLogin(): firebase.Promise<FirebaseAuthState> {
-    return this.socialSignIn(AuthProviders.Facebook);
+  facebookLogin() {
+    const provider = new firebase.auth.FacebookAuthProvider()
+    return this.socialSignIn(provider);
   }
 
-  twitterLogin(): firebase.Promise<FirebaseAuthState> {
-    return this.socialSignIn(AuthProviders.Twitter);
+  twitterLogin(){
+    const provider = new firebase.auth.TwitterAuthProvider()
+    return this.socialSignIn(provider);
   }
 
-  private socialSignIn(provider: number): firebase.Promise<FirebaseAuthState> {
-    return this.af.auth.login({provider, method: AuthMethods.Popup})
-      .then(() => this.updateUserData() )
+  private socialSignIn(provider) {
+    return this.afAuth.auth.signInWithPopup(provider)
+      .then((credential) =>  {
+          this.authState = credential.user
+          this.updateUserData()
+      })
       .catch(error => console.log(error));
   }
 
@@ -86,42 +86,31 @@ export class AuthService {
   //// Anonymous Auth ////
 
   anonymousLogin() {
-    return this.af.auth.login({
-      provider: AuthProviders.Anonymous,
-      method: AuthMethods.Anonymous,
+    return this.afAuth.auth.signInAnonymously()
+    .then((user) => {
+      this.authState = user
+      this.updateUserData()
     })
-    .then(() => this.updateUserData())
     .catch(error => console.log(error));
   }
 
-  // anonymousUpgrade(): firebase.Promise<FirebaseAuthState> {
-  //
-  //   let anonId = this.currentUserId
-  //
-  //   // Login with google
-  //   return this.googleLogin().then( () => {
-  //     // get the data snapshot from anonymous account account
-  //     this.db.object(anonId).subscribe(snapshot => {
-  //       // map the anonymous user data to the new account.
-  //       this.db.object(this.currentUserId).update(snapshot)
-  //     })
-  //   });
-  // }
-
   //// Email/Password Auth ////
 
-  emailSignUp(credentials: EmailPasswordCredentials): firebase.Promise<FirebaseAuthState> {
-    return this.af.auth.createUser(credentials)
-      .then(() => this.updateUserData())
+  emailSignUp(email:string, password:string) {
+    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+      .then((user) => {
+        this.authState = user
+        this.updateUserData()
+      })
       .catch(error => console.log(error));
   }
 
-  emailLogin(credentials: EmailPasswordCredentials): firebase.Promise<FirebaseAuthState> {
-     return this.af.auth.login(credentials,
-       { provider: AuthProviders.Password,
-         method: AuthMethods.Password
-        })
-       .then(() => this.updateUserData())
+  emailLogin(email:string, password:string) {
+     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
+       .then((user) => {
+         this.authState = user
+         this.updateUserData()
+       })
        .catch(error => console.log(error));
   }
 
@@ -138,7 +127,7 @@ export class AuthService {
   //// Sign Out ////
 
   signOut(): void {
-    this.af.auth.logout();
+    this.afAuth.auth.signOut();
     this.router.navigate(['/'])
   }
 
@@ -151,9 +140,9 @@ export class AuthService {
 
     let path = `users/${this.currentUserId}`; // Endpoint on firebase
     let data = {
-                 name: this.currentUser.displayName,
-                 email: this.currentUser.email,
-               }
+                  email: this.authState.email,
+                  name: this.authState.displayName
+                }
 
     this.db.object(path).update(data)
     .catch(error => console.log(error));

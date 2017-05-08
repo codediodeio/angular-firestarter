@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ItemService } from '../shared/item.service';
 import { Item } from '../shared/item';
-import { FirebaseListObservable } from "angularfire2";
+import { FirebaseListObservable } from 'angularfire2/database';
 
 @Component({
   selector: 'items-list',
