@@ -2,6 +2,9 @@
 
 FireStarter is designed to handle the basic features most Angular+Firebase apps need. It can serve as a foundation to quickly roll out more complex features.
 
+[Live Demo](https://firestarter-96e46.firebaseapp.com/)
+[Lessons and Screencasts](https://angularfirebase.com)
+
 ## Features
 
 - Authentication w/ Router Guard
@@ -47,3 +50,4 @@ And finally `ng serve`
 ## Apps Using FireStarter in Production
 
 - [ArtiFilter](https://app.artifilter.com) - Neural Art Generator
+- [FlashLawyer](https://flashlawyer.com) - Legal Document Builder and Chatbot

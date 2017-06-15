@@ -30,6 +30,8 @@ export class UploadFormComponent implements OnInit {
 
   uploadMulti() {
     let files = this.selectedFiles
+    if (_.isEmpty(files)) return;
+
     let filesIndex = _.range(files.length)
     _.each(filesIndex, (idx) => {
       this.currentUpload = new Upload(files[idx]);
