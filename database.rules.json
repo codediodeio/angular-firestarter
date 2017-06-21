@@ -1,6 +1,14 @@
 {
   "rules": {
-    ".read": "auth != null",
-    ".write": "auth != null"
+    ".read": true,
+    ".write": false,
+
+    "posts": {
+      ".write": "auth != null",
+    },
+
+    "uploads": {
+      ".write": "auth != null",
+    }
   }
 }
