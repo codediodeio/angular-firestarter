@@ -11,7 +11,7 @@ import { Upload } from '../shared/upload';
 export class UploadsListComponent implements OnInit {
 
   uploads: FirebaseListObservable<Upload[]>;
-  showSpinner: boolean = true;
+  showSpinner = true;
 
   constructor(private upSvc: UploadService) { }
 

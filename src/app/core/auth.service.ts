@@ -116,9 +116,9 @@ export class AuthService {
 
   // Sends email allowing user to reset password
   resetPassword(email: string) {
-    var auth = firebase.auth();
+    const fbAuth = firebase.auth();
 
-    return auth.sendPasswordResetEmail(email)
+    return fbAuth.sendPasswordResetEmail(email)
       .then(() => console.log("email sent"))
       .catch((error) => console.log(error))
   }
@@ -138,8 +138,8 @@ export class AuthService {
   // Writes user name and email to realtime db
   // useful if your app displays information about users or for admin features
 
-    let path = `users/${this.currentUserId}`; // Endpoint on firebase
-    let data = {
+    const path = `users/${this.currentUserId}`; // Endpoint on firebase
+    const data = {
                   email: this.authState.email,
                   name: this.authState.displayName
                 }

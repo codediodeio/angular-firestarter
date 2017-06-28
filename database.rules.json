@@ -3,12 +3,12 @@
     ".read": true,
     ".write": false,
 
-    "posts": {
-      ".write": "auth != null",
-    },
-
     "uploads": {
-      ".write": "auth != null",
+      ".write": "auth != null"
+    },
+   "items": {
+      ".write": "auth != null"
     }
+
   }
 }
