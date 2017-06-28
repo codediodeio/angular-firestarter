@@ -8,7 +8,12 @@
     },
    "items": {
       ".write": "auth != null"
+    },
+    "users": {
+      ".write": "auth != null"
     }
+
+
 
   }
 }

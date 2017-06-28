@@ -1,8 +1,13 @@
 @import 'variables';
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 
 
 
 ///// Content
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
 
 
 .footer {
@@ -26,6 +31,9 @@
 
 ///// Social Buttons
 
+.input {
+  margin-bottom: 5px;
+}
 
 .btn-social {
   color: #fff;
