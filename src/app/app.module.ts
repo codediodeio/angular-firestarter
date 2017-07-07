@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 
-
 ///// Start FireStarter
 import { environment } from '../environments/environment';
 import { AngularFireModule } from 'angularfire2';
