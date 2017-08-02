@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-// import { AngularFire, FirebaseListObservable, FirebaseObjectObservable, AngularFireDatabase } from "angularfire2";
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { Item } from './item';
 
