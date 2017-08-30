@@ -4,10 +4,18 @@
   <meta charset="utf-8">
   <title>Firestarter</title>
   <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.1/css/bulma.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="msapplication-starturl" content="/">
+  <meta name="theme-color" content="#f48c5b">
+  
+  <link rel="manifest" href="/manifest.json">
 </head>
 <body>
 
@@ -16,6 +24,22 @@
   <div class="loading">
     <h1>~$ bootstrapping firestarter...</h1>
   </div>
+
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js', { scope: '/' })
+        
+      .then((registration) => {
+
+        console.log('Service Worker registered');
+      }).catch((err) => {
+
+        console.log('Service Worker registration failed: ', err);
+      });
+    }
+  </script>
+  
 
 </body>
 </html>
