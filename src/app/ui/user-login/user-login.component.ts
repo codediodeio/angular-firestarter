@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
-import { AuthService } from "../../core/auth.service";
+import { Router } from '@angular/router';
+import { AuthService } from '../../core/auth.service';
 
 import { ReactiveFormsModule } from '@angular/forms';
 

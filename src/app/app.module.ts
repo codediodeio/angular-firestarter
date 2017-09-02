@@ -18,9 +18,9 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module'
 
 // Feature Modules
-import { ItemModule }   from './items/shared/item.module';
+import { ItemModule } from './items/shared/item.module';
 import { UploadModule } from './uploads/shared/upload.module';
-import { UiModule }     from './ui/shared/ui.module';
+import { UiModule } from './ui/shared/ui.module';
 ///// End FireStarter
 
 

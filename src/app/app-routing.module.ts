@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: '', component: ReadmePageComponent },
   { path: 'login', component: UserLoginComponent, },
   { path: 'items', component: ItemsListComponent, canActivate: [AuthGuard]},
-  { path: 'uploads', loadChildren: "./uploads/shared/upload.module#UploadModule" }
+  { path: 'uploads', loadChildren: './uploads/shared/upload.module#UploadModule' }
   // { path: 'uploads', component: UploadsListComponent, canActivate: [AuthGuard]},
 ];
 

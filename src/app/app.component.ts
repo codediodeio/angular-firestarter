@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from "./core/auth.service";
+import { AuthService } from './core/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,8 +7,8 @@ import { AuthService } from "./core/auth.service";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-
-  constructor() {}
   title = 'FireStarter app works!';
+
+  constructor() { }
 
 }

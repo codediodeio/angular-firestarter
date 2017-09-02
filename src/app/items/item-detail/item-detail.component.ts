@@ -17,7 +17,7 @@ export class ItemDetailComponent implements OnInit {
   }
 
   updateTimeStamp() {
-    let date = new Date().getTime()
+    const date = new Date().getTime()
     this.itemSvc.updateItem(this.item.$key, { timeStamp: date })
   }
 

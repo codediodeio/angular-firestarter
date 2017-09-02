@@ -5,7 +5,7 @@ import { Item } from './item';
 @Injectable()
 export class ItemService {
 
-  private basePath: string = '/items';
+  private basePath = '/items';
 
   items: FirebaseListObservable<Item[]> = null; //  list of objects
   item: FirebaseObjectObservable<Item> = null; //   single object
@@ -15,7 +15,7 @@ export class ItemService {
 
   // Return an observable list with optional query
   // You will usually call this from OnInit in a component
-  getItemsList(query={}): FirebaseListObservable<Item[]> {
+  getItemsList(query = {}): FirebaseListObservable<Item[]> {
     this.items = this.db.list('/items', {
       query: query
     });
@@ -24,13 +24,13 @@ export class ItemService {
 
   // Return a single observable item
   getItem(key: string): FirebaseObjectObservable<Item> {
-    const itemPath =  `${this.basePath}/${key}`;
+    const itemPath = `${this.basePath}/${key}`;
     this.item = this.db.object(itemPath)
     return this.item
   }
 
   // Create a bramd new item
-  createItem(item: Item): void  {
+  createItem(item: Item): void {
     this.items.push(item)
       .catch(error => this.handleError(error))
   }
@@ -44,14 +44,14 @@ export class ItemService {
 
   // Deletes a single item
   deleteItem(key: string): void {
-      this.items.remove(key)
-        .catch(error => this.handleError(error))
+    this.items.remove(key)
+      .catch(error => this.handleError(error))
   }
 
   // Deletes the entire list of items
   deleteAll(): void {
-      this.items.remove()
-        .catch(error => this.handleError(error))
+    this.items.remove()
+      .catch(error => this.handleError(error))
   }
 
 
