@@ -2,12 +2,13 @@
     "short_name": "FireStarter",
     "name": "Angular4 + Firebase Starter App",
     "start_url": "/",
-    "gcm_sender_id": "103953800507",
+
     "theme_color": "#f48c5b",
     "background_color": "#ffffff",
+
     "display": "standalone",
     "orientation": "portrait",
-    "Scope": "/",
+
     "icons": [
       {
         "src": "/assets/images/icons/icon-72x72.png",
@@ -49,6 +50,5 @@
         "sizes": "512x512",
         "type": "image/png"
       }
-    ],
-    "splash_pages": null
+    ]
   }
