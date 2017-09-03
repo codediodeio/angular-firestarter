@@ -12,13 +12,13 @@ export class ItemsListComponent implements OnInit {
 
   items: FirebaseListObservable<Item[]>;
 
-  showSpinner: boolean = true;
+  showSpinner = true;
 
 
   constructor(private itemSvc: ItemService) { }
 
   ngOnInit() {
-    this.items = this.itemSvc.getItemsList({limitToLast: 5})
+    this.items = this.itemSvc.getItemsList({ limitToLast: 5 })
     this.items.subscribe(() => this.showSpinner = false)
   }
 
