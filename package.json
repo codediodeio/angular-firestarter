@@ -13,26 +13,26 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^4.3.6",
-    "@angular/common": "^4.3.6",
-    "@angular/compiler": "^4.3.6",
-    "@angular/core": "^4.3.6",
-    "@angular/forms": "^4.3.6",
-    "@angular/http": "^4.3.6",
-    "@angular/platform-browser": "^4.3.6",
-    "@angular/platform-browser-dynamic": "^4.3.6",
-    "@angular/platform-server": "^4.3.6",
-    "@angular/router": "^4.3.6",
-    "angularfire2": "^4.0.0-rc0",
+    "@angular/animations": "^4.4.3",
+    "@angular/common": "^4.4.3",
+    "@angular/compiler": "^4.4.3",
+    "@angular/core": "^4.4.3",
+    "@angular/forms": "^4.4.3",
+    "@angular/http": "^4.4.3",
+    "@angular/platform-browser": "^4.4.3",
+    "@angular/platform-browser-dynamic": "^4.4.3",
+    "@angular/platform-server": "^4.4.3",
+    "@angular/router": "^4.4.3",
+    "angularfire2": "^4.0.0-rc.2",
     "core-js": "^2.4.1",
-    "firebase": "^4.1.3",
+    "firebase": "^4.4.0",
     "lodash": "^4.17.4",
-    "rxjs": "^5.4.2",
-    "zone.js": "^0.8.12"
+    "rxjs": "^5.4.3",
+    "zone.js": "^0.8.17"
   },
   "devDependencies": {
-    "@angular/cli": "^1.3.2",
-    "@angular/compiler-cli": "^4.3.6",
+    "@angular/cli": "^1.4.3",
+    "@angular/compiler-cli": "^4.4.3",
     "@types/jasmine": "2.5.54",
     "@types/lodash": "^4.14.67",
     "@types/node": "~8.0.4",
@@ -50,6 +50,6 @@
     "sw-precache-webpack-plugin": "^0.11.4",
     "ts-node": "~3.3.0",
     "tslint": "~5.7.0",
-    "typescript": "^2.4.2"
+    "typescript": "=2.4.0"
   }
 }
