@@ -1,6 +1,10 @@
-# FireStarter - Angular4 + Firebase Starter App
+[![Slack](https://firebasestorage.googleapis.com/v0/b/firestarter-96e46.appspot.com/o/assets%2Fslack-badge.svg?alt=media&token=3e68acef-3e00-4925-9710-e11cee5923e4)](https://join.slack.com/angularfirebase/shared_invite/MjA2NTgxMTI0MTk2LTE0OTg4NTQ4MDAtMjhhZDIzMjc0Mg)
 
-FireStarter is designed to handle the basic features most Angular+Firebase apps need. It can serve as a foundation to quickly roll out more complex features.
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+
+# FireStarter - Angular + Firebase Progressive Web App
+
+FireStarter is designed to handle the basic features required by most Angular Firebase apps. It can serve as a foundation to learn this stack and roll out more complex features.
 
 - [Live Demo](https://firestarter-96e46.firebaseapp.com/)
 - [Lessons and Screencasts](https://angularfirebase.com)
@@ -8,11 +12,13 @@ FireStarter is designed to handle the basic features most Angular+Firebase apps 
 
 ## Features
 
-- Authentication w/ Router Guard
+- Angular 4.4
+- 100 PWA Lighthouse Score
+- Firebase Authentication w/ Router Guard
 - Realtime Database CRUD Demo
 - File Uploads to Firebase Storage Demo
 - SASS + Bulma + FontAwesome
-- Reactive Form Validation
+
 
 ## Usage
 
