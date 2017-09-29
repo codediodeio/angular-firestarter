@@ -108,6 +108,26 @@ export class AuthService {
       .catch(error => console.log(error));
   }
 
+  emailSignUpWithDisplayName(email:string, password:string, displayName:string) {
+    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+      .then((user) => {
+        //Add a display name to the user.
+       user.updateProfile({
+        displayName: displayName
+      }).then(() => {
+        // Update successful
+        this.authState = user
+      });
+        
+        this.updateUserData()
+      })
+      .catch(error =>{
+         console.log(error);
+         //THrow the exception which results when user signsup
+         throw(error);
+        });
+  }
+
   emailLogin(email: string, password: string) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((user) => {

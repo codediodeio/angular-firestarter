@@ -40,8 +40,9 @@ export class UserFormComponent implements OnInit {
   }
 
   signup(): void {
-    this.auth.emailSignUp(this.userForm.value['email'],
-     this.userForm.value['password'])
+    this.auth.emailSignUpWithDisplayName(this.userForm.value['email'],
+     this.userForm.value['password'], 
+     this.userForm.value['displayName'])
   }
 
   login(): void {
