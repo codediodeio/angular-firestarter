@@ -12,9 +12,10 @@ FireStarter is designed to handle the basic features required by most Angular Fi
 
 ## Features
 
-- Angular 4.4
+- Angular 4.4 + AngularFire5
 - 100 PWA Lighthouse Score
 - Firebase Authentication w/ Router Guard
+- Firestore Database CRUD Demo
 - Realtime Database CRUD Demo
 - File Uploads to Firebase Storage Demo
 - SASS + Bulma + FontAwesome

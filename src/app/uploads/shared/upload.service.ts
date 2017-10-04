@@ -1,22 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Upload } from './upload';
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import * as firebase from 'firebase';
+import { Observable } from 'rxjs/Observable';
 
 
 @Injectable()
 export class UploadService {
 
+  basePath = 'uploads';
+  uploadsRef: AngularFireList<Upload>;
+  uploads: Observable<Upload[]>;
+
   constructor(private db: AngularFireDatabase) { }
 
-  private basePath:string = '/uploads';
-  uploads: FirebaseListObservable<Upload[]>;
 
-
-  getUploads(query={}) {
-    this.uploads = this.db.list(this.basePath, {
-      query: query
-    });
+  getUploads() {
+    this.uploads = this.db.list(this.basePath).valueChanges();
     return this.uploads
   }
 
@@ -37,7 +37,7 @@ export class UploadService {
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
       (snapshot) =>  {
         // upload in progress
-        let snap = snapshot as firebase.storage.UploadTaskSnapshot
+        const snap = snapshot as firebase.storage.UploadTaskSnapshot
         upload.progress = (snap.bytesTransferred / snap.totalBytes) * 100
       },
       (error) => {
@@ -68,7 +68,7 @@ export class UploadService {
 
   // Firebase files must have unique names in their respective storage dir
   // So the name serves as a unique key
-  private deleteFileStorage(name:string) {
+  private deleteFileStorage(name: string) {
     const storageRef = firebase.storage().ref();
     storageRef.child(`${this.basePath}/${name}`).delete()
   }
