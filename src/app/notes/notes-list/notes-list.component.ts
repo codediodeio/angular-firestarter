@@ -20,6 +20,7 @@ export class NotesListComponent implements OnInit {
 
   createNote() {
     this.noteService.create(this.content)
+    this.content = ''
   }
 
 }

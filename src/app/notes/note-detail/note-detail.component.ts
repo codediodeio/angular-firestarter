@@ -8,23 +8,22 @@ import { NoteService } from '../note.service';
 })
 export class NoteDetailComponent implements OnInit {
 
-  @Input() noteId: string;
-  noteDoc;
-  note;
+  @Input()
+  note: any;
 
   constructor(private noteService: NoteService) { }
 
   ngOnInit() {
-    this.noteDoc = this.noteService.getNote(this.noteId)
-    this.note = this.noteDoc.valueChanges()
+    // this.noteDoc = this.noteService.getNote(this.noteId)
+    // this.note = this.noteDoc.valueChanges()
   }
 
   addHeartToNote(val) {
-    this.noteDoc.update({ hearts: val + 1})
+    this.noteService.updateNote(this.note.id, { hearts: val + 1 })
   }
 
-  deleteNote() {
-    this.noteDoc.delete()
+  deleteNote(id) {
+    this.noteService.deleteNote(id)
   }
 
 }

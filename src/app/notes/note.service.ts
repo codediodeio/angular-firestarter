@@ -7,6 +7,7 @@ interface Note {
   content: string;
   hearts?: number;
   id?: any;
+  time?: number;
 }
 
 @Injectable()
@@ -16,8 +17,8 @@ export class NoteService {
   noteDocument:   AngularFirestoreDocument<Node>
 
   constructor(private afs: AngularFirestore) {
-    this.notesCollection = this.afs.collection('notes', ref => ref.orderBy('hearts') )
-    this.noteDocument = this.afs.doc('notes/mtp1Ll6caN4dVrhg8fWD');
+    this.notesCollection = this.afs.collection('notes', ref => ref.orderBy('time', 'desc').limit(5) )
+    // this.noteDocument = this.afs.doc('notes/mtp1Ll6caN4dVrhg8fWD');
   }
 
   getData(): Observable<Note[]> {
@@ -27,7 +28,6 @@ export class NoteService {
   getSnapshot() {
     // ['added', 'modified', 'removed']
     return this.notesCollection.snapshotChanges().map(actions => {
-      console.log(actions)
       return actions.map(a => {
         return { id: a.payload.doc.id, ...a.payload.doc.data() }
       })
@@ -41,9 +41,18 @@ export class NoteService {
   create(content: string) {
     const note: Note = {
       content: content,
-      hearts: 0
+      hearts: 0,
+      time: new Date().getTime()
     }
     return this.notesCollection.add(note);
+  }
+
+  updateNote(id, data) {
+    return this.getNote(id).update(data)
+  }
+
+  deleteNote(id) {
+    return this.getNote(id).delete()
   }
 
 
