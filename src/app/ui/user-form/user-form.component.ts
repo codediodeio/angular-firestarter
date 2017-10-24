@@ -40,7 +40,9 @@ export class UserFormComponent implements OnInit {
   }
 
   signup(): void {
-    this.auth.emailSignUp(this.userForm.value['email'], this.userForm.value['password'])
+    this.auth.emailSignUpWithDisplayName(this.userForm.value['email'],
+     this.userForm.value['password'], 
+     this.userForm.value['displayName'])
   }
 
   login(): void {
@@ -65,6 +67,8 @@ export class UserFormComponent implements OnInit {
         Validators.maxLength(25)
       ]
       ],
+      'displayName': ['', [
+      ]]
     });
 
     this.userForm.valueChanges.subscribe(data => this.onValueChanged(data));
