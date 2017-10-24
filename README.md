@@ -18,7 +18,6 @@ FireStarter is designed to handle the basic features required by most Angular Fi
 - Firestore Database CRUD Demo
 - Realtime Database CRUD Demo
 - File Uploads to Firebase Storage Demo
-- SASS + Bulma + FontAwesome
 
 
 ## Usage
@@ -39,7 +38,9 @@ export const environment = {
         apiKey: 'APIKEY',
         authDomain: 'DEV-APP.firebaseapp.com',
         databaseURL: 'https://DEV-APP.firebaseio.com',
-        storageBucket: 'DEV-APP.appspot.com'
+        projectId: 'DEV-APP',
+        storageBucket: 'DEV-APP.appspot.com',
+        messagingSenderId: '123456789'
     }
 };
 ```
