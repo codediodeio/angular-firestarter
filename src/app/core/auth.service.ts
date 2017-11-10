@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-
 import * as firebase from 'firebase/app';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
@@ -10,10 +9,9 @@ import 'rxjs/add/operator/switchMap'
 
 interface User {
   uid: string;
-  email: string;
+  email?: string;
   photoURL?: string;
   displayName?: string;
-  favoriteColor?: string;
 }
 
 
@@ -26,7 +24,6 @@ export class AuthService {
               private afs: AngularFirestore,
               private router: Router) {
 
-      //// Get auth data, then get firestore user document || null
       this.user = this.afAuth.authState
         .switchMap(user => {
           if (user) {
@@ -35,8 +32,8 @@ export class AuthService {
             return Observable.of(null)
           }
         })
-  }
 
+  }
 
 
   googleLogin() {
@@ -44,12 +41,74 @@ export class AuthService {
     return this.oAuthLogin(provider);
   }
 
+  githubLogin() {
+    const provider = new firebase.auth.GithubAuthProvider()
+    return this.oAuthLogin(provider);
+  }
+
+  facebookLogin() {
+    const provider = new firebase.auth.FacebookAuthProvider()
+    return this.oAuthLogin(provider);
+  }
+
+  twitterLogin() {
+    const provider = new firebase.auth.TwitterAuthProvider()
+    return this.oAuthLogin(provider);
+  }
+
+
   private oAuthLogin(provider) {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((credential) => {
-        this.updateUserData(credential.user)
+        return this.updateUserData(credential.user)
       })
   }
+
+
+  //// Anonymous Auth ////
+
+  anonymousLogin() {
+    return this.afAuth.auth.signInAnonymously()
+      .then((user) => {
+        return this.updateUserData(user) // if using firestore
+      })
+      .catch(error => console.log(error));
+  }
+  
+  //// Email/Password Auth ////
+  
+  emailSignUp(email: string, password: string) {
+    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+      .then((user) => {
+        return this.updateUserData(user) // if using firestore
+      })
+      .catch(error => console.log(error));
+  }
+
+  emailLogin(email: string, password: string) {
+    return this.afAuth.auth.signInWithEmailAndPassword(email, password)
+      .then((user) => {
+        // return this.updateUserData(user) // if using firestore
+      })
+      .catch(error => console.log(error));
+  }
+  
+  // Sends email allowing user to reset password
+  resetPassword(email: string) {
+    const fbAuth = firebase.auth();
+
+    return fbAuth.sendPasswordResetEmail(email)
+      .then(() => console.log('email sent'))
+      .catch((error) => console.log(error))
+  }
+
+
+  signOut() {
+    this.afAuth.auth.signOut().then(() => {
+        this.router.navigate(['/']);
+    });
+  }
+  
 
 
   private updateUserData(user) {
@@ -59,20 +118,13 @@ export class AuthService {
 
     const data: User = {
       uid: user.uid,
-      email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL
+      email: user.email || null,
+      displayName: user.displayName || 'nameless user',
+      photoURL: user.photoURL || 'https://goo.gl/Fz9nrQ'
     }
 
     return userRef.set(data)
 
-  }
-
-
-  signOut() {
-    this.afAuth.auth.signOut().then(() => {
-        this.router.navigate(['/']);
-    });
   }
 
 
@@ -98,118 +150,13 @@ export class AuthService {
 
 
 
-  // // Returns true if user is logged in
-  // get authenticated(): boolean {
-  //   return this.authState !== null;
-  // }
-
-  // // Returns current user data
-  // get currentUser(): any {
-  //   return this.authenticated ? this.authState : null;
-  // }
-
-  // // Returns
-  // get currentUserObservable(): any {
-  //   return this.afAuth.authState
-  // }
-
-  // // Returns current user UID
-  // get currentUserId(): string {
-  //   return this.authenticated ? this.authState.uid : '';
-  // }
-
-  // // Anonymous User
-  // get currentUserAnonymous(): boolean {
-  //   return this.authenticated ? this.authState.isAnonymous : false
-  // }
-
-  // // Returns current user display name or Guest
-  // get currentUserDisplayName(): string {
-  //   if (!this.authState) {
-  //     return 'Guest'
-  //   } else if (this.currentUserAnonymous) {
-  //     return 'Anonymous'
-  //   } else {
-  //     return this.authState['displayName'] || 'User without a Name'
-  //   }
-  // }
-
-  //// Social Auth ////
-
-  githubLogin() {
-    const provider = new firebase.auth.GithubAuthProvider()
-    return this.socialSignIn(provider);
-  }
-
-
-  facebookLogin() {
-    const provider = new firebase.auth.FacebookAuthProvider()
-    return this.socialSignIn(provider);
-  }
-
-  twitterLogin() {
-    const provider = new firebase.auth.TwitterAuthProvider()
-    return this.socialSignIn(provider);
-  }
 
 
 
-  //// Anonymous Auth ////
-
-  anonymousLogin() {
-    return this.afAuth.auth.signInAnonymously()
-      .then((user) => {
-        // this.authState = user
-      })
-      .catch(error => console.log(error));
-  }
-
-  //// Email/Password Auth ////
-
-  emailSignUp(email: string, password: string) {
-    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
-      .then((user) => {
-        // this.authState = user
-        // this.updateUserData()
-      })
-      .catch(error => console.log(error));
-  }
-
-  emailLogin(email: string, password: string) {
-    return this.afAuth.auth.signInWithEmailAndPassword(email, password)
-      .then((user) => {
-        // this.authState = user
-        // this.updateUserData()
-      })
-      .catch(error => console.log(error));
-  }
-
-  // Sends email allowing user to reset password
-  resetPassword(email: string) {
-    const fbAuth = firebase.auth();
-
-    return fbAuth.sendPasswordResetEmail(email)
-      .then(() => console.log('email sent'))
-      .catch((error) => console.log(error))
-  }
 
 
-  //// Sign Out ////
-
-  // signOut(): void {
-  //   this.afAuth.auth.signOut();
-  //   this.router.navigate(['/'])
-  // }
 
 
-  //// Helpers ////
-
-  private socialSignIn(provider) {
-    return this.afAuth.auth.signInWithPopup(provider)
-      .then((credential) => {
-        this.updateUserData(credential.user)
-      })
-  }
 
 
 

@@ -21,7 +21,6 @@
         <h3>Howdy, {{ user.displayName }}</h3>
         <img class="card-img-top" [src]="user.photoURL || 'https://api.adorable.io/avatars/109/fire.png'" width=50px>
         <p class="text-truncate">UID: {{ user.uid }}</p>
-        <p>Favorite Color: {{ user?.favoriteColor }} </p>
         <button class="button" (click)="logout()">Logout</button>
     </div>
 </ng-template>
