@@ -8,7 +8,7 @@ FireStarter is a basic Angular PWA powered by Firebase. It can serve as a founda
 
 - [Live Demo](https://firestarter-96e46.firebaseapp.com/)
 - [Lessons and Screencasts](https://angularfirebase.com)
-- [Join the Slack Team](https://join.slack.com/angularfirebase/shared_invite/MjA2NTgxMTI0MTk2LTE0OTg4NTQ4MDAtMjhhZDIzMjc0Mg)
+- [Join the Slack Team](https://join.slack.com/t/angularfirebase/shared_invite/enQtMjU2OTU5OTMyODM3LWU4YTZiMGFhZjJhYmEwYzI1MWFmYTgyMWRmOTI5NWZjYWE3NTMwZjFmNWMwZGI1MmMzODQ3OTFlZjFkMjc5N2Y)
 
 ## Features
 
@@ -37,7 +37,9 @@ export const environment = {
         apiKey: 'APIKEY',
         authDomain: 'DEV-APP.firebaseapp.com',
         databaseURL: 'https://DEV-APP.firebaseio.com',
-        storageBucket: 'DEV-APP.appspot.com'
+        projectId: 'DEV-APP',
+        storageBucket: 'DEV-APP.appspot.com',
+        messagingSenderId: '123456789'
     }
 };
 ```

@@ -16,7 +16,13 @@ export class UploadService {
 
 
   getUploads() {
-    this.uploads = this.db.list(this.basePath).valueChanges();
+    this.uploads = this.db.list(this.basePath).snapshotChanges().map(actions => {
+      return actions.map(a => {
+        const data = a.payload.val()
+        const $key = a.payload.key;
+        return { $key, ...data };
+      });
+    });
     return this.uploads
   }
 
