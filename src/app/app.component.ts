@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './core/auth.service';
+import { NotifyService } from './core/notify.service';
 
 
 @Component({
@@ -9,7 +10,7 @@ import { AuthService } from './core/auth.service';
 })
 export class AppComponent {
 
-  constructor() { }
+  constructor(public notify: NotifyService) { }
 
 
 }

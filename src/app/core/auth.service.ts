@@ -3,9 +3,10 @@ import { Router } from '@angular/router';
 import * as firebase from 'firebase/app';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { NotifyService } from './notify.service';
 
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/switchMap'
+import 'rxjs/add/operator/switchMap';
 
 interface User {
   uid: string;
@@ -22,7 +23,8 @@ export class AuthService {
 
   constructor(private afAuth: AngularFireAuth,
               private afs: AngularFirestore,
-              private router: Router) {
+              private router: Router,
+              private notify: NotifyService) {
 
       this.user = this.afAuth.authState
         .switchMap(user => {
@@ -34,6 +36,8 @@ export class AuthService {
         })
 
   }
+
+  ////// OAuth Methods /////
 
 
   googleLogin() {
@@ -60,8 +64,10 @@ export class AuthService {
   private oAuthLogin(provider) {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((credential) => {
+        this.notify.update('Welcome to Firestarter!!!', 'success')
         return this.updateUserData(credential.user)
       })
+      .catch(error => this.handleError(error) );
   }
 
 
@@ -70,9 +76,10 @@ export class AuthService {
   anonymousLogin() {
     return this.afAuth.auth.signInAnonymously()
       .then((user) => {
+        this.notify.update('Welcome to Firestarter!!!', 'success')
         return this.updateUserData(user) // if using firestore
       })
-      .catch(error => console.log(error));
+      .catch(error => this.handleError(error) );
   }
   
   //// Email/Password Auth ////
@@ -80,17 +87,15 @@ export class AuthService {
   emailSignUp(email: string, password: string) {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((user) => {
+        this.notify.update('Welcome to Firestarter!!!', 'success')
         return this.updateUserData(user) // if using firestore
       })
-      .catch(error => console.log(error));
+      .catch(error => this.handleError(error) );
   }
 
   emailLogin(email: string, password: string) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
-      .then((user) => {
-        // return this.updateUserData(user) // if using firestore
-      })
-      .catch(error => console.log(error));
+      .catch(error => this.handleError(error) );
   }
   
   // Sends email allowing user to reset password
@@ -98,8 +103,8 @@ export class AuthService {
     const fbAuth = firebase.auth();
 
     return fbAuth.sendPasswordResetEmail(email)
-      .then(() => console.log('email sent'))
-      .catch((error) => console.log(error))
+      .then(() => this.notify.update('Password update email sent', 'info'))
+      .catch((error) => this.handleError(error) )
   }
 
 
@@ -109,10 +114,14 @@ export class AuthService {
     });
   }
   
+  // If error, console log and notify user
+  private handleError(error) {
+    console.error(error)
+    this.notify.update(error.message, 'error')
+  }
 
-
+  // Sets user data to firestore after succesful login
   private updateUserData(user) {
-    // Sets user data to firestore on login
 
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
 
@@ -126,38 +135,5 @@ export class AuthService {
     return userRef.set(data)
 
   }
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
