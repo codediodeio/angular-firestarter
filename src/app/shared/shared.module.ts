@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { LoadingSpinnerComponent } from '../ui/loading-spinner/loading-spinner.component';
+import { NotificationMessageComponent } from '../ui/notification-message/notification-message.component';
 
 
 @NgModule({
@@ -9,10 +10,12 @@ import { LoadingSpinnerComponent } from '../ui/loading-spinner/loading-spinner.c
     CommonModule,
   ],
   declarations: [
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    NotificationMessageComponent,
   ],
   exports: [
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    NotificationMessageComponent,
   ]
 })
 export class SharedModule { }
