@@ -11,7 +11,6 @@ export class NotificationMessageComponent implements OnInit {
 
   constructor(public notify: NotifyService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
 }
