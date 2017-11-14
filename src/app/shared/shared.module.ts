@@ -9,10 +9,10 @@ import { LoadingSpinnerComponent } from '../ui/loading-spinner/loading-spinner.c
     CommonModule,
   ],
   declarations: [
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
   ],
   exports: [
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
   ]
 })
 export class SharedModule { }
