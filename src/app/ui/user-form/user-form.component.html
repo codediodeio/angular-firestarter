@@ -1,4 +1,3 @@
-
 <form [formGroup]="userForm"  *ngIf="newUser"  (ngSubmit)="signup()">
 
   <h3>New User Signup</h3>
@@ -23,9 +22,6 @@
 
   <div *ngIf="userForm.valid" class="notification is-success">Form is valid</div>
   <button type="submit" class="button" [disabled]="!userForm.valid">Submit</button>
-
-
-
 
 </form>
 
@@ -58,6 +54,5 @@
 
   <a *ngIf="!passReset && userForm.controls.email.valid" class="help is-info" (click)="resetPassword()">Reset Password for {{userForm.value.email}}?</a>
   <p *ngIf="passReset" class="help is-info">Reset requested. Check your email instructions.</p>
-
 
 </form>

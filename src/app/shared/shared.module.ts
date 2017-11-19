@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { LoadingSpinnerComponent } from '../ui/loading-spinner/loading-spinner.component';
 
-
 @NgModule({
   imports: [
     CommonModule,
@@ -13,6 +12,6 @@ import { LoadingSpinnerComponent } from '../ui/loading-spinner/loading-spinner.c
   ],
   exports: [
     LoadingSpinnerComponent,
-  ]
+  ],
 })
 export class SharedModule { }

@@ -1,19 +1,17 @@
 <h3>New Task Form</h3>
 
-    <label class="label">Name: </label>
+<label class="label">Name: </label>
 
-    <input placeholder="Item Title" class="input"
-    [(ngModel)]="item.title"
-    required minlength="2" maxlength="23"
-    #title='ngModel' autofocus>
+<input placeholder="Item Title" class="input"
+[(ngModel)]="item.title"
+required minlength="2" maxlength="23"
+#title='ngModel' autofocus>
 
-    <div *ngIf="title.dirty">
-      <span *ngIf='title.errors; then errors else valid'>template renders here...</span>
-    </div>
+<div *ngIf="title.dirty">
+  <span *ngIf='title.errors; then errors else valid'>template renders here...</span>
+</div>
 
-
-    <button class="button is-primary" (click)='createItem()' [disabled]="!title.valid">Create</button>
-
+<button class="button is-primary" (click)='createItem()' [disabled]="!title.valid">Create</button>
 
 <ng-template #valid>
   <p class="help is-success">looks good!</p>

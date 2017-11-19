@@ -1,11 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
-
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
 
 ///// Start FireStarter
 
@@ -13,25 +11,20 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 
 // Shared/Widget
-import { SharedModule } from './shared/shared.module'
+import { SharedModule } from './shared/shared.module';
 
 // Feature Modules
 import { ItemModule } from './items/shared/item.module';
 import { UploadModule } from './uploads/shared/upload.module';
 import { UiModule } from './ui/shared/ui.module';
-import { NotesModule } from './notes/notes.module'
+import { NotesModule } from './notes/notes.module';
 ///// End FireStarter
 
-
-
-
-
 import { environment } from '../environments/environment';
-import { AngularFireModule } from 'angularfire2';
 
+import { AngularFireModule } from 'angularfire2';
 export const firebaseConfig = environment.firebaseConfig;
 import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -39,7 +32,6 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
-    HttpModule,
     FormsModule,
     AppRoutingModule,
     CoreModule,
@@ -47,10 +39,10 @@ import { FormsModule } from '@angular/forms';
     ItemModule,
     UiModule,
     NotesModule,
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireModule.initializeApp(firebaseConfig),
   ],
   bootstrap: [
-    AppComponent
-  ]
+    AppComponent,
+  ],
 })
 export class AppModule { }
