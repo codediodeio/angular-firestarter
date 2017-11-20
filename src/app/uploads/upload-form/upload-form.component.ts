@@ -1,44 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+
 import { UploadService } from '../shared/upload.service';
+
 import { Upload } from '../shared/upload';
-import * as _ from "lodash";
 
 @Component({
   selector: 'upload-form',
   templateUrl: './upload-form.component.html',
-  styleUrls: ['./upload-form.component.scss']
+  styleUrls: ['./upload-form.component.scss'],
 })
-export class UploadFormComponent implements OnInit {
+export class UploadFormComponent {
 
-  selectedFiles: FileList;
+  selectedFiles: FileList | null;
   currentUpload: Upload;
 
   constructor(private upSvc: UploadService) { }
 
-  ngOnInit() {
-  }
-
-  detectFiles(event) {
-      this.selectedFiles = event.target.files;
+  detectFiles($event: Event) {
+      this.selectedFiles = ($event.target as HTMLInputElement).files;
   }
 
   uploadSingle() {
-    let file = this.selectedFiles.item(0)
-    this.currentUpload = new Upload(file);
-    this.upSvc.pushUpload(this.currentUpload)
+    const file = this.selectedFiles;
+    if (file && file.length === 1) {
+      this.currentUpload = new Upload(file.item(0));
+      this.upSvc.pushUpload(this.currentUpload);
+    } else {
+      console.error('No file found!');
+    }
   }
 
   uploadMulti() {
-    let files = this.selectedFiles
-    if (_.isEmpty(files)) return;
+    const files = this.selectedFiles;
+    if (!files || files.length === 0) {
+      console.error('No Multi Files found!');
+      return;
+    }
 
-    let filesIndex = _.range(files.length)
-    _.each(filesIndex, (idx) => {
-      this.currentUpload = new Upload(files[idx]);
-      this.upSvc.pushUpload(this.currentUpload)}
-    )
+    Array.from(files).forEach((file) => {
+      this.currentUpload = new Upload(file);
+      this.upSvc.pushUpload(this.currentUpload);
+    });
   }
-
-
-
 }

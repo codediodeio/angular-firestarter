@@ -1,29 +1,31 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
+
 import { NoteService } from '../note.service';
+
+import { Note } from '../note-model';
 
 @Component({
   selector: 'note-detail',
   templateUrl: './note-detail.component.html',
-  styleUrls: ['./note-detail.component.scss']
+  styleUrls: ['./note-detail.component.scss'],
 })
-export class NoteDetailComponent implements OnInit {
+export class NoteDetailComponent {
 
   @Input()
-  note: any;
+  note: Note;
 
   constructor(private noteService: NoteService) { }
 
-  ngOnInit() {
-    // this.noteDoc = this.noteService.getNote(this.noteId)
-    // this.note = this.noteDoc.valueChanges()
+  addHeartToNote(val: number) {
+    if (this.note.id) {
+      this.noteService.updateNote(this.note.id, { hearts: val + 1 });
+    } else {
+      console.error('Note missing ID!');
+    }
   }
 
-  addHeartToNote(val) {
-    this.noteService.updateNote(this.note.id, { hearts: val + 1 })
-  }
-
-  deleteNote(id) {
-    this.noteService.deleteNote(id)
+  deleteNote(id: string) {
+    this.noteService.deleteNote(id);
   }
 
 }

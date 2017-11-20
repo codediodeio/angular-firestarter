@@ -1,42 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../core/auth.service';
-
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { AuthService } from '../../core/auth.service';
 
 @Component({
   selector: 'user-login',
   templateUrl: './user-login.component.html',
-  styleUrls: ['./user-login.component.scss']
+  styleUrls: ['./user-login.component.scss'],
 })
-export class UserLoginComponent implements OnInit {
+export class UserLoginComponent {
 
   constructor(public auth: AuthService,
               private router: Router) { }
 
-
-  ngOnInit() {
-  }
-
   /// Social Login
 
-  signInWithGithub(): void {
+  signInWithGithub() {
     this.auth.githubLogin()
     .then(() => this.afterSignIn());
   }
 
-  signInWithGoogle(): void {
+  signInWithGoogle() {
     this.auth.googleLogin()
       .then(() => this.afterSignIn());
   }
 
-  signInWithFacebook(): void {
+  signInWithFacebook() {
     this.auth.facebookLogin()
       .then(() => this.afterSignIn());
   }
 
-  signInWithTwitter(): void {
+  signInWithTwitter() {
     this.auth.twitterLogin()
       .then(() => this.afterSignIn());
   }
@@ -48,10 +43,9 @@ export class UserLoginComponent implements OnInit {
       .then(() => this.afterSignIn());
   }
 
-
   /// Shared
 
-  private afterSignIn(): void {
+  private afterSignIn() {
     // Do after login stuff here, such router redirects, toast messages, etc.
     this.router.navigate(['/']);
   }
