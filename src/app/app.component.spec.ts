@@ -1,11 +1,31 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { CoreModule } from './core/core.module';
+import { UploadsModule } from './uploads/uploads.module';
+import { UiModule } from './ui/ui.module';
+import { NotesModule } from './notes/notes.module';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireStorageModule } from 'angularfire2/storage';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { firebasePlaceholderConfig } from '../env';
+
+
+
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        CoreModule,
+        UploadsModule,
+        UiModule,
+        NotesModule,
+        AngularFireModule.initializeApp(firebasePlaceholderConfig, 'firestarter'),
+        AngularFirestoreModule,
+        AngularFireAuthModule,
+        AngularFireStorageModule
       ],
       declarations: [
         AppComponent
@@ -21,11 +41,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app.title).toEqual('app');
-  }));
-  it('should render title in a h1 tag', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to app!');
   }));
 });

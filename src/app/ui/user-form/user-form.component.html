@@ -1,0 +1,58 @@
+<form [formGroup]="userForm"  *ngIf="newUser"  (ngSubmit)="signup()">
+
+  <h3>New User Signup</h3>
+  <p class="button is-small" (click)="toggleForm()">Already Registered?</p>
+  <hr>
+
+  <label for="email">Email</label>
+  <input type="email" id="email" class="input"
+         formControlName="email" required >
+
+  <div *ngIf="formErrors.email" class="notification is-danger">
+    {{ formErrors.email }}
+  </div>
+
+  <label for="password">Password</label>
+  <input type="password" id="password" class="input"
+         formControlName="password" required >
+
+  <div *ngIf="formErrors.password" class="notification is-danger">
+    {{ formErrors.password }}
+  </div>
+
+  <div *ngIf="userForm.valid" class="notification is-success">Form is valid</div>
+  <button type="submit" class="button" [disabled]="!userForm.valid">Submit</button>
+
+</form>
+
+
+<form [formGroup]="userForm"  *ngIf="!newUser"  (ngSubmit)="login()">
+
+  <h3>Existing User Login</h3>
+  <p class="btn button is-small" (click)="toggleForm()">New User?</p>
+  <hr>
+
+  <label for="email">Email</label>
+  <input type="email" id="email" class="input"
+         formControlName="email" required >
+
+  <div *ngIf="formErrors.email" class="help is-danger">
+    {{ formErrors.email }}
+  </div>
+
+  <label for="password">Password</label>
+  <input type="password" id="password" class="input"
+         formControlName="password" required >
+
+  <div *ngIf="formErrors.password" class="help is-danger">
+    {{ formErrors.password }}
+  </div>
+
+  <button type="submit" class="button" [disabled]="!userForm.valid">Submit</button>
+
+  <span *ngIf="userForm.valid" class="help is-success">Form Looks Valid</span>
+
+  <a *ngIf="!passReset && userForm.controls.email.valid" class="help is-info" (click)="resetPassword()">Reset Password for {{userForm.value.email}}?</a>
+  <p *ngIf="passReset" class="help is-info">Reset requested. Check your email instructions.</p>
+
+</form>

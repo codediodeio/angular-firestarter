@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NotesService } from '../notes.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'notes-list',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotesListComponent implements OnInit {
 
-  constructor() { }
+  notes: Observable<any[]>;
+  content: string;
+
+  constructor(private notesService: NotesService) { }
 
   ngOnInit() {
+    this.notes = this.notesService.getData();
+  }
+
+  clickHandler() {
+    this.notesService.createNote(this.content);
+    this.content = '';
   }
 
 }
