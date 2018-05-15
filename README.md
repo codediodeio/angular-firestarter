@@ -2,9 +2,9 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-# FireStarter - Angular + Firebase Progressive Web App
+# FireStarter
 
-FireStarter is a basic Angular PWA powered by Firebase. It can serve as a foundation to learn this stack and roll out more complex features.
+FireStarter is an Angular PWA powered by Firebase. It can serve as a foundation to learn this stack and roll out more complex features.
 - [Live Demo](https://firestarter-96e46.firebaseapp.com/)
 - [Lessons and Screencasts](https://angularfirebase.com)
 - [Join the Slack Team](https://goo.gl/qF8Q5r)
@@ -18,15 +18,19 @@ FireStarter is a basic Angular PWA powered by Firebase. It can serve as a founda
 
 ## Usage
 
-Create an account at https://firebase.google.com/
+1. Run
 
 - `git clone https://github.com/codediodeio/angular-firestarter.git firestarter`
 - `cd firestarter`
 - `npm install`
 
-Create the environment files below in `src/environments/`.
+2. Create a project at https://firebase.google.com/ and grab your web config:
 
-#### environment.ts
+![](https://angularfirebase.com/wp-content/uploads/2017/04/firebase-dev-prod-credentials.png)
+
+3. Add the config to your Angular environment
+
+#### src/environments/environment.ts
 ```typescript
 export const environment = {
     production: false,
@@ -40,16 +44,7 @@ export const environment = {
     }
 };
 ```
-#### environment.prod.ts
-```typescript
-export const environment = {
-    production: true,
-    firebase: {
-        // same as above, or use a different firebase project to isolate environments
-    }
-};
-```
 
-In the `app.moule`, replace the `firebasePlaceholderConfig` with your environment variable, i.e `environment.firebase`
+4. Open `src/app/app.module.ts` and replace the `firebasePlaceholderConfig` with your environment, i.e `environment.firebase`
 
-And finally `ng serve`
+5. And finally `ng serve`
