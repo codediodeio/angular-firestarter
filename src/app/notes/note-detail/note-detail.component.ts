@@ -1,8 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { NoteService } from '../note.service';
-
-import { Note } from '../note-model';
+import { NotesService } from '../notes.service';
 
 @Component({
   selector: 'note-detail',
@@ -11,21 +9,20 @@ import { Note } from '../note-model';
 })
 export class NoteDetailComponent {
 
-  @Input()
-  note: Note;
+  @Input() note: any;
 
-  constructor(private noteService: NoteService) { }
+  constructor(private notesService: NotesService) { }
 
   addHeartToNote(val: number) {
     if (this.note.id) {
-      this.noteService.updateNote(this.note.id, { hearts: val + 1 });
+      this.notesService.updateNote(this.note.id, { hearts: val + 1 });
     } else {
       console.error('Note missing ID!');
     }
   }
 
   deleteNote(id: string) {
-    this.noteService.deleteNote(id);
+    this.notesService.deleteNote(id);
   }
 
 }

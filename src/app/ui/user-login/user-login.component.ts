@@ -16,38 +16,38 @@ export class UserLoginComponent {
 
   /// Social Login
 
-  signInWithGithub() {
-    this.auth.githubLogin()
-    .then(() => this.afterSignIn());
+  async signInWithGithub() {
+    await this.auth.githubLogin();
+    return await this.afterSignIn();
   }
 
-  signInWithGoogle() {
-    this.auth.googleLogin()
-      .then(() => this.afterSignIn());
+  async signInWithGoogle() {
+    await this.auth.googleLogin();
+    return await this.afterSignIn();
   }
 
-  signInWithFacebook() {
-    this.auth.facebookLogin()
-      .then(() => this.afterSignIn());
+  async signInWithFacebook() {
+    await this.auth.facebookLogin();
+    await this.afterSignIn();
   }
 
-  signInWithTwitter() {
-    this.auth.twitterLogin()
-      .then(() => this.afterSignIn());
+  async signInWithTwitter() {
+    await this.auth.twitterLogin();
+    return await this.afterSignIn();
   }
 
   /// Anonymous Sign In
 
-  signInAnonymously() {
-    this.auth.anonymousLogin()
-      .then(() => this.afterSignIn());
+  async signInAnonymously() {
+    await this.auth.anonymousLogin();
+    return await this.afterSignIn();
   }
 
   /// Shared
 
   private afterSignIn() {
     // Do after login stuff here, such router redirects, toast messages, etc.
-    this.router.navigate(['/']);
+    return this.router.navigate(['/']);
   }
 
 }

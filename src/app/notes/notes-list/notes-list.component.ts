@@ -1,30 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-
-import { NoteService } from '../note.service';
-
-import { Note } from '../note-model';
-
-import { Observable } from 'rxjs/Observable';
+import { NotesService } from '../notes.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'notes-list',
   templateUrl: './notes-list.component.html',
-  styleUrls: ['./notes-list.component.scss'],
+  styleUrls: ['./notes-list.component.scss']
 })
 export class NotesListComponent implements OnInit {
 
-  notes: Observable<Note[]>;
+  notes: Observable<any[]>;
   content: string;
 
-  constructor(private noteService: NoteService) { }
+  constructor(private notesService: NotesService) { }
 
   ngOnInit() {
-    // this.notes = this.noteService.getData()
-    this.notes = this.noteService.getSnapshot();
+    this.notes = this.notesService.getData();
   }
 
-  createNote() {
-    this.noteService.create(this.content);
+  clickHandler() {
+    this.notesService.createNote(this.content);
     this.content = '';
   }
 
