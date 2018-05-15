@@ -1,30 +1,28 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
-///// Start FireStarter
-
-// Core
-import { CoreModule } from './core/core.module';
-
-// Shared/Widget
-import { SharedModule } from './shared/shared.module';
-
-// Feature Modules
-import { ItemModule } from './items/shared/item.module';
-import { UploadModule } from './uploads/shared/upload.module';
-import { UiModule } from './ui/shared/ui.module';
-import { NotesModule } from './notes/notes.module';
-///// End FireStarter
-
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
+// Firestarter App Modules
+import { CoreModule } from './core/core.module';
+import { UploadsModule } from './uploads/uploads.module';
+import { UiModule } from './ui/ui.module';
+import { NotesModule } from './notes/notes.module';
+
+// AngularFire2 Modules
 import { AngularFireModule } from 'angularfire2';
-export const firebaseConfig = environment.firebaseConfig;
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireStorageModule } from 'angularfire2/storage';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
+// See README for Firebase setup instructions
+// 1. Delete Me!
+import { firebasePlaceholderConfig } from '../env';
+// 2. Add your project credentials to environments/environment.ts
+// 3. Then use it in the imports section below environment.firebase
 
 @NgModule({
   declarations: [
@@ -32,17 +30,18 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
   ],
   imports: [
     BrowserModule,
-    FormsModule,
     AppRoutingModule,
     CoreModule,
-    SharedModule,
-    ItemModule,
     UiModule,
     NotesModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    UploadsModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
+    AngularFireModule.initializeApp(firebasePlaceholderConfig, 'firestarter'),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    AngularFireStorageModule
   ],
-  bootstrap: [
-    AppComponent,
-  ],
+  providers: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
