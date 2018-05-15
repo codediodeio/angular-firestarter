@@ -30,7 +30,7 @@ Create the environment files below in `src/environments/`.
 ```typescript
 export const environment = {
     production: false,
-    firebaseConfig: {
+    firebase: {
         apiKey: 'APIKEY',
         authDomain: 'DEV-APP.firebaseapp.com',
         databaseURL: 'https://DEV-APP.firebaseio.com',
@@ -44,10 +44,12 @@ export const environment = {
 ```typescript
 export const environment = {
     production: true,
-    firebaseConfig: {
+    firebase: {
         // same as above, or use a different firebase project to isolate environments
     }
 };
 ```
+
+In the `app.moule`, replace the `firebasePlaceholderConfig` with your environment variable, i.e `environment.firebase`
 
 And finally `ng serve`
