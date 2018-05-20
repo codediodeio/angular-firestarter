@@ -6,7 +6,7 @@
 
   <label for="email">Email</label>
   <input type="email" id="email" class="input"
-         formControlName="email" required >
+         formControlName="email" required autocomplete="new-password">
 
   <div *ngIf="formErrors.email" class="notification is-danger">
     {{ formErrors.email }}
@@ -34,7 +34,7 @@
 
   <label for="email">Email</label>
   <input type="email" id="email" class="input"
-         formControlName="email" required >
+         formControlName="email" required autocomplete="new-password">
 
   <div *ngIf="formErrors.email" class="help is-danger">
     {{ formErrors.email }}
@@ -42,7 +42,7 @@
 
   <label for="password">Password</label>
   <input type="password" id="password" class="input"
-         formControlName="password" required >
+         formControlName="password" required autocomplete="new-password">
 
   <div *ngIf="formErrors.password" class="help is-danger">
     {{ formErrors.password }}
