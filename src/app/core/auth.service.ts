@@ -144,4 +144,51 @@ export class AuthService {
     };
     return userRef.set(data);
   }
+
+
+
+  async sendEmailLink(email: string) {
+    const actionCodeSettings = {
+      // Your redirect URL
+      url: 'http://localhost:4200/login',
+      handleCodeInApp: true
+    };
+
+    try {
+      await this.afAuth.auth.sendSignInLinkToEmail(
+        email,
+        actionCodeSettings
+      );
+      window.localStorage.setItem('emailForSignIn', email);
+      return true;
+    } catch (err) {
+      return <string>err.message;
+    }
+  }
+
+  async confirmSignIn(url) {
+    try {
+      if (this.afAuth.auth.isSignInWithEmailLink(url)) {
+        let email = window.localStorage.getItem('emailForSignIn');
+
+        // If missing email, prompt user for it
+        if (!email) {
+          email = window.prompt('Please provide your email for confirmation');
+        }
+
+        // Signin user and remove the email localStorage
+        // const result = await
+        return this.afAuth.auth
+          .signInWithEmailLink(email, url)
+          .then( credential => {
+            window.localStorage.removeItem('emailForSignIn');
+            this.notify.update('Welcome to Firestarter!!!', 'success');
+            return this.updateUserData(credential.user);
+          });
+      }
+    } catch (err) {
+      return <string>err.message;
+    }
+  }
+
 }
