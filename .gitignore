@@ -12,6 +12,8 @@ prerender.ts
 # dependencies
 /node_modules
 
+.firebaserc
+
 # IDEs and editors
 /.idea
 .project
