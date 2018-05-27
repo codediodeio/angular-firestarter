@@ -23,7 +23,7 @@ export class PasswordlessFormComponent implements OnInit {
     if (url.includes('signIn')) {
       this.auth.confirmSignIn(url).then(
         r => {
-          if ( r instanceof String) {
+          if ( typeof r === 'string' ) {
             this.errorMessage = r;
           } else {
             this.router.navigate(['notes']);
