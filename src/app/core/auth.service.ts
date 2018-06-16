@@ -10,7 +10,7 @@ import {
 import { NotifyService } from './notify.service';
 
 import { Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, startWith, tap, filter } from 'rxjs/operators';
 
 interface User {
   uid: string;
@@ -36,7 +36,9 @@ export class AuthService {
         } else {
           return of(null);
         }
-      })
+      }),
+      tap(user => localStorage.setItem('user', JSON.stringify(user))),
+      startWith(JSON.parse(localStorage.getItem('user')))
     );
   }
 
