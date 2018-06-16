@@ -1,16 +1,10 @@
-<div style="display: flex; flex-wrap: nowrap; justify-content: space-around; padding: 0 20vw">
+<p align="center">
 
-[![Slack Status](https://slackin-pbfjhfxnsa.now.sh/badge.svg)](https://goo.gl/qF8Q5r)
+<a href="https://slackin-pbfjhfxnsa.now.sh"><img src="https://slackin-pbfjhfxnsa.now.sh/badge.svg"></a>
 
-<img src="https://slack.angularfirebase.com/badge.svg">
+<a href="https://circleci.com/gh/codediodeio/angular-firestarter"><img src="https://circleci.com/gh/codediodeio/angular-firestarter.svg?style=svg"></a>
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-
-[![Lighthouse score: 100/100](https://lighthouse-badge.appspot.com/?score=100&compact)](https://github.com/ebidel/lighthouse-badge)
-
-[![CircleCI](https://circleci.com/gh/codediodeio/angular-firestarter.svg?style=svg)](https://circleci.com/gh/codediodeio/angular-firestarter)
-
-</div>
+</p>
 
 # FireStarter
 
