@@ -1,4 +1,7 @@
-import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
+import {
+  BrowserModule,
+  BrowserTransferStateModule
+} from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -19,17 +22,11 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireFunctionsModule } from 'angularfire2/functions';
 
-// See README for Firebase setup instructions
-// 1. Delete Me!
-import { firebasePlaceholderConfig } from '../env';
-// 2. Add your project credentials to environments/environment.ts
-// 3. Then use it in the imports section below environment.firebase
-
+// IMPORTANT
+// Add your own project credentials to environments/*.ts
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     BrowserTransferStateModule,
@@ -38,13 +35,15 @@ import { firebasePlaceholderConfig } from '../env';
     UiModule,
     NotesModule,
     UploadsModule,
-    AngularFireModule.initializeApp(firebasePlaceholderConfig, 'firestarter'),
+    AngularFireModule.initializeApp(environment.firebase, 'firestarter'),
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
     AngularFireFunctionsModule,
-    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('/ngsw-worker.js', {
+      enabled: environment.production
+    })
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
