@@ -2,15 +2,14 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SsrPageComponent } from './ssr-page.component';
 
-describe('SsrPageComponent', () => {
+xdescribe('SsrPageComponent', () => {
   let component: SsrPageComponent;
   let fixture: ComponentFixture<SsrPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SsrPageComponent ]
-    })
-    .compileComponents();
+      declarations: [SsrPageComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

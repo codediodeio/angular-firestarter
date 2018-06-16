@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'notes', component: NotesListComponent,  canActivate: [AuthGuard] },
   { path: 'uploads',  component: UploadPageComponent,  canActivate: [AuthGuard] },
 
-  { path: 'ssr', component: SsrPageComponent },
+  { path: 'ssr', component: SsrPageComponent }
 ];
 
 @NgModule({
