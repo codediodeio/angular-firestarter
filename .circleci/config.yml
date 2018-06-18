@@ -80,7 +80,8 @@ jobs:
       - image: circleci/node:8-browsers
     steps:
       - checkout
-      - run: ng build --prod
+      - run: npm install
+      - run: npm run build
       - run: cd functions && npm install && npm run build
       - run: ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
 
