@@ -36,9 +36,9 @@ export class AuthService {
         } else {
           return of(null);
         }
-      }),
-      tap(user => localStorage.setItem('user', JSON.stringify(user))),
-      startWith(JSON.parse(localStorage.getItem('user')))
+      })
+      // tap(user => localStorage.setItem('user', JSON.stringify(user))),
+      // startWith(JSON.parse(localStorage.getItem('user')))
     );
   }
 
