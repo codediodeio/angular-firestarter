@@ -31,5 +31,5 @@ Cypress.Commands.add('login', (email, pass) => {
     cy.get('input[name=email2]').type(email);
     cy.get('input[name=password2]').type(pass);
     cy.get('button[type=submit]').click();
-    cy.contains('Welcome to Firestarter');
+    cy.contains('Welcome back');
 })

@@ -32,7 +32,6 @@ describe('Firestarter', () => {
     it('signs up a new user', () => {
 
         // Click Login
-        cy.visit('http://localhost:4200');
         cy.get('#navToggle').click();
         cy.contains('Login').click();
 
@@ -45,7 +44,7 @@ describe('Firestarter', () => {
         cy.get('button[type=submit]').click();
 
         // Assert welcome message
-        cy.contains('Welcome to Firestarter');
+        cy.contains('Welcome new user!');
         cy.contains('Logout').click();
     });
 
