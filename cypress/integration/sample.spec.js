@@ -3,22 +3,23 @@
 import Chance from 'chance';
 const chance = new Chance();
 
-
-
 describe('Firestarter', () => {
+
+    const email = chance.email();
+    const pass = 'ValidPassword23';
 
     beforeEach(() => {
         cy.visit('http://localhost:4200');
     })
 
-    xit('has a title', () => {
-        cy.contains('Welcome to Foo');
+    it('has a title', () => {
+        cy.contains('Welcome to Firestarter');
         expect(2).to.equal(2)
     });
 
     it('blocks protected routes', () => {
 
-        cy.pause();
+        // cy.pause();
 
         cy.get('#navToggle').click();
         cy.contains('Firestore').click();
@@ -28,29 +29,31 @@ describe('Firestarter', () => {
             .and('be.visible');
     });
 
-    xit('signs up a new user', () => {
+    it('signs up a new user', () => {
+
+        // Click Login
         cy.visit('http://localhost:4200');
         cy.get('#navToggle').click();
-
         cy.contains('Login').click();
 
+        // Assert URL
         cy.url().should('include', 'login');
 
-
-        // cy.contains('Already Registered?').click();
-
-        cy.get('input[name=email]').type(chance.email());
-        cy.get('input[name=password]').type('ValidPassword23');
-
+        // Fill out the form
+        cy.get('input[name=email]').type(email);
+        cy.get('input[name=password]').type(pass);
         cy.get('button[type=submit]').click();
 
+        // Assert welcome message
         cy.contains('Welcome to Firestarter');
+        cy.contains('Logout').click();
     });
 
-    xit('allows user to create notes', () => {
-        cy.login()
-            // cy.wait(1000)
-            // cy.visit('http://localhost:4200');
+    it('allows the user to create notes', () => {
+
+        // Login with custom method
+        cy.login(email, pass)
+
         cy.get('#navToggle').click();
         cy.contains('Firestore').click();
 
@@ -77,14 +80,9 @@ describe('Firestarter', () => {
 
 
 
-
-
-    xit('logs the user out', () => {
-        // cy.clock()
-        // cy.login()
-        // cy.visit('http://localhost:4200/');
-        // cy.tick(1000)
+    it('logs the user out', () => {
         cy.contains('Logout').click();
+        cy.get('user-profile').children().should('contain', 'Howdy, GUEST');
     });
 
 
