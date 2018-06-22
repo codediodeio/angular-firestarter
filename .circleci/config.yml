@@ -1,63 +1,3 @@
-# Javascript Node CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
-# version: 2
-# jobs:
-#   build:
-#     docker:
-#       # specify the version you desire here
-#       - image: circleci/node:8-browsers
-      
-#       # Specify service dependencies here if necessary
-#       # CircleCI maintains a library of pre-built images
-#       # documented at https://circleci.com/docs/2.0/circleci-images/
-#       # - image: circleci/mongo:3.4.4
-
-#     working_directory: ~/firestarter
-
-#     steps:
-#       - checkout
-
-#       # Download and cache dependencies
-#       - restore_cache:
-#           keys:
-#           - v1-dependencies-{{ checksum "package.json" }}
-#           # fallback to using the latest cache if no exact match is found
-#           - v1-dependencies-
-
-#       - run: npm install
-
-#       - save_cache:
-#           paths:
-#             - node_modules
-#           key: v1-dependencies-{{ checksum "package.json" }}
-        
-#       # run tests!
-#       - run: npm run test
-
-#     deploy:
-#       docker:
-#         - image: circleci/node:8
-#       working_directory: ~/firestarter
-#       steps:
-#         - run: 
-#             name: Build app
-#             command: ng build --prod
-
-#         - run:
-#             name: Deploy Master to Firebase
-#             command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
-
-  # workflows:
-  #   version: 2
-  #   build_and_test:
-  #     jobs:
-  #       - build
-  #       - test
-
-
-
 version: 2
 jobs:
   test-job:
@@ -91,9 +31,9 @@ workflows:
   -test_and_deploy:
     jobs:
       - test-job
-      - deploy-job:
-          requires:
-            - test-job
-          filters:
-            branches:
-              only: master
+      # - deploy-job:
+      #     requires:
+      #       - test-job
+      #     filters:
+      #       branches:
+      #         only: master
