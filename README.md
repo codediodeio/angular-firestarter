@@ -18,6 +18,12 @@ FireStarter is an Angular PWA powered by Firebase. It can serve as a foundation 
 
 ## Usage
 
+0. Install:
+npm install -g firebase-tools
+npm install -g @angular/cli
+npm install -g npm-check-updates
+
+
 1. Run
 
 - `git clone https://github.com/codediodeio/angular-firestarter.git firestarter`
