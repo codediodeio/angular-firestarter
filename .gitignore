@@ -1,7 +1,7 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 
-prerender.ts 
+prerender.ts
 
 # compiled output
 /dist
@@ -21,6 +21,7 @@ prerender.ts
 *.launch
 .settings/
 *.sublime-workspace
+*.sublime-project
 
 # IDE - VSCode
 .vscode/*
