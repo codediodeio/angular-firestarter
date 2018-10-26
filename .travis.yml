@@ -1,9 +1,22 @@
 language: node_js
 node_js:
- — “7”
+  - "8.11.1"
+
+branches:
+  only:
+    - master
+
+before_script:
+  - npm install -g firebase-tools
+  - npm install -g @angular/cli
+
 script:
- — echo “Deploy!!”
-install:
- — npm install -g firebase-tools
+  - ng build --prod
+
 after_success:
- — firebase deploy — project leaderboard-79b77 — token $FIREBASE_TOKEN.
+  - firebase deploy --token $FIREBASE_TOKEN
+
+notifications:
+  email:
+    on_failure: change
+    on_success: change
