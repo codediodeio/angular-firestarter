@@ -15,6 +15,7 @@ script:
 
 before_deploy:
   - cd functions && npm install && npm run build
+  - cd ..
 
 deploy:
   skip_cleanup: true
