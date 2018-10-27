@@ -1,45 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
-
 // Colors
-$white: #fff !default;
-$black: #000 !default;
-$red: #d9534f !default;
-$orange: #f0ad4e !default;
-$yellow: #ffd500 !default;
-$green: #5cb85c !default;
-$blue: #0275d8 !default;
-$teal: #5bc0de !default;
-$pink: #ff5b77 !default;
-$purple: #613d7c !default;
-// Grayscale
-$gray-dark: #222;
-$gray: #212121;
-$gray-light: #666;
-$gray-lighter: #bbb;
-$gray-lightest: #eee;
-///// Content
-$body-font: 'Source Sans Pro',
-sans-serif;
-$heading-font: 'Palanquin',
-sans-serif;
+// $white: #fff !default;
+// $black: #000 !default;
+// $red: #d9534f !default;
+// $orange: #f0ad4e !default;
+// $yellow: #ffd500 !default;
+// $green: #5cb85c !default;
+// $blue: #0275d8 !default;
+// $teal: #5bc0de !default;
+// $pink: #ff5b77 !default;
+// $purple: #613d7c !default;
+// // Grayscale
+// $gray-dark: #222;
+// $gray: #212121;
+// $gray-light: #666;
+// $gray-lighter: #bbb;
+// $gray-lightest: #eee;
+// ///// Content
+// $body-font: 'Source Sans Pro',
+// sans-serif;
+// $heading-font: 'Palanquin',
+// sans-serif;
 
-body {
-    font-family: $body-font;
-    // padding: 0 1vw;
-}
+// body {
+//     font-family: $body-font;
+//     // padding: 0 1vw;
+// }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-{
-    font-family: $heading-font;
-    font-weight: 300 !important;
-}
+// h1,
+// h2,
+// h3,
+// h4,
+// h5,
+// h6,
+// {
+//     font-family: $heading-font;
+//     font-weight: 300 !important;
+// }
 
 .loading {
     opacity: 0;
@@ -63,6 +61,8 @@ app-root:empty+.loading {
     }
 }
 
-.button {
-    margin-right: 5px;
-}
+// .button {
+//     margin-right: 5px;
+// }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

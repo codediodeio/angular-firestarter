@@ -4,12 +4,8 @@ import {
 } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import {
-  MatButtonModule,
-  MatIconModule,
-  MatToolbarModule
-} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSidenavModule } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -47,12 +43,10 @@ import { AngularFireFunctionsModule } from '@angular/fire/functions';
     AngularFireAuthModule,
     AngularFireStorageModule,
     AngularFireFunctionsModule,
-    MatButtonModule,
-    MatIconModule,
-    MatToolbarModule,
     ServiceWorkerModule.register('/ngsw-worker.js', {
       enabled: environment.production
     }),
+    MatSidenavModule,
   ],
   bootstrap: [AppComponent]
 })

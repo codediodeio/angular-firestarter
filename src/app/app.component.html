@@ -1,19 +1,18 @@
 <div id="wrapper" class="content">
-    <main-nav></main-nav>
+  <main-nav></main-nav>
 
-    <div class="columns">
-        <aside class="column is-2 is-offset-1">
-            <user-profile></user-profile>
-        </aside>
+  <mat-drawer-container class="example-container">
+    <mat-drawer mode="side" opened>
+      <user-profile></user-profile>
+    </mat-drawer>
 
-        <main class="column is-8">
-            <notification-message></notification-message>
+    <mat-drawer-content>
+      <notification-message></notification-message>
+      <router-outlet></router-outlet>
+    </mat-drawer-content>
+  </mat-drawer-container>
 
-            <router-outlet></router-outlet>
-        </main>
-    </div>
-
-    <footer class="footer">
-        Angular v6.x + Firebase Leaderboard App
-    </footer>
+  <footer class="footer">
+      Angular v6.x + Firebase Leaderboard App
+  </footer>
 </div>

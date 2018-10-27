@@ -1,56 +1,17 @@
-<!-- <nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-        <a class="navbar-item" routerLink="/">
-            <img src="assets/images/angularfirebase.png" width="30px" alt="Leaderboard" /> LeaderBoard
-        </a>
 
-        <a id="navToggle" role="button" class="navbar-burger" (click)="toggleCollapse()" [ngClass]="{'is-active': show}">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-        </a>
-    </div>
-
-    <div class="navbar-menu" [ngClass]="{'is-active': show}">
-        <div class="navbar-end">
-            <a class="navbar-item" routerLink="/notes">
-                Firestore
-            </a>
-            <a class="navbar-item" routerLink="/uploads">
-                File Uploads
-            </a>
-        </div>
-    </div>
-</nav> -->
-<!-- <mat-toolbar color="primary">
+<mat-toolbar color="primary">
   <mat-toolbar-row>
-    <a class="navbar-item" routerLink="/">
+    <a routerLink="/">
       <img src="assets/images/angularfirebase.png" width="30px" alt="Leaderboard" /> LeaderBoard
     </a>
     <span class="example-spacer"></span>
-    <a class="navbar-item" routerLink="/notes">
+    <a routerLink="/notes">
       <mat-icon class="example-icon">note</mat-icon>
+      Notes
     </a>
-    <a class="navbar-item" routerLink="/uploads">
+    <a routerLink="/uploads">
       <mat-icon class="example-icon">attach_file</mat-icon>
+      File Upload
     </a>
-  </mat-toolbar-row>
-</mat-toolbar> -->
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <span>Custom Toolbar</span>
-  </mat-toolbar-row>
-
-  <mat-toolbar-row>
-    <span>Second Line</span>
-    <span class="example-spacer"></span>
-    <mat-icon class="example-icon">verified_user</mat-icon>
-  </mat-toolbar-row>
-
-  <mat-toolbar-row>
-    <span>Third Line</span>
-    <span class="example-spacer"></span>
-    <mat-icon class="example-icon">favorite</mat-icon>
-    <mat-icon class="example-icon">delete</mat-icon>
   </mat-toolbar-row>
 </mat-toolbar>
