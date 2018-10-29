@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import {
   MatButtonModule,
+  MatCardModule,
   MatIconModule,
   MatToolbarModule
 } from '@angular/material';
@@ -23,6 +24,7 @@ import { SsrPageComponent } from './ssr-page/ssr-page.component';
     RouterModule,
     ReactiveFormsModule,
     MatButtonModule,
+    MatCardModule,
     MatIconModule,
     MatToolbarModule,
   ],

@@ -1,16 +1,16 @@
-<div id="wrapper" class="content">
+<div id="wrapper">
   <main-nav></main-nav>
 
-  <mat-drawer-container class="example-container">
-    <mat-drawer mode="side" opened>
+  <mat-sidenav-container class="example-container">
+    <mat-sidenav mode="side" opened class="example-sidenav">
       <user-profile></user-profile>
-    </mat-drawer>
+    </mat-sidenav>
 
-    <mat-drawer-content>
+    <mat-sidenav-content>
       <notification-message></notification-message>
       <router-outlet></router-outlet>
-    </mat-drawer-content>
-  </mat-drawer-container>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 
   <footer class="footer">
       Angular v6.x + Firebase Leaderboard App

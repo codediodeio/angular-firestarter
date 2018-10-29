@@ -3,11 +3,11 @@
 <hr>
 
 <div *ngIf="!(auth.user | async); else alreadyLoggedIn">
-  <h3>Login</h3>
+  <h3>Login using your Google Account.</h3>
 
-    <button (click)="signInWithGoogle()" class="button btn-social btn-google">
-      <i class="fa fa-google fa-lg"></i> Connect Google
-    </button>
+  <button mat-raised-button color="primary" (click)="signInWithGoogle()">
+    <i class="fa fa-google fa-lg"></i> Connect Google
+  </button>
 </div>
 
 <ng-template #alreadyLoggedIn>

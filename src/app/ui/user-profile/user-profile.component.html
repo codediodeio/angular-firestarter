@@ -5,19 +5,36 @@
 </div>
 
 <!-- User NOT logged in -->
-<ng-template #guest class="box">
-  <h3>Howdy, GUEST</h3>
-  <p class="card-text">Login to get started...</p>
-  <button class="button" routerLink="/login">Login</button>
+<ng-template #guest mat-card class="example-card">
+  <mat-card>
+    <mat-card-content>
+      <h3>Hello, GUEST</h3>
+      <p>Please login to get started...</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-stroked-button color="primary" routerLink="/login">Login</button>
+    </mat-card-actions>
+  </mat-card>
 </ng-template>
 
 <!-- User logged in -->
 <ng-template #authenticated>
-  <div *ngIf="auth.user | async as user">
-    <h3>Howdy, {{ user.displayName }}</h3>
-    <img class="card-img-top" [src]="user.photoURL || 'https://api.adorable.io/avatars/109/fire.png'" width=50px>
-    <p class="text-truncate">UID: {{ user.uid }}</p>
-    <button class="button" (click)="logout()">Logout</button>
-  </div>
+  <mat-card class="example-card" *ngIf="auth.user | async as user">
+    <mat-card-header>
+      <div mat-card-avatar>
+        <img [src]="user.photoURL || 'https://api.adorable.io/avatars/109/fire.png'" class="avatar">
+      </div>
+      <mat-card-title>{{ user.displayName }}</mat-card-title>
+      <mat-card-subtitle>Member</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <h4>User Details:</h4>
+      <p>Email: {{ user.email }}</p>
+      <p>UID: {{ user.uid }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-stroked-button color="accent" (click)="logout()">Logout</button>
+    </mat-card-actions>
+  </mat-card>
 </ng-template>
 
