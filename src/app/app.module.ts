@@ -16,6 +16,7 @@ import { CoreModule } from './core/core.module';
 import { UploadsModule } from './uploads/uploads.module';
 import { UiModule } from './ui/ui.module';
 import { NotesModule } from './notes/notes.module';
+import { TasksModule } from './tasks/tasks.module';
 
 // @angular/fire Modules
 import { AngularFireModule } from '@angular/fire';
@@ -30,23 +31,24 @@ import { AngularFireFunctionsModule } from '@angular/fire/functions';
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserAnimationsModule,
-    BrowserModule.withServerTransition({ appId: 'serverApp' }),
-    BrowserTransferStateModule,
-    AppRoutingModule,
-    CoreModule,
-    UiModule,
-    NotesModule,
-    UploadsModule,
     AngularFireModule.initializeApp(environment.firebase, 'firestarter'),
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
     AngularFireFunctionsModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    BrowserTransferStateModule,
+    CoreModule,
+    MatSidenavModule,
+    NotesModule,
+    TasksModule,
+    UiModule,
+    UploadsModule,
     ServiceWorkerModule.register('/ngsw-worker.js', {
       enabled: environment.production
     }),
-    MatSidenavModule,
   ],
   bootstrap: [AppComponent]
 })

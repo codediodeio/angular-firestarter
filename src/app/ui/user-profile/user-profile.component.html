@@ -25,10 +25,14 @@
         <img [src]="user.photoURL || 'https://api.adorable.io/avatars/109/fire.png'" class="avatar">
       </div>
       <mat-card-title>{{ user.displayName }}</mat-card-title>
-      <mat-card-subtitle>Member</mat-card-subtitle>
+      <mat-card-subtitle>{{ user.team.name || 'Team Unknown' }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <h4>User Details:</h4>
+      <span *ngIf="user.team.lead === user.uid">
+        <mat-icon>work</mat-icon>
+        <b>Team Lead</b>
+      </span>
+      <h4>Details:</h4>
       <p>Email: {{ user.email }}</p>
       <p>UID: {{ user.uid }}</p>
     </mat-card-content>

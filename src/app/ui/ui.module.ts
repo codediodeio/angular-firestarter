@@ -6,7 +6,8 @@ import {
   MatButtonModule,
   MatCardModule,
   MatIconModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatStepperModule
 } from '@angular/material';
 
 import { UserLoginComponent } from './user-login/user-login.component';
@@ -26,6 +27,7 @@ import { SsrPageComponent } from './ssr-page/ssr-page.component';
     MatButtonModule,
     MatCardModule,
     MatIconModule,
+    MatStepperModule,
     MatToolbarModule,
   ],
   declarations: [

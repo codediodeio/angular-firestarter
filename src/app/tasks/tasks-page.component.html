@@ -1,0 +1,62 @@
+<div class="content" *ngIf="user && user.uid">
+
+  <form [formGroup]="teamFormGroup" *ngIf="!user.team" (ngSubmit)="setUserTeam(user)">
+
+    <h4>Complete your Registration:</h4>
+
+    <mat-form-field class="team-picker">
+      <input matInput formControlName="team" [matAutocomplete]="auto">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayTeamName">
+        <mat-option *ngFor="let team of filteredTeams | async" [value]="team">
+          {{team.name}}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-label><mat-icon>group</mat-icon>Choose your Team</mat-label>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" class="save-btn">Save</button>
+
+  </form>
+
+  <div *ngIf="user.team">
+    <mat-label>
+      <b>Team:</b>
+      <mat-icon>group</mat-icon>
+      {{user.team.name}}
+    </mat-label>
+
+    <div class="team-lead" *ngIf="teamLead">
+      <b>Team Lead:</b>
+      <mat-label>
+        <mat-icon>person</mat-icon>{{teamLead.displayName}}
+      </mat-label>
+      <mat-label>
+        <mat-icon>email</mat-icon>{{teamLead.email}}
+      </mat-label>
+    </div>
+
+    <hr/>
+
+    <div class="task-approvals" *ngIf="teamLead && teamLead.uid === user.uid">
+      <h4>Tasks Awaiting Your Approval:</h4>
+      <p>TODO: Show Tasks Pending for Approval Here</p>
+    </div>
+
+    <hr/>
+
+    <div class="task-list" *ngIf="tasks | async as taskList">
+      <mat-card class="example-card" *ngFor="let task of taskList">
+        <mat-card-content>
+          <b>{{ task.name }}</b>
+          <p *ngIf="task.description">Description: {{ task.description }}</p>
+          <p>Points: {{ task.points }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-stroked-button color="primary" (click)="finishTask()">
+            Finish Task
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+.content {
+	padding: 20px;
+}
+
+.team-picker {
+	width: 75%;
+}
+
+.team-lead {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.save-btn {
+	margin-left: 20px;
+}
+
+mat-label {
+	display: flex;
+	align-items: center;
+}
+
+mat-icon {
+	padding: 0 10px;
+}
+
+.task-list {
+	display: flex;
+    flex-wrap: wrap;
+}
+
+mat-card {
+	width: 150px;
+	margin: 5px;
+}
+
+mat-card-actions {
+	text-align: center;
+}

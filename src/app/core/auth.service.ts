@@ -13,13 +13,6 @@ import { NotifyService } from './notify.service';
 import { Observable, of } from 'rxjs';
 import { switchMap, startWith, tap, filter } from 'rxjs/operators';
 
-interface User {
-  uid: string;
-  email?: string | null;
-  photoURL?: string;
-  displayName?: string;
-}
-
 @Injectable()
 export class AuthService {
   user: Observable<User | null>;
@@ -70,7 +63,7 @@ export class AuthService {
       .signInWithPopup(provider)
       .then(credential => {
         this.notify.update('Welcome to Firestarter!!!', 'success');
-        return this.updateUserData(credential.user);
+        return this.setUserDoc(credential.user);
       })
       .catch(error => this.handleError(error));
   }
@@ -82,7 +75,7 @@ export class AuthService {
       .signInAnonymously()
       .then(credential => {
         this.notify.update('Welcome to Firestarter!!!', 'success');
-        return this.updateUserData(credential.user); // if using firestore
+        return this.setUserDoc(credential.user); // if using firestore
       })
       .catch(error => {
         this.handleError(error);
@@ -96,7 +89,7 @@ export class AuthService {
       .createUserWithEmailAndPassword(email, password)
       .then(credential => {
         this.notify.update('Welcome new user!', 'success');
-        return this.updateUserData(credential.user); // if using firestore
+        return this.setUserDoc(credential.user); // if using firestore
       })
       .catch(error => this.handleError(error));
   }
@@ -106,7 +99,7 @@ export class AuthService {
       .signInWithEmailAndPassword(email, password)
       .then(credential => {
         this.notify.update('Welcome back!', 'success');
-        return this.updateUserData(credential.user);
+        return this.setUserDoc(credential.user);
       })
       .catch(error => this.handleError(error));
   }
@@ -127,6 +120,10 @@ export class AuthService {
     });
   }
 
+  updateUserData(user: User, data: any) {
+    return this.afs.doc(`users/${user.uid}`).update(data);
+  }
+
   // If error, console log and notify user
   private handleError(error: Error) {
     console.error(error);
@@ -134,7 +131,7 @@ export class AuthService {
   }
 
   // Sets user data to firestore after succesful login
-  private updateUserData(user: User) {
+  private setUserDoc(user: User) {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(
       `users/${user.uid}`
     );
