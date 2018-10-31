@@ -9,4 +9,12 @@ import { NotifyService } from '../../core/notify.service';
 export class NotificationMessageComponent {
 
   constructor(public notify: NotifyService) { }
+
+  getColor(style: 'error' | 'info' | 'success'): string {
+    switch (style) {
+      case 'success': return 'primary'; break;
+      case 'error': return 'warn'; break;
+      case 'info': return 'accent'; break;
+    }
+  }
 }

@@ -1,9 +1,9 @@
-<div *ngIf="notify.msg | async as msg" class="notification"
-  [ngClass]="{ 
-    'is-danger': msg.style == 'error',
-    'is-success': msg.style == 'success',
-    'is-info': msg.style == 'info'
-  }">
-  <button class="delete" (click)="notify.clear()"></button>
-  {{ msg.content }}
-</div>
+<mat-chip-list *ngIf="notify.msg | async as msg">
+  <mat-chip selected
+    [removable]="true"
+    color="{{getColor(msg.style)}}"
+    (removed)="notify.clear()">
+    {{ msg.content }}
+    <mat-icon matChipRemove>cancel</mat-icon>
+  </mat-chip>
+</mat-chip-list>

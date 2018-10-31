@@ -1,6 +1,6 @@
 <div class="box" >
   <div *ngIf="auth.user | async; then authenticated else guest">
-          <!-- template will replace this div -->
+    <!-- template will replace this div -->
   </div>
 </div>
 
@@ -25,16 +25,15 @@
         <img [src]="user.photoURL || 'https://api.adorable.io/avatars/109/fire.png'" class="avatar">
       </div>
       <mat-card-title>{{ user.displayName }}</mat-card-title>
-      <mat-card-subtitle>{{ user.team.name || 'Team Unknown' }}</mat-card-subtitle>
+      <mat-card-subtitle>{{ user.team?.name || 'Team Unknown' }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <span *ngIf="user.team.lead === user.uid">
+      <span *ngIf="user.team?.lead === user.uid">
         <mat-icon>work</mat-icon>
         <b>Team Lead</b>
       </span>
-      <h4>Details:</h4>
-      <p>Email: {{ user.email }}</p>
-      <p>UID: {{ user.uid }}</p>
+      <span><mat-icon>email</mat-icon> {{ user.email }}</span>
+      <span><b>UID</b> {{ user.uid }}</span>
     </mat-card-content>
     <mat-card-actions>
       <button mat-stroked-button color="accent" (click)="logout()">Logout</button>

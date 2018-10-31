@@ -15,6 +15,10 @@
   background: mat-color(mat-palette($mat-grey));
 }
 
+mat-sidenav-content {
+  padding: 10px;
+}
+
 footer {
   display: flex;
   justify-content: center;

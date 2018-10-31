@@ -33,6 +33,10 @@ export class TasksPageComponent implements OnInit {
     });
 
     this.auth.user.subscribe((user: User) => {
+      if (!user) {
+        return;
+      }
+
       this.user = user;
       if (user.team) {
         this.loadTeamLead(user.team);

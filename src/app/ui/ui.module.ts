@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {
   MatButtonModule,
   MatCardModule,
+  MatChipsModule,
   MatIconModule,
   MatToolbarModule,
   MatStepperModule
@@ -26,6 +27,7 @@ import { SsrPageComponent } from './ssr-page/ssr-page.component';
     ReactiveFormsModule,
     MatButtonModule,
     MatCardModule,
+    MatChipsModule,
     MatIconModule,
     MatStepperModule,
     MatToolbarModule,
