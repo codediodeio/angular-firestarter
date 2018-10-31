@@ -5,7 +5,14 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ]
+    ],
+    "headers": [{
+      "source" : "/ngsw-worker.js",
+      "headers" : [{
+        "key" : "Cache-Control",
+        "value" : "no-cache"
+      }]
+    }],
   },
   "database": {
     "rules": "database.rules.json"
