@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {
   AngularFireStorage,
   AngularFireUploadTask
-} from 'angularfire2/storage';
-import { AngularFirestore } from 'angularfire2/firestore';
+} from '@angular/fire/storage';
+import { AngularFirestore } from '@angular/fire//firestore';
 import { Observable } from 'rxjs';
 import { tap, finalize } from 'rxjs/operators';
 
