@@ -16,7 +16,7 @@ FireStarter is an Angular PWA powered by Firebase. It can serve as a foundation 
 
 ## Features
 
-- Angular 6.x
+- Angular 7.x
 - 100 PWA Lighthouse Score with NGSW
 - Firebase Auth, Storage, and Cloud Firestore Demos
 - Angular Universal Prerendered SSR (deployed to Firebase Static Hosting)

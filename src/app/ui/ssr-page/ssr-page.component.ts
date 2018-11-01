@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore } from '@angular/fire//firestore';
 
 import { tap, startWith } from 'rxjs/operators';
 import { TransferState, makeStateKey } from '@angular/platform-browser';
