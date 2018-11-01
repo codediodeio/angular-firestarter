@@ -4,4 +4,7 @@ interface User {
   photoURL: string;
   displayName: string;
   team?: Team;
+  totalScore?: number;
+  updatedScore?: firebase.firestore.FieldValue;
+  totalTasksDone?: number;
 }

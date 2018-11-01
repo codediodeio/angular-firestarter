@@ -5,12 +5,15 @@ import {
   MatAutocompleteModule,
   MatButtonModule,
   MatCardModule,
+  MatChipsModule,
+  MatExpansionModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule
 } from '@angular/material';
 
 import { TasksPageComponent } from './tasks-page.component';
+import { TaskListComponent } from './task-list/task-list.component';
 import { TasksService } from './tasks.service';
 import { TeamsService } from './teams.service';
 
@@ -21,12 +24,17 @@ import { TeamsService } from './teams.service';
     MatAutocompleteModule,
     MatButtonModule,
     MatCardModule,
+    MatChipsModule,
+    MatExpansionModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
     ReactiveFormsModule,
   ],
-  declarations: [ TasksPageComponent ],
+  declarations: [
+    TaskListComponent,
+    TasksPageComponent,
+  ],
   providers: [
     TasksService,
     TeamsService

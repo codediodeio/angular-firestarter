@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { map, tap, startWith } from 'rxjs/operators';
+import { map, tap, startWith, withLatestFrom } from 'rxjs/operators';
 
 import { AuthService } from '../core/auth.service';
 import { TasksService } from './tasks.service';
@@ -25,7 +25,9 @@ export class TasksPageComponent implements OnInit {
 
   teamLead: User;
   user: User;
-  tasks: Observable<Task[]>;
+  tasks$: Observable<Task[]>;
+  tasksDone: Task[];
+  private tasksDone$: Observable<TaskDone[]>;
 
   ngOnInit() {
     this.teamFormGroup = this.formBuilder.group({
@@ -40,7 +42,21 @@ export class TasksPageComponent implements OnInit {
       this.user = user;
       if (user.team) {
         this.loadTeamLead(user.team);
-        this.tasks = this.tasksService.getData();
+        this.tasksDone$ = this.tasksService.getTasksDone(user.uid);
+        this.tasks$ = this.tasksService.getAllTasks().pipe(
+          withLatestFrom(this.tasksDone$),
+          map(ref => {
+            const tasks = ref[0];
+            const tasksDone = ref[1].map(taskDone => taskDone.task.id);
+            this.tasksDone = ref[1].map(taskDone => ({
+              ...taskDone.task,
+              status: taskDone.status
+            }));
+            return tasks.filter((task: Task) => {
+              return tasksDone.indexOf(task.id) < 0;
+            });
+          })
+        );
       } else {
         this.loadTeamsSelection();
       }
@@ -79,7 +95,20 @@ export class TasksPageComponent implements OnInit {
     this.loadTeamLead(team);
   }
 
-  finishTask() {
-    // TODO
+  finishTask(task: Task) {
+    if (!this.user || !task) {
+      throw new Error('Unable to get both user and task.');
+    }
+
+    this.tasksService.finishTask(this.user.uid, task);
+  }
+
+  approveTask(task: Task) {
+    if (!this.user || !task) {
+      throw new Error('Unable to get both user and task.');
+    }
+
+    // TODO:
+    // this.tasksService.approveTask(this.user.uid, task);
   }
 }

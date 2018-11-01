@@ -42,21 +42,22 @@
       <p>TODO: Show Tasks Pending for Approval Here</p>
     </div>
 
-    <hr/>
+    <task-list
+      [tasks]="tasks$ | async"
+      title="Open Tasks"
+      description="Tasks not yet done."
+      actionLabel="Finish"
+      icon="outlined_flag"
+      expanded="true"
+      (action)="finishTask($event)">
+    </task-list>
 
-    <div class="task-list" *ngIf="tasks | async as taskList">
-      <mat-card class="example-card" *ngFor="let task of taskList">
-        <mat-card-content>
-          <b>{{ task.name }}</b>
-          <p *ngIf="task.description">Description: {{ task.description }}</p>
-          <p>Points: {{ task.points }}</p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-stroked-button color="primary" (click)="finishTask()">
-            Finish Task
-          </button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
+    <task-list
+      [tasks]="tasksDone"
+      title="Finished Tasks"
+      description="Tasks already finished."
+      icon="flag"
+      expanded="true">
+    </task-list>
   </div>
 </div>

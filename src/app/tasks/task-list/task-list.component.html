@@ -1,0 +1,29 @@
+<mat-expansion-panel *ngIf="tasks" expanded="{{expanded}}">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <mat-icon>{{icon}}</mat-icon>
+      <b>{{ title | uppercase }}</b>
+    </mat-panel-title>
+    <mat-panel-description>
+      {{description}}
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+
+  <div class="tasks">
+    <mat-card class="example-card" *ngFor="let task of tasks">
+      <mat-card-content>
+        <b>{{ task.name }}</b>
+        <p *ngIf="task.description">Description: {{ task.description }}</p>
+        <p>Points: {{ task.points }}</p>
+        <mat-chip-list *ngIf="task.status">
+          <mat-chip selected color="primary">{{ task.status }}</mat-chip>
+        </mat-chip-list>
+      </mat-card-content>
+      <mat-card-actions *ngIf="!task.status">
+        <button mat-stroked-button color="primary" (click)="doAction(task)">
+          {{actionLabel}}
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</mat-expansion-panel>

@@ -1,0 +1,22 @@
+.tasks {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+mat-panel-title {
+	display: flex;
+	align-items: center;
+}
+
+mat-icon {
+	margin-right: 5px;
+}
+
+mat-card {
+	width: 150px;
+	margin: 5px;
+}
+
+mat-card-actions {
+	text-align: center;
+}
