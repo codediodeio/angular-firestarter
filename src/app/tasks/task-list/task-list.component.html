@@ -16,10 +16,14 @@
         <p *ngIf="task.description">Description: {{ task.description }}</p>
         <p>Points: {{ task.points }}</p>
         <mat-chip-list *ngIf="task.status">
-          <mat-chip selected color="primary">{{ task.status }}</mat-chip>
+          <mat-chip
+            selected="{{!!getStatusColor(task.status)}}"
+            color="{{getStatusColor(task.status)}}">
+            {{ task.status }}
+          </mat-chip>
         </mat-chip-list>
       </mat-card-content>
-      <mat-card-actions *ngIf="!task.status">
+      <mat-card-actions *ngIf="alwaysShowAction || task.status !== 'pending'">
         <button mat-stroked-button color="primary" (click)="doAction(task)">
           {{actionLabel}}
         </button>

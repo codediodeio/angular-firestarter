@@ -3,14 +3,14 @@ interface Task {
   name: string;
   points: number;
   description?: string;
-  status?: 'pending' | 'approved';
 }
 
-interface TaskDone {
-  id?: string;
+interface UserTask extends Task {
   uid: string;
-  task: Task;
-  status: 'pending' | 'approved';
-  createdAt: firebase.firestore.FieldValue;
-  updatedAt: firebase.firestore.FieldValue;
+  tid: string;
+  status: TaskStatus;
+  created: firebase.firestore.FieldValue;
+  updated: firebase.firestore.FieldValue;
 }
+
+type TaskStatus = 'ongoing' | 'pending' | 'approved';

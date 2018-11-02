@@ -6,6 +6,7 @@ import {
   MatButtonModule,
   MatCardModule,
   MatChipsModule,
+  MatDividerModule,
   MatExpansionModule,
   MatFormFieldModule,
   MatIconModule,
@@ -15,6 +16,7 @@ import {
 import { TasksPageComponent } from './tasks-page.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { TasksService } from './tasks.service';
+import { UserTasksService } from './user-tasks.service';
 import { TeamsService } from './teams.service';
 
 @NgModule({
@@ -25,6 +27,7 @@ import { TeamsService } from './teams.service';
     MatButtonModule,
     MatCardModule,
     MatChipsModule,
+    MatDividerModule,
     MatExpansionModule,
     MatFormFieldModule,
     MatIconModule,
@@ -37,7 +40,8 @@ import { TeamsService } from './teams.service';
   ],
   providers: [
     TasksService,
-    TeamsService
+    TeamsService,
+    UserTasksService,
   ]
 })
 export class TasksModule { }

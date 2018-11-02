@@ -9,20 +9,28 @@ import { Observable } from 'rxjs';
 export class TaskListComponent implements OnInit {
 
   @Input() expanded = true;
+  @Input() alwaysShowAction = false;
   @Input() title: string;
   @Input() description: string;
   @Input() icon: string;
-  @Input() tasks: Task[];
+  @Input() tasks: UserTask[];
 
   @Input() actionLabel: string;
-  @Output() action = new EventEmitter<Task>();
+  @Output() action = new EventEmitter<UserTask>();
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  doAction(task: Task) {
+  doAction(task: UserTask) {
     this.action.emit(task);
+  }
+
+  getStatusColor(status: TaskStatus) {
+    switch (status) {
+      case 'approved': return 'primary';
+      case 'pending': return 'accent';
+    }
   }
 }

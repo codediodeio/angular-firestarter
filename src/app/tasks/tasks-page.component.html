@@ -1,12 +1,11 @@
 <div class="content" *ngIf="user && user.uid">
 
-  <form [formGroup]="teamFormGroup" *ngIf="!user.team" (ngSubmit)="setUserTeam(user)">
-
+  <form *ngIf="!user.team">
     <h4>Complete your Registration:</h4>
 
     <mat-form-field class="team-picker">
-      <input matInput formControlName="team" [matAutocomplete]="auto">
-      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayTeamName">
+      <input matInput [formControl]="team" [matAutocomplete]="auto">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="teamName">
         <mat-option *ngFor="let team of filteredTeams | async" [value]="team">
           {{team.name}}
         </mat-option>
@@ -14,50 +13,73 @@
       <mat-label><mat-icon>group</mat-icon>Choose your Team</mat-label>
     </mat-form-field>
 
-    <button mat-raised-button color="primary" class="save-btn">Save</button>
-
+    <button mat-raised-button class="save-btn"
+      color="primary" (click)="setTeam()">
+      Save
+    </button>
   </form>
 
   <div *ngIf="user.team">
     <mat-label>
       <b>Team Name:</b>
-      <mat-icon>group</mat-icon>
-      {{user.team.name}}
+      <mat-icon>group</mat-icon>{{user.team.name}}
     </mat-label>
 
     <div class="team-lead" *ngIf="teamLead">
       <b>Team Lead:</b>
-      <mat-label>
-        <mat-icon>person</mat-icon>{{teamLead.displayName}}
-      </mat-label>
-      <mat-label>
-        <mat-icon>email</mat-icon>{{teamLead.email}}
-      </mat-label>
+      <mat-label><mat-icon>person</mat-icon>{{teamLead.displayName}}</mat-label>
+      <mat-label><mat-icon>email</mat-icon>{{teamLead.email}}</mat-label>
     </div>
 
-    <hr/>
+    <mat-divider></mat-divider>
 
     <div class="task-approvals" *ngIf="teamLead && teamLead.uid === user.uid">
       <h4>Tasks Awaiting Your Approval:</h4>
-      <p>TODO: Show Tasks Pending for Approval Here</p>
+      <task-list
+        [tasks]="memberTasks$ | async"
+        title="Members Tasks"
+        description="Finished tasks waiting for your approval."
+        actionLabel="Approve"
+        icon="outlined_flag"
+        expanded="true"
+        alwaysShowAction="true"
+        (action)="approveTask($event)">
+      </task-list>
     </div>
-
-    <task-list
-      [tasks]="tasks$ | async"
-      title="Open Tasks"
-      description="Tasks not yet done."
-      actionLabel="Finish"
-      icon="outlined_flag"
-      expanded="true"
-      (action)="finishTask($event)">
-    </task-list>
-
-    <task-list
-      [tasks]="tasksDone"
-      title="Finished Tasks"
-      description="Tasks already finished."
-      icon="flag"
-      expanded="true">
-    </task-list>
   </div>
+
+  <mat-divider></mat-divider>
+
+  <form *ngIf="user.team">
+    <h4>Get Tasks Here: </h4>
+    <i>Note: You can only finish tasks you have added.</i>
+
+    <mat-form-field class="team-picker">
+      <input matInput [matAutocomplete]="auto" (keyup)="taskSearch()" [formControl]="task">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="taskName">
+        <mat-option *ngFor="let task of tasks$ | async" [value]="task">
+          {{task.name}} ( {{task.points}} pts. )
+        </mat-option>
+      </mat-autocomplete>
+      <mat-label><mat-icon>ballot</mat-icon>Search Tasks</mat-label>
+      <mat-error *ngIf="task.invalid">{{ taskError }}</mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button class="save-btn"
+      color="primary" (click)="addUserTask()">
+      Add Task
+    </button>
+  </form>
+
+  <mat-divider></mat-divider>
+
+  <task-list
+    [tasks]="userTasks$ | async"
+    title="Your Tasks"
+    description="All Tasks"
+    actionLabel="Finish"
+    icon="flag"
+    expanded="true"
+    (action)="finishTask($event)">
+  </task-list>
 </div>
