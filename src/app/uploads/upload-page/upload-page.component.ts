@@ -3,7 +3,7 @@ import {
   AngularFireStorage,
   AngularFireUploadTask
 } from '@angular/fire/storage';
-import { AngularFirestore } from '@angular/fire//firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { tap, finalize } from 'rxjs/operators';
 

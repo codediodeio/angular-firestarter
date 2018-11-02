@@ -7,7 +7,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import {
   AngularFirestore,
   AngularFirestoreDocument
-} from '@angular/fire//firestore';
+} from '@angular/fire/firestore';
 import { NotifyService } from './notify.service';
 
 import { Observable, of } from 'rxjs';
