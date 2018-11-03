@@ -7,8 +7,9 @@ import {
   MatCardModule,
   MatChipsModule,
   MatIconModule,
-  MatToolbarModule,
-  MatStepperModule
+  MatListModule,
+  MatStepperModule,
+  MatToolbarModule
 } from '@angular/material';
 
 import { UserLoginComponent } from './user-login/user-login.component';
@@ -20,6 +21,9 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserFormComponent } from './user-form/user-form.component';
 import { SsrPageComponent } from './ssr-page/ssr-page.component';
 
+import { FirestoreDatePipe } from './firestore-date.pipe';
+import { LeaderboardService } from './home-page/leaderboard.service';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -29,6 +33,7 @@ import { SsrPageComponent } from './ssr-page/ssr-page.component';
     MatCardModule,
     MatChipsModule,
     MatIconModule,
+    MatListModule,
     MatStepperModule,
     MatToolbarModule,
   ],
@@ -40,7 +45,8 @@ import { SsrPageComponent } from './ssr-page/ssr-page.component';
     NotificationMessageComponent,
     UserProfileComponent,
     UserFormComponent,
-    SsrPageComponent
+    SsrPageComponent,
+    FirestoreDatePipe,
   ],
   exports: [
     MainNavComponent,
@@ -48,6 +54,9 @@ import { SsrPageComponent } from './ssr-page/ssr-page.component';
     NotificationMessageComponent,
     UserProfileComponent,
     UserFormComponent
+  ],
+  providers: [
+    LeaderboardService,
   ]
 })
 export class UiModule {}

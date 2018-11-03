@@ -140,7 +140,8 @@ export class AuthService {
       uid: user.uid,
       email: user.email || null,
       displayName: user.displayName || 'nameless user',
-      photoURL: user.photoURL || 'https://goo.gl/Fz9nrQ'
+      photoURL: user.photoURL || 'https://goo.gl/Fz9nrQ',
+      totalScore: 0
     };
     return userRef.set(data);
   }

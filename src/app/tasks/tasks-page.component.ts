@@ -19,8 +19,8 @@ export class TasksPageComponent implements OnInit {
   team: FormControl;
   teams$: Observable<Team[]>;
   tasks$: Observable<Task[]>;
-  userTasks$: Observable<Task[]>;
-  memberTasks$: Observable<Task[]>;
+  userTasks$: Observable<UserTask[]>;
+  memberTasks$: Observable<UserTask[]>;
 
   teamLead: User;
   user: User;
@@ -96,21 +96,20 @@ export class TasksPageComponent implements OnInit {
     return this.task.errors.error;
   }
 
-  finishTask(userTask: UserTask) {
-    if (!userTask) {
+  finishTask(task: UserTask) {
+    if (!task) {
       throw new Error('Unable to get user\'s task.');
     }
 
-    this.userTasksService.finishTask(userTask.id);
+    this.userTasksService.finishTask(task.id);
   }
 
-  approveTask(task: Task) {
-    if (!this.user || !task) {
-      throw new Error('Unable to get user/task.');
+  approveTask(task: UserTask) {
+    if (!task) {
+      throw new Error('Unable to get user\'s task.');
     }
 
-    // TODO:
-    // this.tasksService.approveUserTask(this.user.uid, task);
+    this.userTasksService.approveTask(task);
   }
 
   private loadTeamsSelection() {

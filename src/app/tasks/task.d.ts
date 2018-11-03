@@ -6,8 +6,9 @@ interface Task {
 }
 
 interface UserTask extends Task {
-  uid: string;
   tid: string;
+  uid: string;
+  username: string;
   status: TaskStatus;
   created: firebase.firestore.FieldValue;
   updated: firebase.firestore.FieldValue;

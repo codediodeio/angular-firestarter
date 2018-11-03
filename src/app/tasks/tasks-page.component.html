@@ -41,8 +41,8 @@
         description="Finished tasks waiting for your approval."
         actionLabel="Approve"
         icon="outlined_flag"
-        expanded="true"
         alwaysShowAction="true"
+        showUser="true"
         (action)="approveTask($event)">
       </task-list>
     </div>
@@ -79,7 +79,6 @@
     description="All Tasks"
     actionLabel="Finish"
     icon="flag"
-    expanded="true"
     (action)="finishTask($event)">
   </task-list>
 </div>

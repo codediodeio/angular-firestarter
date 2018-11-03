@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+
+import { LeaderboardService } from './leaderboard.service';
 
 @Component({
   selector: 'home-page',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor() { }
+  topUsers$: Observable<User[]>;
+
+  constructor(private leaderboardService: LeaderboardService) { }
 
   ngOnInit() {
+    this.topUsers$ = this.leaderboardService.getTopUsers();
   }
 
 }

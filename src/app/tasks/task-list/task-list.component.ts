@@ -10,6 +10,7 @@ export class TaskListComponent implements OnInit {
 
   @Input() expanded = true;
   @Input() alwaysShowAction = false;
+  @Input() showUser = false;
   @Input() title: string;
   @Input() description: string;
   @Input() icon: string;

@@ -1,5 +1,17 @@
-<h2>Welcome to LeaderBoard</h2>
+<div class="content">
+  <h3>LeaderBoard</h3>
 
-<p>
-  Leaderboard placeholder. TODO: Add main leaderboard here.
-</p>
+  <mat-list *ngIf="topUsers$ | async as users">
+    <mat-list-item *ngFor="let user of users">
+      <img matListAvatar src="{{user.photoURL}}" alt="photo">
+      <h3 matLine>{{user.displayName}}</h3>
+      <p matLine>
+        <b>Team: </b>{{user?.team?.name || 'Unknown Team'}}
+      </p>
+      <p matLine>
+        <b>Total Score: </b>{{user.totalScore}}
+        <span>( {{user.updatedScore | firestoreDate}} )</span>
+      </p>
+    </mat-list-item>
+  </mat-list>
+</div>

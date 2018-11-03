@@ -13,7 +13,8 @@
     <mat-card class="example-card" *ngFor="let task of tasks">
       <mat-card-content>
         <b>{{ task.name }}</b>
-        <p *ngIf="task.description">Description: {{ task.description }}</p>
+        <p *ngIf="task.description">{{ task.description }}</p>
+        <p *ngIf="showUser">User: {{ task.username }}</p>
         <p>Points: {{ task.points }}</p>
         <mat-chip-list *ngIf="task.status">
           <mat-chip
@@ -23,7 +24,7 @@
           </mat-chip>
         </mat-chip-list>
       </mat-card-content>
-      <mat-card-actions *ngIf="alwaysShowAction || task.status !== 'pending'">
+      <mat-card-actions *ngIf="alwaysShowAction || task.status === 'ongoing'">
         <button mat-stroked-button color="primary" (click)="doAction(task)">
           {{actionLabel}}
         </button>
