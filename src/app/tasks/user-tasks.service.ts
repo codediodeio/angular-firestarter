@@ -108,7 +108,7 @@ export class UserTasksService {
           totalScore,
           totalTasks,
           updated
-        });
+        }, { merge: true });
       });
     });
   }

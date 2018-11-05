@@ -11,7 +11,7 @@ service cloud.firestore {
     }
 
     match /userTasks/{id} {
-      allow read: if isTeamMember();
+      allow read: if isSignedIn();
       allow create: if isOwnNewTask();
       allow update: if canUpdateTask();
     }
