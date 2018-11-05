@@ -12,7 +12,6 @@ const routes: Routes = [
   { path: '', component: HomePageComponent },
   { path: 'login', component: UserLoginComponent },
   { path: 'tasks', component: TasksPageComponent,  canActivate: [AuthGuard] },
-  { path: 'uploads',  component: UploadPageComponent,  canActivate: [AuthGuard] },
 ];
 
 @NgModule({

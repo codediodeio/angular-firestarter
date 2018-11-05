@@ -8,6 +8,7 @@ import {
   MatChipsModule,
   MatIconModule,
   MatListModule,
+  MatProgressSpinnerModule,
   MatStepperModule,
   MatToolbarModule
 } from '@angular/material';
@@ -34,6 +35,7 @@ import { LeaderboardService } from './home-page/leaderboard.service';
     MatChipsModule,
     MatIconModule,
     MatListModule,
+    MatProgressSpinnerModule,
     MatStepperModule,
     MatToolbarModule,
   ],

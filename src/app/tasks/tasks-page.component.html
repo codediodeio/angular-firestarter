@@ -6,15 +6,16 @@
     <mat-form-field class="team-picker">
       <input matInput [formControl]="team" [matAutocomplete]="auto">
       <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="teamName">
-        <mat-option *ngFor="let team of filteredTeams | async" [value]="team">
+        <mat-option *ngFor="let team of teams$ | async" [value]="team">
           {{team.name}}
         </mat-option>
       </mat-autocomplete>
       <mat-label><mat-icon>group</mat-icon>Choose your Team</mat-label>
+      <mat-error *ngIf="team.invalid">{{ teamError }}</mat-error>
     </mat-form-field>
 
     <button mat-raised-button class="save-btn"
-      color="primary" (click)="setTeam()">
+      color="primary" (click)="setTeam()" [disabled]="teamSaveDisabled">
       Save
     </button>
   </form>
@@ -61,7 +62,7 @@
           {{task.name}} ( {{task.points}} pts. )
         </mat-option>
       </mat-autocomplete>
-      <mat-label><mat-icon>ballot</mat-icon>Search Tasks</mat-label>
+      <mat-label><mat-icon>search</mat-icon>Search Tasks</mat-label>
       <mat-error *ngIf="task.invalid">{{ taskError }}</mat-error>
     </mat-form-field>
 

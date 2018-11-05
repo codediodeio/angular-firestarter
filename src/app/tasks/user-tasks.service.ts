@@ -42,10 +42,6 @@ export class UserTasksService {
     return this.afs.doc<UserTask>(`userTasks/${id}`);
   }
 
-  getUser(uid: string): AngularFirestoreDocument<User> {
-    return this.afs.doc<User>(`users/${uid}`);
-  }
-
   get timestamp() {
     return firestore.FieldValue.serverTimestamp();
   }
@@ -57,6 +53,7 @@ export class UserTasksService {
       tid: user.team.id,
       uid: user.uid,
       username: user.displayName,
+      photoURL: user.photoURL,
       status: 'ongoing',
       created: this.timestamp,
       updated: this.timestamp
@@ -70,23 +67,47 @@ export class UserTasksService {
     });
   }
 
-  approveTask(task: UserTask) {
-    const userRef = this.getUser(task.uid).ref;
+  getUserScore(uid: string): AngularFirestoreDocument<UserScore> {
+    return this.afs.doc<UserScore>(`userScores/${uid}`);
+  }
+
+  approveTask(task: UserTask, team: Team) {
+    const userScoreRef = this.getUserScore(task.uid).ref;
     const taskRef = this.getTask(task.id).ref;
 
     return this.afs.firestore.runTransaction((transaction) => {
-      return transaction.get(userRef).then(user => {
+      return transaction.get(userScoreRef).then(userScore => {
+        const updated = this.timestamp;
+
         transaction.update(taskRef, {
           status: 'approved',
-          updated: this.timestamp
+          updated
         });
 
-        let totalScore = <number>(user.data().totalScore || 0);
-        totalScore += task.points;
+        let totalScore = 0;
+        let totalTasks = 0;
+        let initialData: Partial<UserScore>;
 
-        transaction.update(userRef, {
+        if (userScore.exists) {
+          totalScore = Number(userScore.data().totalScore);
+          totalTasks = Number(userScore.data().totalTasks);
+        } else {
+          initialData = {
+            username: task.username,
+            photoURL: task.photoURL,
+            teamName: team.name,
+            teamId: team.id
+          };
+        }
+
+        totalTasks += 1;
+        totalScore += Number(task.points);
+
+        transaction.set(userScoreRef, {
+          ...initialData,
           totalScore,
-          updatedScore: this.timestamp
+          totalTasks,
+          updated
         });
       });
     });

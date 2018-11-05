@@ -43,4 +43,12 @@ export class TeamsService {
   getTeamLead(team: Team): Observable<User> {
     return this.afs.doc<User>(`users/${team.lead}`).valueChanges();
   }
+
+  getUser(uid: string): AngularFirestoreDocument<User> {
+    return this.afs.doc<User>(`users/${uid}`);
+  }
+
+  setUserTeam(uid: string, team: Team) {
+    return this.getUser(uid).update({ team });
+  }
 }

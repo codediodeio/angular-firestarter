@@ -1,17 +1,26 @@
 <div class="content">
-  <h3>LeaderBoard</h3>
+  <h3>LeaderBoard Top 10</h3>
 
-  <mat-list *ngIf="topUsers$ | async as users">
+  <mat-list *ngIf="topUsers$ | async as users; else loading">
     <mat-list-item *ngFor="let user of users">
       <img matListAvatar src="{{user.photoURL}}" alt="photo">
-      <h3 matLine>{{user.displayName}}</h3>
+      <h3 matLine>{{user.username}}</h3>
       <p matLine>
-        <b>Team: </b>{{user?.team?.name || 'Unknown Team'}}
+        <b>Team: </b>{{user.teamName || 'Unknown Team'}}
       </p>
       <p matLine>
         <b>Total Score: </b>{{user.totalScore}}
-        <span>( {{user.updatedScore | firestoreDate}} )</span>
+        <span>( {{user.updated | firestoreDate}} )</span>
       </p>
     </mat-list-item>
+    <div *ngIf="!users.length" class="loader">
+      Oops! No one has a scored yet!
+    </div>
   </mat-list>
+
+  <ng-template #loading>
+    <div class="loader">
+      <mat-spinner diameter="175"></mat-spinner>
+    </div>
+  </ng-template>
 </div>

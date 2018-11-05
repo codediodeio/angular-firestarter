@@ -1,20 +1,18 @@
-<h1>LeaderBoard</h1>
+<div class="login">
+  <div *ngIf="!(auth.user | async); else alreadyLoggedIn">
+    <h3>Login using your Google Account.</h3>
 
-<hr>
+    <button mat-raised-button color="primary" (click)="signInWithGoogle()">
+      <i class="fa fa-google fa-lg"></i> Connect Google
+    </button>
+  </div>
 
-<div *ngIf="!(auth.user | async); else alreadyLoggedIn">
-  <h3>Login using your Google Account.</h3>
-
-  <button mat-raised-button color="primary" (click)="signInWithGoogle()">
-    <i class="fa fa-google fa-lg"></i> Connect Google
-  </button>
+  <ng-template #alreadyLoggedIn>
+    <p class="text-success">
+      You are logged in <i class="fa fa-thumbs-up"></i>
+    </p>
+    <p>
+      TODO: Show user progress here (points, badges, finished tasks, etc.)
+    </p>
+  </ng-template>
 </div>
-
-<ng-template #alreadyLoggedIn>
-  <p class="text-success">
-    You are logged in <i class="fa fa-thumbs-up"></i>
-  </p>
-  <p>
-    TODO: Show user progress here (points, badges, finished tasks, etc.)
-  </p>
-</ng-template>

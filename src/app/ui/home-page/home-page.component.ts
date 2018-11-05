@@ -10,7 +10,7 @@ import { LeaderboardService } from './leaderboard.service';
 })
 export class HomePageComponent implements OnInit {
 
-  topUsers$: Observable<User[]>;
+  topUsers$: Observable<UserScore[]>;
 
   constructor(private leaderboardService: LeaderboardService) { }
 

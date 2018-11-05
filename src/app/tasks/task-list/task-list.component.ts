@@ -25,6 +25,7 @@ export class TaskListComponent implements OnInit {
   }
 
   doAction(task: UserTask) {
+    this.alwaysShowAction = false;
     this.action.emit(task);
   }
 

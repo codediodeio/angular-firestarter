@@ -120,10 +120,6 @@ export class AuthService {
     });
   }
 
-  updateUserData(user: User, data: any) {
-    return this.afs.doc(`users/${user.uid}`).update(data);
-  }
-
   // If error, console log and notify user
   private handleError(error: Error) {
     console.error(error);
@@ -140,8 +136,7 @@ export class AuthService {
       uid: user.uid,
       email: user.email || null,
       displayName: user.displayName || 'nameless user',
-      photoURL: user.photoURL || 'https://goo.gl/Fz9nrQ',
-      totalScore: 0
+      photoURL: user.photoURL || 'https://goo.gl/Fz9nrQ'
     };
     return userRef.set(data);
   }

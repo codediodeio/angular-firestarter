@@ -25,6 +25,8 @@ export class TasksPageComponent implements OnInit {
   teamLead: User;
   user: User;
 
+  teamSaveDisabled = false;
+
   constructor(
     private auth: AuthService,
     private teamsService: TeamsService,
@@ -58,12 +60,15 @@ export class TasksPageComponent implements OnInit {
   }
 
   setTeam() {
-    const team = <Team>this.team.value;
-    if (!this.user || !team) {
-      throw new Error('Unable to get user/team.');
+    if (!this.user) {
+      return this.team.setErrors({ error: 'Unknown User!' });
     }
-
-    this.auth.updateUserData(this.user, { team });
+    const team = <Team>this.team.value;
+    if (!team.id) {
+      return this.team.setErrors({ error: 'Invalid Team!' });
+    }
+    this.teamSaveDisabled = true;
+    this.teamsService.setUserTeam(this.user.uid, team);
     this.loadTeamLead(team);
   }
 
@@ -96,6 +101,10 @@ export class TasksPageComponent implements OnInit {
     return this.task.errors.error;
   }
 
+  get teamError(): string {
+    return this.team.errors.error;
+  }
+
   finishTask(task: UserTask) {
     if (!task) {
       throw new Error('Unable to get user\'s task.');
@@ -109,7 +118,7 @@ export class TasksPageComponent implements OnInit {
       throw new Error('Unable to get user\'s task.');
     }
 
-    this.userTasksService.approveTask(task);
+    this.userTasksService.approveTask(task, this.user.team);
   }
 
   private loadTeamsSelection() {
@@ -129,11 +138,13 @@ export class TasksPageComponent implements OnInit {
   }
 
   private loadTeamLead(team: Team) {
-    this.teamsService.getTeamLead(team).subscribe((lead: User) => {
-      this.teamLead = lead;
-      if (lead.uid === this.user.uid) {
-        this.memberTasks$ = this.userTasksService.getMemberTasks(team.id);
-      }
-    });
+    if (team.lead === this.user.uid) {
+      this.memberTasks$ = this.userTasksService.getMemberTasks(team.id);
+      this.teamLead = this.user;
+    } else {
+      this.teamsService.getTeamLead(team).subscribe((lead: User) => {
+        this.teamLead = lead;
+      });
+    }
   }
 }

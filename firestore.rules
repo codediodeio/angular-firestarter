@@ -1,7 +1,81 @@
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write;
+    match /users/{userId} {
+      allow read: if isSignedIn();
+      allow write: if isOwner(userId);
+    }
+
+    match /userScores/{userId} {
+      allow read: if true;
+      allow write: if canUpdateScore();
+    }
+
+    match /userTasks/{id} {
+      allow read: if isTeamMember();
+      allow create: if isOwnNewTask();
+      allow update: if canUpdateTask();
+    }
+
+    match /tasks/{id} {
+      allow read: if isSignedIn();
+      allow write: if false;
+    }
+
+    match /teams/{id} {
+      allow read: if isSignedIn();
+      allow write: if false;
+    }
+
+    /// Functions ///
+
+    function existingData() {
+      return resource.data;
+    }
+
+    function incomingData() {
+      return request.resource.data;
+    }
+
+    function currentUser() {
+      return request.auth;
+    }
+
+    function isSignedIn() {
+     return currentUser() != null;
+    }
+
+    function isOwner(userId) {
+      return currentUser().uid == userId;
+    }
+
+    function getUserData(userId) {
+      return get(/databases/$(database)/documents/users/$(userId)).data;
+    }
+
+    function getTeamData(teamId) {
+      return get(/databases/$(database)/documents/teams/$(teamId)).data;
+    }
+
+    function isTeamLead(teamId) {
+      return getTeamData(teamId).lead == currentUser().uid;
+    }
+
+    function isTeamMember() {
+      return getUserData(userId).team.id == existingData().tid;
+    }
+
+    function isOwnNewTask() {
+      return currentUser().uid == incomingData().uid &&
+        incomingData().status == 'ongoing';
+    }
+
+    function canUpdateTask() {
+      return (currentUser().uid == existingData().uid && incomingData().status == 'pending') ||
+        (isTeamLead(existingData().tid) && incomingData().status == 'approved');
+    }
+
+    function canUpdateScore() {
+      return isTeamLead(incomingData().teamId) || isTeamLead(existingData().teamId);
     }
   }
 }
