@@ -61,7 +61,7 @@ service cloud.firestore {
     }
 
     function isTeamMember() {
-      return getUserData(userId).team.id == existingData().tid;
+      return getUserData(currentUser().uid).team.id == existingData().tid;
     }
 
     function isOwnNewTask() {
