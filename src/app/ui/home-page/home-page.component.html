@@ -1,7 +1,27 @@
 <div class="content">
-  <h3>LeaderBoard Top 10</h3>
+  <div class="leaderboard-content">
+    <h3>LeaderBoard Top 10</h3>
+    <div *ngIf="topUsers$ | async as users; else loading">
+      <mat-card *ngFor="let user of users">
+        <mat-card-header>
+          <img  mat-card-avatar src="{{user.photoURL}}" alt="photo">
+          <mat-card-title>{{user.username}}</mat-card-title>
+          <mat-card-subtitle><b>Team: </b>{{user.teamName || 'Unknown Team'}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <h3>Total Score: </h3>
+          <p>{{user.totalScore}}</p>
+          <!--<span>( {{user.updated | firestoreDate}} )</span>-->
+        </mat-card-content>
+        <div *ngIf="!users.length" class="loader">
+            Oops! No one has a scored yet!
+          </div>
+      </mat-card>
+    </div>
+  </div>
 
-  <mat-list *ngIf="topUsers$ | async as users; else loading">
+  <!-- Old Code, not removing yet just in case reverting to list -->
+  <!--<mat-list *ngIf="topUsers$ | async as users; else loading">
     <mat-list-item *ngFor="let user of users">
       <img matListAvatar src="{{user.photoURL}}" alt="photo">
       <h3 matLine>{{user.username}}</h3>
@@ -16,7 +36,7 @@
     <div *ngIf="!users.length" class="loader">
       Oops! No one has a scored yet!
     </div>
-  </mat-list>
+  </mat-list>-->
 
   <ng-template #loading>
     <div class="loader">

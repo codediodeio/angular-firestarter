@@ -7,6 +7,37 @@
 	justify-content: center;
 }
 
+.leaderboard-content {
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+
+	mat-card {
+		display: flex;
+		margin: 2.5% 0;
+
+		mat-card-header {
+			width: 70%;
+		}
+		mat-card-content {
+			display: flex;
+			flex-direction: column;
+			width: 30%;
+
+			h3 {
+				color: #3f51b5;
+				align-self: center;
+				margin: 0;
+			}
+			p {
+				align-self: center;
+				margin: 0;
+				font-size: 2.5em;
+			}
+		}
+	}
+}
+
 mat-list-item {
 	border: 1px solid;
 }
