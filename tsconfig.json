@@ -17,4 +17,7 @@
       "dom"
     ]
   }
+  "exclude": [
+    "functions"
+  ]
 }
