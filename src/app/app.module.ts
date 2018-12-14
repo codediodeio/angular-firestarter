@@ -23,7 +23,10 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFireFunctionsModule } from '@angular/fire/functions';
+import { AngularFireFunctionsModule, FunctionsRegionToken } from '@angular/fire/functions';
+import { MsalModule } from '@azure/msal-angular';
+
+import { functions } from 'firebase';
 
 // IMPORTANT
 // Add your own project credentials to environments/*.ts
@@ -42,6 +45,7 @@ import { AngularFireFunctionsModule } from '@angular/fire/functions';
     BrowserTransferStateModule,
     CoreModule,
     MatSidenavModule,
+    MsalModule.forRoot({ clientID: '9fc78166-b1bb-4cc6-bb92-a2425705410a' }),
     NotesModule,
     TasksModule,
     UiModule,
@@ -50,6 +54,9 @@ import { AngularFireFunctionsModule } from '@angular/fire/functions';
       enabled: environment.production
     }),
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [
+    { provide: FunctionsRegionToken, useValue: 'us-central1' }
+  ]
 })
 export class AppModule {}

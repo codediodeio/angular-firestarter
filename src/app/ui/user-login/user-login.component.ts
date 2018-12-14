@@ -24,9 +24,13 @@ export class UserLoginComponent {
     await this.afterSignIn();
   }
 
+  async signInWithMicrosoft() {
+    await this.auth.microsoftSignIn();
+    await this.afterSignIn();
+  }
+
   private afterSignIn() {
     // Do after login stuff here, such router redirects, toast messages, etc.
     return this.router.navigate(['/']);
   }
-
 }

@@ -1,25 +1,30 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { firebase } from '@firebase/app';
-import { auth } from 'firebase';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { MsalService} from '@azure/msal-angular';
+import { firebase } from '@firebase/app';
+import { auth, functions } from 'firebase';
+import { Observable, of } from 'rxjs';
+import { switchMap, startWith, tap } from 'rxjs/operators';
 import {
   AngularFirestore,
   AngularFirestoreDocument
 } from '@angular/fire/firestore';
+import { AngularFireFunctions } from '@angular/fire/functions';
+
 import { NotifyService } from './notify.service';
 
-import { Observable, of } from 'rxjs';
-import { switchMap, startWith, tap, filter } from 'rxjs/operators';
 
 @Injectable()
 export class AuthService {
   user: Observable<User | null>;
+  microsoftUser = false;
 
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
+    private afFunctions: AngularFireFunctions,
+    private msalService: MsalService,
     private router: Router,
     private notify: NotifyService
   ) {
@@ -115,7 +120,12 @@ export class AuthService {
   }
 
   signOut() {
+    if (this.microsoftUser) {
+      this.microsoftSignOut();
+    }
+
     this.afAuth.auth.signOut().then(() => {
+
       this.router.navigate(['/']);
     });
   }
@@ -132,12 +142,24 @@ export class AuthService {
       `users/${user.uid}`
     );
 
-    const data: User = {
-      uid: user.uid,
-      email: user.email || null,
-      displayName: user.displayName || 'nameless user',
-      photoURL: user.photoURL || 'https://goo.gl/Fz9nrQ'
-    };
-    return userRef.set(data, { merge: true });
+    return userRef.set(user, { merge: true });
+  }
+
+  microsoftSignIn = async() => {
+    await this.msalService.loginPopup(['user.read mail.send']);
+    const user = this.msalService.getUser();
+    const createFirebaseToken = this.afFunctions.httpsCallable('createFirebaseToken');
+    const token = await createFirebaseToken({
+      uid: user.userIdentifier,
+      email: user.displayableId,
+      displayName: user.name
+    }).toPromise();
+    this.microsoftUser = true;
+
+    return this.afAuth.auth.signInWithCustomToken(token);
+  }
+
+  microsoftSignOut() {
+    this.msalService.logout();
   }
 }
