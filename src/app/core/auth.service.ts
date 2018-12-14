@@ -149,14 +149,14 @@ export class AuthService {
     await this.msalService.loginPopup(['user.read mail.send']);
     const user = this.msalService.getUser();
     const createFirebaseToken = this.afFunctions.httpsCallable('createFirebaseToken');
-    const token = await createFirebaseToken({
+    const result = await createFirebaseToken({
       uid: user.userIdentifier,
       email: user.displayableId,
       displayName: user.name
     }).toPromise();
     this.microsoftUser = true;
 
-    return this.afAuth.auth.signInWithCustomToken(token);
+    return this.afAuth.auth.signInWithCustomToken(result.token);
   }
 
   microsoftSignOut() {
