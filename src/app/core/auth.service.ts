@@ -18,7 +18,7 @@ import { NotifyService } from './notify.service';
 @Injectable()
 export class AuthService {
   user: Observable<User | null>;
-  microsoftUser = false;
+  microsoftCredentials = null;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -34,6 +34,11 @@ export class AuthService {
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         } else {
           return of(null);
+        }
+      }),
+      tap((user: User) => {
+        if (user && user.isMicrosoft) {
+          this.microsoftCredentials = this.msalService.getUser();
         }
       })
       // tap(user => localStorage.setItem('user', JSON.stringify(user))),
@@ -120,12 +125,11 @@ export class AuthService {
   }
 
   signOut() {
-    if (this.microsoftUser) {
+    if (this.microsoftCredentials) {
       this.microsoftSignOut();
     }
 
     this.afAuth.auth.signOut().then(() => {
-
       this.router.navigate(['/']);
     });
   }
@@ -154,9 +158,20 @@ export class AuthService {
       email: user.displayableId,
       displayName: user.name
     }).toPromise();
-    this.microsoftUser = true;
+    this.microsoftCredentials = user;
 
-    return this.afAuth.auth.signInWithCustomToken(result.token);
+    return this.afAuth.auth
+      .signInWithCustomToken(result.token)
+      .then(credential => {
+        this.notify.update('Welcome back!', 'success');
+        return this.setUserDoc({
+          uid: credential.user.uid,
+          email: credential.user.email,
+          displayName: credential.user.displayName,
+          isMicrosoft: true
+        });
+      })
+      .catch(error => this.handleError(error));
   }
 
   microsoftSignOut() {

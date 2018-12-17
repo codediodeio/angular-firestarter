@@ -4,6 +4,7 @@ interface User {
   displayName: string;
   photoURL?: string;
   team?: Team;
+  isMicrosoft?: boolean;
 }
 
 interface UserScore {

@@ -5,10 +5,17 @@ import * as admin from 'firebase-admin';
 // // https://firebase.google.com/docs/functions/typescript
 
 admin.initializeApp();
-export const createFirebaseToken = functions.https.onCall((data, context) => {
-  console.log(`Creating token for uid: ${data.uid}...`);
-  return admin.auth().createCustomToken(data.uid, data).then((token) => {
-    console.log(`Created token: ${token}`);
+export const createFirebaseToken = functions.https.onCall(async(data, context) => {
+  const uid = data.uid;
+  const user = await admin.auth().getUser(uid);
+
+  if (!user) {
+    console.log(`Creating user: ${JSON.stringify(data)}`)
+    await admin.auth().createUser(data);
+  }
+
+  return admin.auth().createCustomToken(uid, data).then((token) => {
+    console.log(`Created token: ${token} for uid: ${data.uid}`);
     return { token };
   });
 });
