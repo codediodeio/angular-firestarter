@@ -1,3 +1,7 @@
+interface Admin {
+  uid: string;
+}
+
 interface User {
   uid: string;
   email: string | null;
@@ -5,6 +9,7 @@ interface User {
   photoURL?: string;
   team?: Team;
   isMicrosoft?: boolean;
+  isAdmin?: boolean;
 }
 
 interface UserScore {

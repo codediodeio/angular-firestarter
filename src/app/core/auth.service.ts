@@ -4,8 +4,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { MsalService} from '@azure/msal-angular';
 import { firebase } from '@firebase/app';
 import { auth, functions } from 'firebase';
-import { Observable, of } from 'rxjs';
-import { switchMap, startWith, tap } from 'rxjs/operators';
+import { empty, forkJoin, Observable, of } from 'rxjs';
+import { flatMap, map, switchMap, startWith, tap } from 'rxjs/operators';
 import {
   AngularFirestore,
   AngularFirestoreDocument
@@ -13,6 +13,7 @@ import {
 import { AngularFireFunctions } from '@angular/fire/functions';
 
 import { NotifyService } from './notify.service';
+import { AdminService } from './admin.service';
 
 
 @Injectable()
@@ -26,18 +27,27 @@ export class AuthService {
     private afFunctions: AngularFireFunctions,
     private msalService: MsalService,
     private router: Router,
-    private notify: NotifyService
+    private notify: NotifyService,
+    private adminService: AdminService
   ) {
     this.user = this.afAuth.authState.pipe(
       switchMap(user => {
         if (user) {
-          return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
-        } else {
-          return of(null);
+          return forkJoin(
+            this.afs.doc<User>(`users/${user.uid}`).valueChanges(),
+            this.adminService.getAdmin(user.uid)
+          );
         }
+
+        return empty();
       }),
+      map(([user, admin]) => ({
+        ...user,
+        isAdmin: (user.uid === admin.uid)
+      })),
       tap((user: User) => {
         if (user && user.isMicrosoft) {
+          //
           this.microsoftCredentials = this.msalService.getUser();
         }
       })

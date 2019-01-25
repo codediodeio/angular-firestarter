@@ -1,5 +1,10 @@
 service cloud.firestore {
   match /databases/{database}/documents {
+    match /admin_users/{userId} {
+      allow read: if isSignedIn();
+      allow write: if false;
+    }
+
     match /users/{userId} {
       allow read: if isSignedIn();
       allow write: if isOwner(userId);
