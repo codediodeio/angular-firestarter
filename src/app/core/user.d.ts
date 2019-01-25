@@ -9,7 +9,6 @@ interface User {
   photoURL?: string;
   team?: Team;
   isMicrosoft?: boolean;
-  isAdmin?: boolean;
 }
 
 interface UserScore {

@@ -28,7 +28,7 @@
       <mat-card-subtitle>{{ user.team?.name || 'Team Unknown' }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <h3 *ngIf="user.isAdmin">Admin</h3>
+      <h3 *ngIf="auth.isAdmin | async">Admin</h3>
       <span *ngIf="user.team?.lead === user.uid">
         <mat-icon>work</mat-icon>
         <b>Team Lead</b>

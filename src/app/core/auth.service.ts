@@ -15,44 +15,41 @@ import { AngularFireFunctions } from '@angular/fire/functions';
 import { NotifyService } from './notify.service';
 import { AdminService } from './admin.service';
 
-
 @Injectable()
 export class AuthService {
   user: Observable<User | null>;
+  isAdmin: Observable<boolean>;
+  loggingIn = false;
   microsoftCredentials = null;
 
   constructor(
+    private adminService: AdminService,
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private afFunctions: AngularFireFunctions,
     private msalService: MsalService,
     private router: Router,
     private notify: NotifyService,
-    private adminService: AdminService
   ) {
     this.user = this.afAuth.authState.pipe(
       switchMap(user => {
         if (user) {
-          return forkJoin(
-            this.afs.doc<User>(`users/${user.uid}`).valueChanges(),
-            this.adminService.getAdmin(user.uid)
-          );
+          return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
+        }
+        return of(null);
+      }),
+      tap((user: User) => {
+        if (!user) {
+          return;
         }
 
-        return empty();
-      }),
-      map(([user, admin]) => ({
-        ...user,
-        isAdmin: (user.uid === admin.uid)
-      })),
-      tap((user: User) => {
-        if (user && user.isMicrosoft) {
-          //
+        this.isAdmin = this.adminService.isAdmin(user.uid);
+        if (user.isMicrosoft) {
           this.microsoftCredentials = this.msalService.getUser();
         }
-      })
-      // tap(user => localStorage.setItem('user', JSON.stringify(user))),
-      // startWith(JSON.parse(localStorage.getItem('user')))
+      }),
+      tap(user => localStorage.setItem('user', JSON.stringify(user))),
+      startWith(JSON.parse(localStorage.getItem('user')))
     );
   }
 
@@ -146,6 +143,7 @@ export class AuthService {
 
   // If error, console log and notify user
   private handleError(error: Error) {
+    this.loggingIn = false;
     console.error(error);
     this.notify.update(error.message, 'error');
   }
@@ -160,6 +158,7 @@ export class AuthService {
   }
 
   microsoftSignIn = async() => {
+    this.loggingIn = true;
     await this.msalService.loginPopup(['user.read mail.send']);
     const user = this.msalService.getUser();
     const createFirebaseToken = this.afFunctions.httpsCallable('createFirebaseToken');
@@ -173,7 +172,8 @@ export class AuthService {
     return this.afAuth.auth
       .signInWithCustomToken(result.token)
       .then(credential => {
-        this.notify.update('Welcome back!', 'success');
+        this.loggingIn = false;
+        this.notify.update('Welcome ${credential.user.displayName}!', 'success');
         return this.setUserDoc({
           uid: credential.user.uid,
           email: credential.user.email,

@@ -1,29 +1,46 @@
 @import '~@angular/material/theming';
 
-.example-container {
+.container {
+  display: flex;
+  flex-direction: column;
   position: absolute;
-  top: 60px;
-  bottom: 60px;
-  left: 0;
-  right: 0;
-}
-
-.example-sidenav {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: mat-color(mat-palette($mat-grey));
-}
-
-footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 60px;
-  background-color: #ddd;
-  position: fixed;
+  top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  font-size: small;
+}
+
+.content {
+  flex: 1;
+  margin-top: 0;
+}
+
+.sidenav {
+  border-right: 1px solid mat-color(mat-palette($mat-gray));
+  width: 175px;
+}
+
+.is-mobile .toolbar {
+  position: fixed;
+  z-index: 2;
+}
+
+.is-mobile .content {
+  flex: 1 0 auto;
+}
+
+.fix-content-top {
+  margin-top: 56px;
+}
+
+.icon {
+  padding-right: 5px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.active-link {
+  background-color: mat-color(mat-palette($mat-indigo));
 }

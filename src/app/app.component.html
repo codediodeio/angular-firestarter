@@ -1,9 +1,53 @@
-<div id="wrapper">
-  <main-nav></main-nav>
+<div class="container" [class.is-mobile]="mobileQuery.matches">
+  <mat-toolbar class="toolbar" color="primary">
+    <mat-toolbar-row>
+      <button mat-icon-button (click)="snav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="spacer"></span>
+      <a mat-button routerLink="/">
+        <mat-icon class="icon">school</mat-icon>
+        LeaderBoard
+      </a>
+      <span class="spacer"></span>
+      <a mat-button (click)="logout()" matTooltip="Logout"
+        *ngIf="auth.user | async; else authenticated">
+        <mat-icon class="icon">exit_to_app</mat-icon>
+      </a>
+    </mat-toolbar-row>
+  </mat-toolbar>
 
-  <mat-sidenav-container class="example-container">
-    <mat-sidenav mode="side" opened class="example-sidenav">
-      <user-profile></user-profile>
+  <mat-sidenav-container class="content"
+    [class.fix-content-top]="mobileQuery.matches">
+    <mat-sidenav #snav
+      [mode]="mode"
+      [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56"
+      opened class="sidenav">
+      <mat-nav-list>
+        <a mat-list-item routerLink="/login"
+          [routerLinkActive]="['active-link']"
+          [routerLinkActiveOptions]="{exact: true}">
+          <mat-icon class="icon">home</mat-icon>
+          Home
+        </a>
+        <a mat-list-item routerLink="/profile"
+          [routerLinkActive]="['active-link']">
+          <mat-icon class="icon">person</mat-icon>
+          Profile
+        </a>
+        <a mat-list-item routerLink="/tasks"
+          [routerLinkActive]="['active-link']">
+          <mat-icon class="icon">dashboard</mat-icon>
+          Dashboard
+        </a>
+        <a mat-list-item routerLink="/admin"
+          [routerLinkActive]="['active-link']"
+          *ngIf="auth.isAdmin | async">
+          <mat-icon class="icon">whatshot</mat-icon>
+          Administrator
+        </a>
+      </mat-nav-list>
     </mat-sidenav>
 
     <mat-sidenav-content>
@@ -11,8 +55,11 @@
       <router-outlet></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>
-
-  <footer class="footer">
-      Angular v6.x + Firebase Leaderboard App
-  </footer>
 </div>
+
+<ng-template #authenticated>
+  <a mat-button routerLink="/login">
+    <mat-icon class="icon">person</mat-icon>
+    Login
+  </a>
+</ng-template>

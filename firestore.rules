@@ -5,6 +5,11 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    match /seasons/{userId} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
+    }
+
     match /users/{userId} {
       allow read: if isSignedIn();
       allow write: if isOwner(userId);
@@ -67,6 +72,14 @@ service cloud.firestore {
 
     function isTeamMember() {
       return getUserData(currentUser().uid).team.id == existingData().tid;
+    }
+
+    function getAdminData(userId) {
+      return get(/databases/$(database)/documents/admin_users/$(userId)).data;
+    }
+
+    function isAdmin() {
+      return getAdminData(teamId).uid == currentUser().uid;
     }
 
     function isOwnNewTask() {
