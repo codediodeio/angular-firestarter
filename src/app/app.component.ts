@@ -15,8 +15,8 @@ import { AuthService } from './core/auth.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
 
-  private mobileQuery: MediaQueryList;
   private mobileQueryListener: () => void;
+  mobileQuery: MediaQueryList;
 
   constructor(
     public auth: AuthService,
