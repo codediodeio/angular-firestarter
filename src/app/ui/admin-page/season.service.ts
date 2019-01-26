@@ -5,7 +5,7 @@ import {
   AngularFirestoreDocument
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { flatMap, map, tap } from 'rxjs/operators';
+import { flatMap, map, first } from 'rxjs/operators';
 import { firestore } from 'firebase/app';
 
 @Injectable({
@@ -17,7 +17,7 @@ export class SeasonService {
   seasonDocument: AngularFirestoreDocument<Season>;
 
   constructor(private afs: AngularFirestore) {
-    this.seasonsCollection = this.afs.collection('seasons', (ref) => ref.orderBy('updated', 'desc'));
+    this.seasonsCollection = this.afs.collection('seasons', (ref) => ref.orderBy('created', 'asc'));
   }
 
   getData(): Observable<Season[]> {
@@ -33,46 +33,51 @@ export class SeasonService {
   }
 
   getSeason(id: string) {
-    return this.afs.doc<any>(`seasons/${id}`);
+    return this.afs.doc<Season>(`seasons/${id}`);
   }
 
-  createSeason(name: string, user: User) {
-    const season = {
+  createSeason(name: string, user: Partial<User>) {
+    return this.seasonsCollection.add({
       name,
       created: this.timestamp,
       updated: this.timestamp,
       enabled: false,
       created_by: user,
       updated_by: user
-    };
-    return this.seasonsCollection.add(season);
+    });
   }
 
-  disableAllSeasons(user: User) {
-    const batch = this.afs.firestore.batch();
-    const seasonsCollection = this.afs.collection('seasons', ref => ref.where('enabled', '==', true));
+  // Returns enabled season id
+  getEnabledSeason(): Observable<string> {
+    const enabledSeasonQuery = this.afs.collection<Season>(
+      'seasons', ref => ref.where('enabled', '==', true).limit(1));
 
-    return seasonsCollection.snapshotChanges().pipe(
-      map((actions) => {
-        return actions.map((a) => batch.update(a.payload.doc.ref, {
-          enabled: false,
-          updated: this.timestamp,
-          updated_by: user
-        }));
-      }),
-      flatMap(() => batch.commit())
+    return enabledSeasonQuery.snapshotChanges().pipe(
+      first(),
+      map((actions) => actions[0].payload.doc.id)
     );
   }
 
-  enableSeason(id: string, user: User) {
-    return this.disableAllSeasons(user).pipe(
-      flatMap(() =>
-        this.getSeason(id).update({
+  // Enables a season while also disabling currently enabled season
+  enableSeason(id: string, user: Partial<User>): Observable<void> {
+    const batch = this.afs.firestore.batch();
+
+    return this.getEnabledSeason().pipe(
+      flatMap((enabledSeasonId: string) => {
+        // disable currently enabled season
+        batch.update(this.getSeason(enabledSeasonId).ref, {
+          enabled: false,
+          updated: this.timestamp,
+          updated_by: user
+        });
+        // enable new season
+        batch.update(this.getSeason(id).ref, {
           enabled: true,
           updated: this.timestamp,
           updated_by: user
-        })
-      )
+        });
+        return batch.commit();
+      })
     );
   }
 

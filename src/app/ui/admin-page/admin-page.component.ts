@@ -11,9 +11,19 @@ import { SeasonService } from './season.service';
   styleUrls: ['./admin-page.component.scss']
 })
 export class AdminPageComponent implements OnInit {
-  readonly displayedColumns = ['name', 'created', 'created_by', 'updated', 'updated_by', 'enabled'];
+  readonly displayedColumns = [
+    'name',
+    'created',
+    'created_by',
+    'updated',
+    'updated_by',
+    'enabled',
+    'action',
+  ];
+
   seasons: Observable<Season[]>;
   newSeason = new FormControl('', [ Validators.required ]);
+  loading = false;
 
   constructor(
     public auth: AuthService,
@@ -25,7 +35,22 @@ export class AdminPageComponent implements OnInit {
   }
 
   addSeason(user: User) {
-    this.seasonService.createSeason(this.newSeason.value, user);
+    this.seasonService.createSeason(this.newSeason.value, {
+      uid: user.uid,
+      displayName: user.displayName
+    });
+  }
+
+  enable(season: Season, user: User) {
+    const userInfo = {
+      uid: user.uid,
+      displayName: user.displayName
+    };
+
+    this.loading = true;
+    this.seasonService.enableSeason(season.id, userInfo).subscribe(() => {
+      this.loading = false;
+    });
   }
 
   get error() {

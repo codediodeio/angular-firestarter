@@ -10,7 +10,8 @@ import {
   MatIconModule,
   MatListModule,
   MatSidenavModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatTooltipModule
 } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -55,6 +56,7 @@ import { functions } from 'firebase';
     MatListModule,
     MatSidenavModule,
     MatToolbarModule,
+    MatTooltipModule,
     MsalModule.forRoot({ clientID: '9fc78166-b1bb-4cc6-bb92-a2425705410a' }),
     NotesModule,
     TasksModule,

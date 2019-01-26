@@ -7,10 +7,7 @@
       <mat-error *ngIf="newSeason.invalid">{{error}}</mat-error>
     </mat-form-field>
 
-    <button mat-raised-button
-      class="save-btn"
-      color="primary"
-      (click)="addSeason(user)">
+    <button mat-stroked-button color="primary" (click)="addSeason(user)">
       Add Season
     </button>
   </form>
@@ -21,7 +18,7 @@
   <table mat-table [dataSource]="seasons | async">
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let season"> {{season.name}} </td>
+      <td mat-cell *matCellDef="let season" class="season"> {{season.name}} </td>
     </ng-container>
 
     <ng-container matColumnDef="created">
@@ -31,7 +28,7 @@
 
     <ng-container matColumnDef="created_by">
       <th mat-header-cell *matHeaderCellDef> Created By </th>
-      <td mat-cell *matCellDef="let season"> {{season.created_by}} </td>
+      <td mat-cell *matCellDef="let season" class="admin"> {{season.created_by.displayName}} </td>
     </ng-container>
 
     <ng-container matColumnDef="updated">
@@ -41,12 +38,22 @@
 
     <ng-container matColumnDef="updated_by">
       <th mat-header-cell *matHeaderCellDef> Updated By </th>
-      <td mat-cell *matCellDef="let season"> {{season.updated_by}} </td>
+      <td mat-cell *matCellDef="let season" class="admin"> {{season.updated_by.displayName}} </td>
     </ng-container>
 
     <ng-container matColumnDef="enabled">
       <th mat-header-cell *matHeaderCellDef> Enabled </th>
       <td mat-cell *matCellDef="let season"> {{season.enabled}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let season">
+        <button mat-stroked-button color="primary" [disabled]="loading"
+          *ngIf="!season.enabled" (click)="enable(season, user)">
+          Enable
+        </button>
+    </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

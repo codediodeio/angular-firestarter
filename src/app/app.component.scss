@@ -41,6 +41,11 @@
   flex: 1 1 auto;
 }
 
-.active-link {
-  background-color: mat-color(mat-palette($mat-indigo));
+.active-menu {
+  color: mat-color(mat-palette($mat-indigo));
+}
+
+a {
+  display: flex;
+  align-items: center;
 }

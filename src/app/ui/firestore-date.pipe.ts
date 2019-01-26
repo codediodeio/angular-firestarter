@@ -15,6 +15,6 @@ export class FirestoreDatePipe implements PipeTransform {
     if (!timestamp) {
       return '';
     }
-    return formatDate(timestamp.toDate(), format || 'medium', this.locale);
+    return formatDate(timestamp.toDate(), format || 'short', this.locale);
   }
 }

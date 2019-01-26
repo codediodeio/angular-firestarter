@@ -1,11 +1,11 @@
 <div class="container" [class.is-mobile]="mobileQuery.matches">
   <mat-toolbar class="toolbar" color="primary">
     <mat-toolbar-row>
-      <button mat-icon-button (click)="snav.toggle()">
+      <button mat-icon-button (click)="snav.toggle()" matTooltip="Menu">
         <mat-icon>menu</mat-icon>
       </button>
       <span class="spacer"></span>
-      <a mat-button routerLink="/">
+      <a mat-button routerLink="/" matTooltip="LeaderBoard">
         <mat-icon class="icon">school</mat-icon>
         LeaderBoard
       </a>
@@ -25,27 +25,23 @@
       fixedTopGap="56"
       opened class="sidenav">
       <mat-nav-list>
-        <a mat-list-item routerLink="/login"
-          [routerLinkActive]="['active-link']"
-          [routerLinkActiveOptions]="{exact: true}">
-          <mat-icon class="icon">home</mat-icon>
-          Home
+        <a mat-list-item [routerLinkActive]="['active-menu']"
+          [routerLinkActiveOptions]="{exact: true}"
+          routerLink="/login">
+          <mat-icon class="icon">home</mat-icon>Home
         </a>
-        <a mat-list-item routerLink="/profile"
-          [routerLinkActive]="['active-link']">
-          <mat-icon class="icon">person</mat-icon>
-          Profile
+        <a mat-list-item [routerLinkActive]="['active-menu']"
+          routerLink="/profile">
+          <mat-icon class="icon">person</mat-icon>Profile
         </a>
-        <a mat-list-item routerLink="/tasks"
-          [routerLinkActive]="['active-link']">
-          <mat-icon class="icon">dashboard</mat-icon>
-          Dashboard
+        <a mat-list-item [routerLinkActive]="['active-menu']"
+          routerLink="/tasks">
+          <mat-icon class="icon">dashboard</mat-icon>Dashboard
         </a>
-        <a mat-list-item routerLink="/admin"
-          [routerLinkActive]="['active-link']"
-          *ngIf="auth.isAdmin | async">
-          <mat-icon class="icon">whatshot</mat-icon>
-          Administrator
+        <a mat-list-item *ngIf="auth.isAdmin | async"
+          [routerLinkActive]="['active-menu']"
+          routerLink="/admin">
+          <mat-icon class="icon">whatshot</mat-icon>Administrator
         </a>
       </mat-nav-list>
     </mat-sidenav>

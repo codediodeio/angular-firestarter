@@ -1,3 +1,19 @@
+@import '~@angular/material/theming';
+
 .content {
   padding: 0 20px;
+}
+
+form {
+  display: flex;
+  align-items: baseline;
+}
+
+.season-name {
+  flex: 1;
+  padding: 0 15px;
+}
+
+.season, .admin {
+  color: mat-color(mat-palette($mat-indigo));
 }

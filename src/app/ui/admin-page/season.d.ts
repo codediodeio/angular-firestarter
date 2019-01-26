@@ -3,7 +3,7 @@ interface Season {
   name: string;
   enabled: boolean;
   created: firebase.firestore.FieldValue;
-  created_by: User;
+  created_by: Partial<User>;
   updated: firebase.firestore.FieldValue;
-  updated_by: User;
+  updated_by: Partial<User>;
 }

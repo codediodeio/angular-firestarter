@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 // Colors
-// $white: #fff !default;
+$white: #fff !default;
 // $black: #000 !default;
 // $red: #d9534f !default;
 // $orange: #f0ad4e !default;
@@ -17,57 +17,49 @@
 // $gray-light: #666;
 // $gray-lighter: #bbb;
 // $gray-lightest: #eee;
-// ///// Content
-// $body-font: 'Source Sans Pro',
-// sans-serif;
-// $heading-font: 'Palanquin',
-// sans-serif;
-
-// h1,
-// h2,
-// h3,
-// h4,
-// h5,
-// h6,
-// {
-//     font-family: $heading-font;
-//     font-weight: 300 !important;
-// }
 
 .loading {
-    opacity: 0;
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    background: #272c33;
-    padding-top: 25vh;
-    text-align: center;
-    z-index: -1;
-    transition: opacity .8s ease-out;
+  opacity: 0;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: #272c33;
+  padding-top: 25vh;
+  text-align: center;
+  z-index: -1;
+  transition: opacity .8s ease-out;
 }
 
 app-root:empty+.loading {
-    opacity: 1;
-    z-index: 100;
-    h1 {
-        font-family: "courier", monospace;
-        color: #EEE;
-        margin-bottom: 50px;
-    }
+  opacity: 1;
+  z-index: 100;
+  h1 {
+    font-family: "courier", monospace;
+    color: #EEE;
+    margin-bottom: 50px;
+  }
 }
 
 html, body { height: 100%; }
 body {
-    font-family: Roboto, "Helvetica Neue", sans-serif;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-content: stretch;
-    align-items: stretch;
-    height: 100vh;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
+  align-items: stretch;
+  height: 100vh;
 }
 
-h3 {
-    margin-top: 0;
+h3, h4 {
+  margin-top: 0;
+}
+
+hr {
+  margin: 20px 0;
+}
+
+table {
+  width: 100%;
 }
