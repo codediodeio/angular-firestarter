@@ -79,7 +79,7 @@ service cloud.firestore {
     }
 
     function isAdmin() {
-      return getAdminData(teamId).uid == currentUser().uid;
+      return getAdminData(currentUser().uid).uid == currentUser().uid;
     }
 
     function isOwnNewTask() {

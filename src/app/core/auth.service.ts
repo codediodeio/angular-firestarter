@@ -173,7 +173,7 @@ export class AuthService {
       .signInWithCustomToken(result.token)
       .then(credential => {
         this.loggingIn = false;
-        this.notify.update('Welcome ${credential.user.displayName}!', 'success');
+        this.notify.update(`Welcome ${credential.user.displayName}!`, 'success');
         return this.setUserDoc({
           uid: credential.user.uid,
           email: credential.user.email,
