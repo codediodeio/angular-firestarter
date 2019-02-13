@@ -75,7 +75,7 @@ service cloud.firestore {
     }
 
     function getAdminData(userId) {
-      return get(/databases/$(database)/documents/admin_users/$(userId)).data;
+      return get(/databases/$(database)/documents/adminUsers/$(userId)).data;
     }
 
     function isAdmin() {
