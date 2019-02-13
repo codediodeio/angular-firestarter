@@ -8,7 +8,7 @@ export class AdminService {
   constructor(private afs: AngularFirestore) {}
 
   isAdmin(uid: string): Observable<boolean> {
-    return this.afs.doc<Admin>(`admin_users/${uid}`)
+    return this.afs.doc<Admin>(`adminUsers/${uid}`)
     .valueChanges().pipe(
       map((admin: Admin) => admin ? admin.uid === uid : false)
     );
