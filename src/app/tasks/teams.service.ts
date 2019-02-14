@@ -11,10 +11,12 @@ import { map } from 'rxjs/operators';
 export class TeamsService {
 
   teamsCollection: AngularFirestoreCollection<Team>;
+  teamApplicationsCollection: AngularFirestoreCollection<TeamApplication>;
   teamDocument:   AngularFirestoreDocument<Team>;
 
   constructor(private afs: AngularFirestore) {
     this.teamsCollection = this.afs.collection('teams');
+    this.teamApplicationsCollection = this.afs.collection('teamApplications');
   }
 
   getData(): Observable<Team[]> {
@@ -28,6 +30,8 @@ export class TeamsService {
     );
   }
 
+
+  // Team
   getTeam(id: string) {
     return this.afs.doc<Team>(`teams/${id}`);
   }
@@ -50,5 +54,21 @@ export class TeamsService {
 
   setUserTeam(uid: string, team: Team) {
     return this.getUser(uid).update({ team });
+  }
+
+  // Team Applications
+  getTeamApplication(id: string) {
+    return this.afs.doc<TeamApplication>(`teamApplications/${id}`);
+  }
+
+  addTeamApplication(uid: string, teamId: string) {
+    return this.teamApplicationsCollection.doc(uid).set({
+      id: uid,
+      teamId: teamId
+    });
+  }
+
+  removeTeamApplication(uid: string) {
+    return this.getTeamApplication(uid).delete();
   }
 }
