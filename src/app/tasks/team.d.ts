@@ -4,3 +4,9 @@ interface Team {
   lead?: string;
   memberCount: number;
 }
+
+interface TeamApplication {
+  id: string;
+  uid: string;
+  teamId: string;
+}
