@@ -43,8 +43,11 @@ export class AuthService {
           return;
         }
 
-        this.isAdmin = this.adminService.isAdmin(user.uid);
-        if (user.isMicrosoft) {
+        if (!this.isAdmin) {
+          this.isAdmin = this.adminService.isAdmin(user.uid);
+        }
+
+        if (user.isMicrosoft && !this.microsoftCredentials) {
           this.microsoftCredentials = this.msalService.getUser();
         }
       }),

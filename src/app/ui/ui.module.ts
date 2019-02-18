@@ -27,6 +27,7 @@ import { SsrPageComponent } from './ssr-page/ssr-page.component';
 
 import { FirestoreDatePipe } from './firestore-date.pipe';
 import { LeaderboardService } from './home-page/leaderboard.service';
+import { PlayerQuestComponent } from './player-quest/player-quest.component';
 
 @NgModule({
   imports: [
@@ -56,6 +57,7 @@ import { LeaderboardService } from './home-page/leaderboard.service';
     SsrPageComponent,
     FirestoreDatePipe,
     AdminPageComponent,
+    PlayerQuestComponent,
   ],
   exports: [
     LoadingSpinnerComponent,

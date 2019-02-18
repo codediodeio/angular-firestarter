@@ -36,7 +36,11 @@
         </a>
         <a mat-list-item [routerLinkActive]="['active-menu']"
           routerLink="/tasks">
-          <mat-icon class="icon">dashboard</mat-icon>Dashboard
+          <mat-icon class="icon">group</mat-icon>Team
+        </a>
+        <a mat-list-item [routerLinkActive]="['active-menu']"
+          routerLink="/quests">
+          <mat-icon class="icon">dashboard</mat-icon>Quests
         </a>
         <a mat-list-item *ngIf="auth.isAdmin | async"
           [routerLinkActive]="['active-menu']"
