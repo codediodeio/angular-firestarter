@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 import { LeaderboardService } from './leaderboard.service';
 
@@ -15,7 +15,7 @@ export class HomePageComponent implements OnInit {
   constructor(private leaderboardService: LeaderboardService) { }
 
   ngOnInit() {
-    this.topUsers$ = this.leaderboardService.getTopUsers();
+    this.topUsers$ = of([]); // this.leaderboardService.getTopUsers();
   }
 
 }

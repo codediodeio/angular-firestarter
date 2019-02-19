@@ -50,9 +50,7 @@ export class AuthService {
         if (user.isMicrosoft && !this.microsoftCredentials) {
           this.microsoftCredentials = this.msalService.getUser();
         }
-      }),
-      tap(user => localStorage.setItem('user', JSON.stringify(user))),
-      startWith(JSON.parse(localStorage.getItem('user')))
+      })
     );
   }
 
