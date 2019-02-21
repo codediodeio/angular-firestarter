@@ -1,6 +1,7 @@
 <div class="content">
   <div class="leaderboard-content">
     <h3>LeaderBoard Top 10</h3>
+    <h4 *ngIf="season$ | async as season">{{season.name}}</h4>
     <div *ngIf="topUsers$ | async as users; else loading">
       <mat-card *ngFor="let user of users">
         <mat-card-header>

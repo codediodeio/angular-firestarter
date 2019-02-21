@@ -3,7 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 import { AuthService } from '../../core/auth.service';
-import { SeasonService } from './season.service';
+import { SeasonService } from '../../core/season.service';
 
 @Component({
   selector: 'admin-page',

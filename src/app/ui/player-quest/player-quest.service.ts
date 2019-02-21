@@ -64,12 +64,15 @@ export class PlayerQuestService {
 
   /**
    * Get all quests of a team member
+   * @param  {string}                    seasonId season's id
+   * @param  {string}                    teamId   team's id
    * @param  {string}                    playerId player's user id
    * @return {Observable<PlayerQuest[]>}          observable array of player quests
    */
-  getMemberQuests(playerId: string, teamId: string): Observable<PlayerQuest[]> {
+  getMemberQuests(seasonId: string, teamId: string, playerId: string): Observable<PlayerQuest[]> {
     this.playerQuestsCollection =
       this.afs.collection('playerQuests', ref => ref
+        .where('seasonId', '==', seasonId)
         .where('teamId', '==', teamId)
         .where('playerId', '==', playerId));
 
@@ -80,12 +83,14 @@ export class PlayerQuestService {
 
   /**
    * Gets all quests awaiting approval from team members
+   * @param  {string}                    seasonId season's id
    * @param  {string}                    teamId team's id
    * @return {Observable<PlayerQuest[]>}        observable array of player quests
    */
-  getAllMemberSubmittedQuests(teamId: string): Observable<PlayerQuest[]> {
+  getAllMemberSubmittedQuests(seasonId: string, teamId: string): Observable<PlayerQuest[]> {
     this.playerQuestsCollection =
       this.afs.collection('playerQuests', ref => ref
+        .where('seasonId', '==', seasonId)
         .where('teamId', '==', teamId)
         .where('status', '==', QuestStatus.PENDING_APPROVAL));
 
@@ -104,8 +109,13 @@ export class PlayerQuestService {
     });
   }
 
-  getPlayerPoints(uid: string): AngularFirestoreDocument<PlayerPoints> {
-    return this.afs.doc<PlayerPoints>(`playerPoints/${uid}`);
+  /**
+   * Returns a playerPoints firestore document reference
+   * @param  {string}                                 id playerpoints id (season id + player id)
+   * @return {AngularFirestoreDocument<PlayerPoints>}    player points info reference
+   */
+  getPlayerPoints(id: string): AngularFirestoreDocument<PlayerPoints> {
+    return this.afs.doc<PlayerPoints>(`playerPoints/${id}`);
   }
 
   /**
@@ -113,7 +123,7 @@ export class PlayerQuestService {
    * @param {Partial<PlayerQuest>} quest all quest info
    */
   approveQuest(quest: Partial<PlayerQuest>) {
-    const playerPointsRef = this.getPlayerPoints(quest.playerId).ref;
+    const playerPointsRef = this.getPlayerPoints(quest.seasonId + quest.playerId).ref;
     const questRef = this.getQuest(quest.id).ref;
 
     return this.afs.firestore.runTransaction((transaction) => {

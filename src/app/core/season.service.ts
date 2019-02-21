@@ -48,7 +48,7 @@ export class SeasonService {
   }
 
   // Returns enabled season id
-  getEnabledSeason(): Observable<string> {
+  getEnabledSeasonId(): Observable<string> {
     const enabledSeasonQuery = this.afs.collection<Season>(
       'seasons', ref => ref.where('enabled', '==', true).limit(1));
 
@@ -58,11 +58,29 @@ export class SeasonService {
     );
   }
 
+  // Returns enabled season
+  getEnabledSeason(): Observable<Season> {
+    const enabledSeasonQuery = this.afs.collection<Season>(
+      'seasons', ref => ref.where('enabled', '==', true).limit(1));
+
+    return enabledSeasonQuery.snapshotChanges().pipe(
+      first(),
+      map((actions) => {
+        const doc = actions[0].payload.doc;
+        const data = doc.data();
+        return <Season>{
+          id: doc.id,
+          ...data
+        };
+      })
+    );
+  }
+
   // Enables a season while also disabling currently enabled season
   enableSeason(id: string, user: Partial<User>): Observable<void> {
     const batch = this.afs.firestore.batch();
 
-    return this.getEnabledSeason().pipe(
+    return this.getEnabledSeasonId().pipe(
       flatMap((enabledSeasonId: string) => {
         // disable currently enabled season
         batch.update(this.getSeason(enabledSeasonId).ref, {

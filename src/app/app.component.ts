@@ -5,8 +5,10 @@ import {
   OnDestroy,
   OnInit
 } from '@angular/core';
+import { SwUpdate } from '@angular/service-worker';
 
 import { AuthService } from './core/auth.service';
+import { NotifyService } from './core/notify.service';
 
 @Component({
   selector: 'app-root',
@@ -21,13 +23,22 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(
     public auth: AuthService,
     private changeDetectorRef: ChangeDetectorRef,
-    private media: MediaMatcher
+    private media: MediaMatcher,
+    private notify: NotifyService,
+    private updates: SwUpdate
   ) {}
 
   ngOnInit() {
     this.mobileQuery = this.media.matchMedia('(max-width: 600px)');
     this.mobileQueryListener = () => this.changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this.mobileQueryListener);
+
+    // Notify & reload when updates occurs
+    this.updates.available.subscribe(event => {
+      const message = 'A new version of this App is available. Browser will reload for a moment to get the latest version.';
+      this.notify.update(message, 'info');
+      this.updates.activateUpdate().then(() => document.location.reload());
+    });
   }
 
   ngOnDestroy() {
