@@ -1,0 +1,9 @@
+@import '~@angular/material/theming';
+
+.mat-row {
+  cursor: pointer;
+
+  &:hover {
+    background-color: mat-color(mat-palette($mat-indigo));
+  }
+}

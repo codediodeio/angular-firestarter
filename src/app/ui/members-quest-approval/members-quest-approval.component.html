@@ -1,0 +1,26 @@
+<h4>Submitted Quests for your Approval:</h4>
+<table mat-table [dataSource]="memberSubmittedQuests$ | async">
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Quest Name </th>
+    <td mat-cell *matCellDef="let quest"> {{quest.questName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="submitted_by">
+    <th mat-header-cell *matHeaderCellDef> Submitted By </th>
+    <td mat-cell *matCellDef="let quest"> {{quest.playerName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="completed">
+    <th mat-header-cell *matHeaderCellDef> Completed </th>
+    <td mat-cell *matCellDef="let quest"> {{quest.completed | firestoreDate}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="required">
+    <th mat-header-cell *matHeaderCellDef> XP </th>
+    <td mat-cell *matCellDef="let quest"> {{quest.required ? 10 : 5}} XP </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let quest; columns: displayedColumns;"
+    (click)="selectRow(quest)"></tr>
+</table>
