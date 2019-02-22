@@ -1,22 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
+@import "variables.scss";
 
 // Colors
 $white: #fff !default;
-// $black: #000 !default;
-// $red: #d9534f !default;
-// $orange: #f0ad4e !default;
-// $yellow: #ffd500 !default;
-// $green: #5cb85c !default;
-// $blue: #0275d8 !default;
-// $teal: #5bc0de !default;
-// $pink: #ff5b77 !default;
-// $purple: #613d7c !default;
-// // Grayscale
-// $gray-dark: #222;
-// $gray: #212121;
-// $gray-light: #666;
-// $gray-lighter: #bbb;
-// $gray-lightest: #eee;
 
 .loading {
   opacity: 0;
@@ -62,4 +47,28 @@ hr {
 
 table {
   width: 100%;
+}
+
+.error {
+  background: $warn;
+
+  .mat-button {
+    color: white;
+  }
+}
+
+.info {
+  background: $primary;
+
+  .mat-button {
+    color: white;
+  }
+}
+
+.success {
+  background: $green;
+
+  .mat-button {
+    color: white;
+  }
 }

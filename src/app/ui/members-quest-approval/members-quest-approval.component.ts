@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { PlayerQuestService } from '../player-quest/player-quest.service';
+import { NotifyService } from '../../core/notify.service';
 import { SeasonService } from '../../core/season.service';
 
 @Component({
@@ -21,6 +22,7 @@ export class MembersQuestApprovalComponent implements OnInit {
   ];
 
   constructor(
+    private notify: NotifyService,
     private playerQuest: PlayerQuestService,
     private season: SeasonService) {}
 
@@ -33,5 +35,6 @@ export class MembersQuestApprovalComponent implements OnInit {
 
   selectRow(quest: PlayerQuest) {
     console.log(quest);
+    this.notify.update(quest.playerName, 'success');
   }
 }

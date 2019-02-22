@@ -20,7 +20,6 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
-import { NotificationMessageComponent } from './notification-message/notification-message.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserFormComponent } from './user-form/user-form.component';
 import { SsrPageComponent } from './ssr-page/ssr-page.component';
@@ -52,7 +51,6 @@ import { MembersQuestApprovalComponent } from './members-quest-approval/members-
     UserLoginComponent,
     HomePageComponent,
     LoadingSpinnerComponent,
-    NotificationMessageComponent,
     UserProfileComponent,
     UserFormComponent,
     SsrPageComponent,
@@ -63,7 +61,6 @@ import { MembersQuestApprovalComponent } from './members-quest-approval/members-
   ],
   exports: [
     LoadingSpinnerComponent,
-    NotificationMessageComponent,
     UserProfileComponent,
     UserFormComponent
   ],

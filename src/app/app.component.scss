@@ -1,4 +1,5 @@
 @import '~@angular/material/theming';
+@import "variables.scss";
 
 .container {
   display: flex;
@@ -16,7 +17,7 @@
 }
 
 .sidenav {
-  border-right: 1px solid mat-color(mat-palette($mat-gray));
+  border-right: 1px solid $gray;
   width: 175px;
 }
 
@@ -42,7 +43,7 @@
 }
 
 .active-menu {
-  color: mat-color(mat-palette($mat-indigo));
+  color: $primary;
 }
 
 a {

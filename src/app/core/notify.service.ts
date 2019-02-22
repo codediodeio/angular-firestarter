@@ -1,26 +1,14 @@
 import { Injectable } from '@angular/core';
-
-import { Subject } from 'rxjs';
+import { MatSnackBar, MatSnackBarDismiss } from '@angular/material';
+import { Observable } from 'rxjs';
 
 /// Notify users about errors and other helpful stuff
-export interface Msg {
-  content: string;
-  style: string;
-}
-
 @Injectable()
 export class NotifyService {
 
-  private _msgSource = new Subject<Msg | null>();
+  constructor(private snackBar: MatSnackBar) {}
 
-  msg = this._msgSource.asObservable();
-
-  update(content: string, style: 'error' | 'info' | 'success') {
-    const msg: Msg = { content, style };
-    this._msgSource.next(msg);
-  }
-
-  clear() {
-    this._msgSource.next(null);
+  update(message: string, panelClass: 'error' | 'info' | 'success'): Observable<MatSnackBarDismiss> {
+    return this.snackBar.open(message, 'OK', { panelClass }).afterDismissed();
   }
 }
