@@ -6,6 +6,7 @@ import {
   MatButtonModule,
   MatCardModule,
   MatChipsModule,
+  MatDialogModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
@@ -28,6 +29,7 @@ import { FirestoreDatePipe } from './firestore-date.pipe';
 import { LeaderboardService } from './home-page/leaderboard.service';
 import { PlayerQuestComponent } from './player-quest/player-quest.component';
 import { MembersQuestApprovalComponent } from './members-quest-approval/members-quest-approval.component';
+import { QuestApprovalDialogComponent } from './members-quest-approval/quest-approval-dialog.component';
 
 @NgModule({
   imports: [
@@ -38,6 +40,7 @@ import { MembersQuestApprovalComponent } from './members-quest-approval/members-
     MatButtonModule,
     MatCardModule,
     MatChipsModule,
+    MatDialogModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
@@ -58,6 +61,10 @@ import { MembersQuestApprovalComponent } from './members-quest-approval/members-
     AdminPageComponent,
     PlayerQuestComponent,
     MembersQuestApprovalComponent,
+    QuestApprovalDialogComponent,
+  ],
+  entryComponents: [
+    QuestApprovalDialogComponent
   ],
   exports: [
     LoadingSpinnerComponent,

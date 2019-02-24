@@ -1,14 +1,18 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import {
+  ApplicationRef,
   ChangeDetectorRef,
   Component,
   OnDestroy,
   OnInit
 } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
+import { concat, interval, from } from 'rxjs';
+import { first, flatMap } from 'rxjs/operators';
 
 import { AuthService } from './core/auth.service';
 import { NotifyService } from './core/notify.service';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +26,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     public auth: AuthService,
+    private appRef: ApplicationRef,
     private changeDetectorRef: ChangeDetectorRef,
     private media: MediaMatcher,
     private notify: NotifyService,
@@ -33,11 +38,21 @@ export class AppComponent implements OnInit, OnDestroy {
     this.mobileQueryListener = () => this.changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this.mobileQueryListener);
 
+    if (!environment.production) {
+      return;
+    }
+
+    // Check for App Updates every 15mins
+    const appIsStable$ = this.appRef.isStable.pipe(first(isStable => isStable === true));
+    const interval15Mins$ = interval(15 * 60 * 1000);
+    concat(appIsStable$, interval15Mins$).subscribe(() => this.updates.checkForUpdate());
+
     // Notify & reload when updates occurs
     this.updates.available.subscribe(event => {
-      const message = 'A new version of this App is available. Browser will reload for a moment to get the latest version.';
-      this.notify.update(message, 'info');
-      this.updates.activateUpdate().then(() => document.location.reload());
+      const message = 'A new version of this App is available. App needs to reload.';
+      this.notify.update(message, 'info').pipe(
+        flatMap(() => from(this.updates.activateUpdate()))
+      ).subscribe(() => location.reload());
     });
   }
 

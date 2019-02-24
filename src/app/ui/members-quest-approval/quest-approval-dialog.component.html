@@ -1,0 +1,43 @@
+<h1 mat-dialog-title>
+  {{data.questName}}
+  <mat-chip-list>
+    <mat-chip color="primary" selected>{{data.required ? 'Required' : 'Additional'}}</mat-chip>
+    <mat-chip color="accent" selected>{{data.required ? '10 XP' : '5 XP'}}</mat-chip>
+  </mat-chip-list>
+</h1>
+<div mat-dialog-content>
+
+  <table>
+    <tr>
+      <td><b>Source:</b></td>
+      <td>{{data.source}}</td>
+    </tr>
+    <tr>
+      <td><b>Category:</b></td>
+      <td>{{data.category}}</td>
+    </tr>
+    <tr>
+      <td><b>Submitted by:</b></td>
+      <td>{{data.playerName}}</td>
+    </tr>
+    <tr>
+      <td><b>Date Submitted:</b></td>
+      <td>{{data.submitted | firestoreDate}}</td>
+    </tr>
+    <tr>
+      <td><b>Date Completed:</b></td>
+      <td>{{data.completed | firestoreDate}}</td>
+    </tr>
+    <tr>
+      <td><b>Completion Proof Link:</b></td>
+      <td>
+        <a href="/{{data.completionProof}}">{{data.completionProof}}</a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="'approved'" color="primary">Approve</button>
+  <button mat-button [mat-dialog-close]="'rejected'" color="accent">Reject</button>
+  <button mat-button [mat-dialog-close]="'cancel'">Cancel</button>
+</div>
