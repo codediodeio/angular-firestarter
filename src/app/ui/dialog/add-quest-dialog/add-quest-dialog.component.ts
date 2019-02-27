@@ -4,6 +4,7 @@ import { PlayerQuestService } from '../../player-quest/player-quest.service';
 import { DocumentReference } from '@angular/fire/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
 import { NotifyService } from '../../../core/notify.service';
+import { EmailService } from '../../../core/email.service';
 
 const CategoryList = [
   'Core  - Infor Specific',
@@ -28,7 +29,8 @@ export class AddQuestDialogComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) private data: any,
     private playerQuestService: PlayerQuestService,
     private dialogRef: MatDialogRef<AddQuestDialogComponent>,
-    private notifyService: NotifyService) {
+    private notifyService: NotifyService,
+    private emailService: EmailService) {
     this.categoryList = CategoryList;
     this.season = data.season;
     this.user = data.user;
@@ -53,6 +55,7 @@ export class AddQuestDialogComponent implements OnInit {
     this.playerQuestService.assignPlayerQuest(this.playerQuest).then((docRef: DocumentReference) => {
       docRef.get().then((data) => {
         if(data.exists) {
+          this.emailService.sendEmail('jesusgerard.deramos@infor.com', 'New Quest Assigned', 'New Quest: ' + this.playerQuest.questName);
           this.notifyService.update('Assign quest successful!', 'success');
         } else {
           this.notifyService.update('Assign quest failed!', 'error');
