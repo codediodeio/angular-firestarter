@@ -22,5 +22,5 @@
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let quest; columns: displayedColumns;"
-    (click)="selectRow(quest)"></tr>
+    (click)="openDialog(quest)"></tr>
 </table>

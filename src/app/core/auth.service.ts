@@ -20,7 +20,6 @@ export class AuthService {
   user: Observable<User | null>;
   isAdmin: Observable<boolean>;
   loggingIn = false;
-  microsoftCredentials = null;
 
   constructor(
     private adminService: AdminService,
@@ -45,10 +44,6 @@ export class AuthService {
 
         if (!this.isAdmin) {
           this.isAdmin = this.adminService.isAdmin(user.uid);
-        }
-
-        if (user.isMicrosoft && !this.microsoftCredentials) {
-          this.microsoftCredentials = this.msalService.getUser();
         }
       })
     );
@@ -132,8 +127,40 @@ export class AuthService {
       .catch(error => this.handleError(error));
   }
 
+  async microsoftSignIn() {
+    this.loggingIn = true;
+
+    await this.msalService.loginPopup(['user.read', 'mail.send']);
+
+    const user = this.msalService.getUser();
+    const createFirebaseToken = this.afFunctions.httpsCallable('createFirebaseToken');
+    const result = await createFirebaseToken({
+      uid: user.userIdentifier,
+      email: user.displayableId,
+      displayName: user.name
+    }).toPromise();
+
+    return this.afAuth.auth
+      .signInWithCustomToken(result.token)
+      .then(credential => {
+        this.loggingIn = false;
+        this.notify.update(`Welcome ${credential.user.displayName}!`, 'success');
+        return this.setUserDoc({
+          uid: credential.user.uid,
+          email: credential.user.email,
+          displayName: credential.user.displayName,
+          isMicrosoft: true
+        });
+      })
+      .catch(error => this.handleError(error));
+  }
+
+  microsoftSignOut() {
+    this.msalService.logout();
+  }
+
   signOut() {
-    if (this.microsoftCredentials) {
+    if (this.msalService.getUser()) {
       this.microsoftSignOut();
     }
 
@@ -156,36 +183,5 @@ export class AuthService {
     );
 
     return userRef.set(user, { merge: true });
-  }
-
-  microsoftSignIn = async() => {
-    this.loggingIn = true;
-    await this.msalService.loginPopup(['user.read mail.send']);
-    const user = this.msalService.getUser();
-    const createFirebaseToken = this.afFunctions.httpsCallable('createFirebaseToken');
-    const result = await createFirebaseToken({
-      uid: user.userIdentifier,
-      email: user.displayableId,
-      displayName: user.name
-    }).toPromise();
-    this.microsoftCredentials = user;
-
-    return this.afAuth.auth
-      .signInWithCustomToken(result.token)
-      .then(credential => {
-        this.loggingIn = false;
-        this.notify.update(`Welcome ${credential.user.displayName}!`, 'success');
-        return this.setUserDoc({
-          uid: credential.user.uid,
-          email: credential.user.email,
-          displayName: credential.user.displayName,
-          isMicrosoft: true
-        });
-      })
-      .catch(error => this.handleError(error));
-  }
-
-  microsoftSignOut() {
-    this.msalService.logout();
   }
 }

@@ -13,19 +13,6 @@ import {
   MatToolbarModule,
   MatTooltipModule
 } from '@angular/material';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { environment } from '../environments/environment';
-
-// Firestarter App Modules
-import { CoreModule } from './core/core.module';
-import { UploadsModule } from './uploads/uploads.module';
-import { UiModule } from './ui/ui.module';
-import { NotesModule } from './notes/notes.module';
-import { TasksModule } from './tasks/tasks.module';
-
-// @angular/fire Modules
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
@@ -33,10 +20,15 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireFunctionsModule, FunctionsRegionToken } from '@angular/fire/functions';
 import { MsalModule } from '@azure/msal-angular';
 
-import { functions } from 'firebase';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { environment } from '../environments/environment';
+import { CoreModule } from './core/core.module';
+import { UploadsModule } from './uploads/uploads.module';
+import { UiModule } from './ui/ui.module';
+import { NotesModule } from './notes/notes.module';
+import { TasksModule } from './tasks/tasks.module';
 
-// IMPORTANT
-// Add your own project credentials to environments/*.ts
 
 @NgModule({
   declarations: [AppComponent],
@@ -66,8 +58,7 @@ import { functions } from 'firebase';
       enabled: environment.production
     }),
   ],
-  bootstrap: [AppComponent],
-  providers: [
+  bootstrap: [AppComponent], providers: [
     { provide: FunctionsRegionToken, useValue: 'us-central1' }
   ]
 })

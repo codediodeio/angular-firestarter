@@ -6,9 +6,15 @@
       <i class="fa fa-google fa-lg"></i> Connect Google
     </button> -->
 
-    <button mat-raised-button color="primary" (click)="signInWithMicrosoft()">
+    <button mat-raised-button color="primary"
+      [disabled]="auth.loggingIn"
+      (click)="signInWithMicrosoft()">
       Connect Microsoft
     </button>
+
+    <div *ngIf="auth.loggingIn" class="loader">
+      <mat-spinner diameter="100"></mat-spinner>
+    </div>
   </div>
 
   <ng-template #alreadyLoggedIn>

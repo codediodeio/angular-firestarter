@@ -4,7 +4,7 @@ import {
   AngularFirestoreCollection,
   AngularFirestoreDocument
 } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { firestore } from 'firebase/app';
 import Timestamp = firestore.Timestamp;
@@ -104,9 +104,9 @@ export class PlayerQuestService {
    * @param {Partial<PlayerQuest>} quest all quest info
    */
   rejectQuest(quest: Partial<PlayerQuest>) {
-    return this.getQuest(quest.id).update({
+    return from(this.getQuest(quest.id).update({
       status: QuestStatus.TODO
-    });
+    }));
   }
 
   /**
@@ -126,7 +126,7 @@ export class PlayerQuestService {
     const playerPointsRef = this.getPlayerPoints(quest.seasonId + quest.playerId).ref;
     const questRef = this.getQuest(quest.id).ref;
 
-    return this.afs.firestore.runTransaction((transaction) => {
+    const trans = this.afs.firestore.runTransaction((transaction) => {
       return transaction.get(playerPointsRef).then(playerPoints => {
         const updated = Timestamp.now();
 
@@ -163,5 +163,7 @@ export class PlayerQuestService {
         }, { merge: true });
       });
     });
+
+    return from(trans);
   }
 }

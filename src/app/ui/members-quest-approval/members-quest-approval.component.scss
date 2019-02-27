@@ -1,9 +1,12 @@
-@import '~@angular/material/theming';
+@import 'variables.scss';
 
 .mat-row {
   cursor: pointer;
 
   &:hover {
-    background-color: mat-color(mat-palette($mat-indigo));
+    background-color: $light-blue;
+    > td {
+      color: white;
+    }
   }
 }
