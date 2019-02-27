@@ -14,8 +14,7 @@ import {
   MatProgressSpinnerModule,
   MatStepperModule,
   MatTableModule,
-  MatToolbarModule,
-  MatDialogModule
+  MatToolbarModule
 } from '@angular/material';
 
 import { DialogModule } from './dialog/dialog.module';
