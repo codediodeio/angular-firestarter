@@ -27,5 +27,6 @@ interface PlayerQuest {
   questName: string;
   source: string;  // e.g. LMS
   required: boolean; // true = 10 points granted, else 5 points
+  xp: number;
   category: QuestCategories;
 }

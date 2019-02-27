@@ -13,9 +13,11 @@ import {
   MatProgressSpinnerModule,
   MatStepperModule,
   MatTableModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatDialogModule
 } from '@angular/material';
 
+import { DialogModule } from './dialog/dialog.module';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { HomePageComponent } from './home-page/home-page.component';
@@ -46,6 +48,8 @@ import { MembersQuestApprovalComponent } from './members-quest-approval/members-
     MatStepperModule,
     MatTableModule,
     MatToolbarModule,
+    MatDialogModule,
+    DialogModule,
   ],
   declarations: [
     UserLoginComponent,

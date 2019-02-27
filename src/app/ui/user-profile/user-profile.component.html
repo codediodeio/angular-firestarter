@@ -1,43 +1,65 @@
-<div class="box" >
-  <div *ngIf="auth.user | async; then authenticated else guest">
-    <!-- template will replace this div -->
-  </div>
-</div>
+ <div *ngIf="auth.user | async; then authenticated else guest">
+   <!-- template will replace this div -->
+ </div>
 
 <!-- User NOT logged in -->
 <ng-template #guest mat-card class="example-card">
-  <mat-card>
-    <mat-card-content>
-      <h3>Hello, GUEST</h3>
-      <p>Please login to get started...</p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-stroked-button color="primary" routerLink="/login">Login</button>
-    </mat-card-actions>
-  </mat-card>
+  <div class="box" >
+    <mat-card>
+      <mat-card-content>
+        <h3>Hello, GUEST</h3>
+        <p>Please login to get started...</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-stroked-button color="primary" routerLink="/login">Login</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </ng-template>
 
-<!-- User logged in -->
 <ng-template #authenticated>
-  <mat-card class="example-card" *ngIf="auth.user | async as user">
-    <mat-card-header>
-      <div mat-card-avatar>
-        <img [src]="user.photoURL || 'https://api.adorable.io/avatars/109/fire.png'" class="avatar">
-      </div>
-      <mat-card-title>{{ user.displayName }}</mat-card-title>
-      <mat-card-subtitle>{{ user.team?.name || 'Team Unknown' }}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <h3 *ngIf="auth.isAdmin | async">Admin</h3>
-      <span *ngIf="user.team?.lead === user.uid">
-        <mat-icon>work</mat-icon>
-        <b>Team Lead</b>
-      </span>
-      <span><mat-icon>email</mat-icon> {{ user.email }}</span>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-stroked-button color="accent" (click)="logout()">Logout</button>
-    </mat-card-actions>
-  </mat-card>
+  <div *ngIf="true then profile else null">
+    <!-- template will replace this div -->
+  </div>
+
+  <div class="box" *ngIf="user.isLead && player">
+    <mat-card class="example-card">
+      <mat-card-actions>
+        <button mat-stroked-button color="primary" (click)="openDialog()">Add Quest</button> 
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </ng-template>
 
+<!-- Team Lead Viewing Player -->
+<ng-template #profile>
+  <div class="box" >
+    <mat-card class="example-card" *ngIf="(!(user.isLead && player)? user: player) as viewedProfile">
+      <mat-card-header>
+        <div mat-card-avatar>
+          <img [src]="viewedProfile.photoURL || 'https://api.adorable.io/avatars/109/fire.png'" class="avatar">
+        </div>
+        <mat-card-title>{{ viewedProfile.displayName }}</mat-card-title>
+        <mat-card-subtitle>{{ viewedProfile.team?.name || 'Team Unknown' }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <h3 *ngIf="auth.isAdmin | async">Admin</h3>
+        <span *ngIf="viewedProfile.team?.lead === viewedProfile.uid">
+          <mat-icon>work</mat-icon>
+          <b>Team Lead</b>
+        </span>
+        <span><mat-icon>email</mat-icon> {{ viewedProfile.email }}</span>
+      </mat-card-content>
+      <mat-card-actions *ngIf="!(user.isLead && player)">
+        <button mat-stroked-button color="accent" (click)="logout()">Logout</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</ng-template>
+
+<!-- template for spinner -->
+<ng-template #loading>
+  <div class="loader">
+    <mat-spinner diameter="175"></mat-spinner>
+  </div>
+</ng-template>

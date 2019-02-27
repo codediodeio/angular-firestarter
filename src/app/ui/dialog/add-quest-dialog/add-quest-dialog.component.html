@@ -1,0 +1,45 @@
+<mat-dialog-content class="mat-typography">
+  <div class="box">
+      <mat-card>
+        <mat-card-header>
+          <div mat-card-avatar>
+            <img [src]="user.photoURL || 'https://api.adorable.io/avatars/109/fire.png'" class="avatar">
+          </div>
+          <mat-card-title>{{ user.displayName }}</mat-card-title>
+          <mat-card-subtitle>{{ user.team?.name || 'Team Unknown' }}</mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
+  </div>
+  
+  <div class="form-table">
+    <form>
+      <mat-form-field>
+        <input matInput placeholder="Quest Name" [(ngModel)]="playerQuest.questName" name="questName" />
+      </mat-form-field>
+    
+      <mat-form-field>
+        <mat-select placeholder="Quest Category" [(ngModel)]="playerQuest.category" name="category">
+          <mat-option *ngFor="let category of categoryList" [value]="category">
+            {{category}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Quest Source" [(ngModel)]="playerQuest.source" name="source" />
+      </mat-form-field>
+
+      <mat-form-field [floatLabel]="'always'">
+        <input id="quest-type-input" matInput disabled placeholder="Quest Type" />
+        <mat-button-toggle-group name="questType" value="Required" aria-label="Quest Type" #questType="matButtonToggleGroup">
+          <mat-button-toggle (click)="adjustQuestType(true)" value="Required">Required</mat-button-toggle>
+          <mat-button-toggle (click)="adjustQuestType(false)" value="Additional">Additional</mat-button-toggle>
+        </mat-button-toggle-group>
+      </mat-form-field>
+    </form>
+  </div>
+
+  <div class="form-action">
+    <button matInput mat-raised-button color="primary" (click)="assignQuest()">ADD QUEST</button>
+  </div>
+</mat-dialog-content>
