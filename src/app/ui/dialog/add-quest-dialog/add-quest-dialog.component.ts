@@ -41,7 +41,8 @@ export class AddQuestDialogComponent implements OnInit {
       teamId: this.user.team.id,
       status: 'todo',
       seasonId: this.season.id,
-      xp: 10
+      xp: 10,
+      playerEmail: this.user.email
     } as PlayerQuest;
   }
 
@@ -55,7 +56,11 @@ export class AddQuestDialogComponent implements OnInit {
     this.playerQuestService.assignPlayerQuest(this.playerQuest).then((docRef: DocumentReference) => {
       docRef.get().then((data) => {
         if(data.exists) {
-          this.emailService.sendEmail('jesusgerard.deramos@infor.com', 'New Quest Assigned', 'New Quest: ' + this.playerQuest.questName);
+          this.emailService.sendEmail(this.user.email, 'Leader Board: New Quest Assigned', 
+            'Quest Name: ' + this.playerQuest.questName + '\n' +
+            'Quest Category: ' + this.playerQuest.category + '\n' +
+            'Quest Source: ' + this.playerQuest.source + '\n' +
+            'Quest Type: ' + this.playerQuest.required? 'Required': 'Additional');
           this.notifyService.update('Assign quest successful!', 'success');
         } else {
           this.notifyService.update('Assign quest failed!', 'error');

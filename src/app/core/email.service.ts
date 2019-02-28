@@ -47,7 +47,7 @@ export class EmailService {
       },
       saveToSentItems: false
     };
-
+    
     return this.getToken().pipe(
       flatMap((token: string) => {
         const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
