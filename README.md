@@ -11,9 +11,10 @@
 
 ## Docker
 * A image and script command to run in a docker container
-* [jgwill/nodalping]()
+* Using image: [jgwill/nodalping]()
 
 [jgwill/nodalping]:https://hub.docker.com/r/jgwill/nodalping
+
 ### Build
 ```sh
 npm run dk:build
