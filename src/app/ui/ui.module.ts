@@ -49,6 +49,7 @@ import { ButtonModule } from 'primeng/button';
 import { GixMdcSamplesComponent } from '../gix/gix-mdc-samples/gix-mdc-samples.component';
 import { NotificationToasterComponent } from './notification-toaster/notification-toaster.component';
 
+import {MatStepperModule} from '@angular/material/stepper';
 
 @NgModule({
   imports: [CommonModule, RouterModule, ReactiveFormsModule,
@@ -74,7 +75,8 @@ import { NotificationToasterComponent } from './notification-toaster/notificatio
     MatButtonModule,
     ConfirmDialogModule,
     ToastModule,
-    ButtonModule
+    ButtonModule,
+    MatStepperModule
   ],
   declarations: [
     UserLoginComponent,
@@ -118,7 +120,8 @@ import { NotificationToasterComponent } from './notification-toaster/notificatio
     ConfirmDialogModule,
     ToastModule,
     ButtonModule,
-    MatButtonModule
+    MatButtonModule,
+    MatStepperModule
   ]
 })
 export class UiModule { }
