@@ -1,3 +1,8 @@
+# GIX Goal: 
+* Base Starter Kit made of my common patterns (Angular Material, PrimeNG)
+
+---
+
 <p align="center">
 
 <a href="https://slackin-pbfjhfxnsa.now.sh"><img src="https://slackin-pbfjhfxnsa.now.sh/badge.svg"></a>
