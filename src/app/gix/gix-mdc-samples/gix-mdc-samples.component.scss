@@ -1,0 +1,49 @@
+
+ 
+.gix-button-shadow{
+   box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+   
+   -webkit-box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+   
+}
+
+
+
+
+.gix-button-cornecto-label
+{
+   -ms-flex-pack: start;
+   justify-content: flex-start;
+   -o-text-overflow: ellipsis;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   overflow: hidden;
+}
+
+.gix-cornecto-button
+   {
+
+      font-family: Roboto,sans-serif;
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-font-smoothing: antialiased;
+      font-size: .875rem;
+      line-height: 2.25rem;
+      font-weight: 500;
+      letter-spacing: .0892857143em;
+      text-decoration: none;
+      text-transform: uppercase;
+      border-radius: 24px;
+      padding: 0 20px;
+      width: auto;
+       max-width: 100%; 
+
+       
+       
+
+       border-radius: 12px;
+       border-top-left-radius: 12px;
+       border-top-right-radius: 12px;
+       border-bottom-right-radius: 12px;
+       border-bottom-left-radius: 12px;
+       margin-right: 24px;
+   }
