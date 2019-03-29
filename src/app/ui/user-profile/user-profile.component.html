@@ -7,8 +7,13 @@
 <!-- User NOT logged in -->
 <ng-template #guest class="box">
   <h3>Howdy, GUEST</h3>
-  <p class="card-text">Login to get started...</p>
-  <button class="button" routerLink="/login">Login</button>
+  <p class="card-text">Login to get started...</p> 
+
+<button mat-raised-button color="primary"  class="gix-button-shadow gix-cornecto-button" routerLink="/login">  
+    <mat-icon>lock</mat-icon>  
+     <span class="gix-button-cornecto-label">Login</span>
+</button>
+
 </ng-template>
 
 <!-- User logged in -->
@@ -17,7 +22,13 @@
     <h3>Howdy, {{ user.displayName }}</h3>
     <img class="card-img-top" [src]="user.photoURL || 'https://api.adorable.io/avatars/109/fire.png'" width=50px>
     <p class="text-truncate">UID: {{ user.uid }}</p>
-    <button class="button" (click)="logout()">Logout</button>
+    
+
+<br>
+<button mat-raised-button color="secondary"  class="gix-button-shadow gix-cornecto-button" 
+(click)="logout()"><mat-icon>lock</mat-icon>  
+   <span class="gix-button-cornecto-label">Logout</span>
+</button>
   </div>
 </ng-template>
 
