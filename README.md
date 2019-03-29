@@ -1,5 +1,11 @@
-# GIX Goal: 
+# GIX's FireStarter Goal: 
 * Base Starter Kit made of my common patterns (Angular Material, PrimeNG)
+
+## Material Design
+* all MDC available
+
+## PrimeNG
+* Toasting Service replacing the notification service
 
 ---
 
