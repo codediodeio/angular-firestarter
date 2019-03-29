@@ -1,5 +1,7 @@
 # GIX's FireStarter Goal: 
 * Base Starter Kit made of my common patterns (Angular Material, PrimeNG)
+* Contains common components  for implementations.
+
 
 ## Material Design
 * all MDC available
