@@ -34,7 +34,7 @@
     "core-js": "^2.5.4",
     "firebase": "^5.9.0",
     "gix-angular-pipes": "^9.0.9",
-    "gixng-buttons": "^0.2.17",
+
     "hammerjs": "^2.0.8",
     "primeicons": "^1.0.0",
     "primeng": "^7.1.0",
