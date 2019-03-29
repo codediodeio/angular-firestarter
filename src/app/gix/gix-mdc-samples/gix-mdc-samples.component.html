@@ -1,4 +1,3 @@
-
 <hr>
 <h1>GIX Angular Fire - Adding-on</h1>
 <h2>Includes Angular Material Design </h2>
@@ -14,36 +13,30 @@
 </div>
 <hr>
 
-<button mat-raised-button [color]="color"  class="gix-button-shadow gix-cornecto-button"
-(click)="showNotification('creating clicked')"
->  
-    <mat-icon>add</mat-icon>  
-     <span class="gix-button-cornecto-label">Create</span>
+<button mat-raised-button [color]="color" class="gix-button-shadow gix-cornecto-button"
+  (click)="showNotification('creating clicked')">
+  <mat-icon>add</mat-icon>
+  <span class="gix-button-cornecto-label">Create</span>
 </button>
 
-<button mat-raised-button color="primary"  class="gix-button-shadow gix-cornecto-button">  
-    <mat-icon>dashboard</mat-icon>  
-     <span class="gix-button-cornecto-label">Dashboard</span>
+<button mat-raised-button color="primary" class="gix-button-shadow gix-cornecto-button">
+  <mat-icon>dashboard</mat-icon>
+  <span class="gix-button-cornecto-label">Dashboard</span>
 </button>
-
 
 <hr>
-<h3>Material Design Icons</h3>
-<mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
-<mat-icon aria-hidden="false" aria-label="Example add icon">add</mat-icon>
-<mat-icon aria-hidden="false" aria-label="Example zoom_in
-icon">zoom_in</mat-icon>
-<mat-icon aria-hidden="false" aria-label="Example zoomout icon">zoom_out</mat-icon>
-<mat-icon aria-hidden="false" aria-label="Example lock icon">lock</mat-icon>
-<mat-icon aria-hidden="false" aria-label="Example pan icon">pan_tool</mat-icon>
-<mat-icon aria-hidden="false" aria-label="Example payment icon">payment</mat-icon>
-<mat-icon aria-hidden="false" aria-label="Example pets icon">pets</mat-icon>
-<mat-icon aria-hidden="false" aria-label="Example print icon">print</mat-icon>
-<mat-icon aria-hidden="false" aria-label="Example star_rate icon">star_rate</mat-icon>
-<mat-icon aria-hidden="false" aria-label="Example turned_in_not
-icon">turned_in_not
-  </mat-icon>
-<mat-icon aria-hidden="false" aria-label="Example settings_voice icon">settings_voice</mat-icon>
+
+
+<h2>Toast Notifications</h2>
+
+<h3 class="first">Severities</h3>
+<button type="button" pButton (click)="showSuccess()" label="Success" class="ui-button-success"></button>
+<button type="button" pButton (click)="showInfo()" label="Info" class="ui-button-info"></button>
+<button type="button" pButton (click)="showWarn()" label="Warn" class="ui-button-warning"></button>
+<p-button (click)="showWarnSticky()" label="Warn Sticky" class="ui-button-warning"></p-button>
+<button type="button" pButton (click)="showError()" label="Error" class="ui-button-danger"></button>
+
+<hr>
 <br>
 <h3>Material Resources</h3>
 <ul>
@@ -60,6 +53,25 @@ icon">turned_in_not
 
   </li>
 </ul>
+<hr>
+
+<h3>Material Design Icons</h3>
+<mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
+<mat-icon aria-hidden="false" aria-label="Example add icon">add</mat-icon>
+<mat-icon aria-hidden="false" aria-label="Example zoom_in
+icon">zoom_in</mat-icon>
+<mat-icon aria-hidden="false" aria-label="Example zoomout icon">zoom_out</mat-icon>
+<mat-icon aria-hidden="false" aria-label="Example lock icon">lock</mat-icon>
+<mat-icon aria-hidden="false" aria-label="Example pan icon">pan_tool</mat-icon>
+<mat-icon aria-hidden="false" aria-label="Example payment icon">payment</mat-icon>
+<mat-icon aria-hidden="false" aria-label="Example pets icon">pets</mat-icon>
+<mat-icon aria-hidden="false" aria-label="Example print icon">print</mat-icon>
+<mat-icon aria-hidden="false" aria-label="Example star_rate icon">star_rate</mat-icon>
+<mat-icon aria-hidden="false" aria-label="Example turned_in_not
+icon">turned_in_not
+</mat-icon>
+<mat-icon aria-hidden="false" aria-label="Example settings_voice icon">settings_voice</mat-icon>
+
 
 <hr>
 <h2>Font Awesome Icons</h2>
@@ -109,12 +121,3 @@ icon">turned_in_not
 &nbsp;
 <i class="fas fa-terminal"></i>
 &nbsp;
-
-<h2>Toast Notifications</h2>
-
-<h3 class="first">Severities</h3>
-<button type="button" pButton (click)="showSuccess()" label="Success" class="ui-button-success"></button>
-<button type="button" pButton (click)="showInfo()" label="Info" class="ui-button-info"></button>
-<button type="button" pButton (click)="showWarn()" label="Warn" class="ui-button-warning"></button>
-<p-button   (click)="showWarnSticky()" label="Warn Sticky" class="ui-button-warning"></p-button>
-<button type="button" pButton (click)="showError()" label="Error" class="ui-button-danger"></button>
