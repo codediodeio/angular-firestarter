@@ -6,6 +6,7 @@ import {
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { tap, finalize } from 'rxjs/operators';
+import { NotifyService } from 'src/app/core/notify.service';
 
 @Component({
   selector: 'upload-page',
@@ -24,13 +25,19 @@ export class UploadPageComponent {
   // Download URL
   downloadURL: Observable<string>;
 
+  sourcePath: string;
+
   // State for dropzone CSS toggling
   isHovering: boolean;
 
   constructor(
     private storage: AngularFireStorage,
-    private db: AngularFirestore
-  ) {}
+    private db: AngularFirestore,
+    public notify: NotifyService
+  ) {
+
+
+  }
 
   toggleHover(event: boolean) {
     this.isHovering = event;
@@ -49,6 +56,9 @@ export class UploadPageComponent {
     // The storage path
     const path = `test/${new Date().getTime()}_${file.name}`;
 
+    //keep the path
+    this.sourcePath = path;
+
     // Totally optional metadata
     const customMetadata = { app: 'My AngularFire-powered PWA!' };
 
@@ -64,13 +74,30 @@ export class UploadPageComponent {
           this.db.collection('photos').add({ path, size: snap.totalBytes });
         }
       }),
-      finalize(() => this.downloadURL = this.storage.ref(path).getDownloadURL() )
+      finalize(() => {
+        this.downloadURL = this.storage.ref(path).getDownloadURL();
+
+        //@result expected to notify when we are getting the download url
+        this.downloadURL.subscribe(data => {
+          this.notifyOpen(data, this.sourcePath);
+        });
+      })
     );
 
 
     // The file's download URL
   }
 
+  notifyOpen(url: string, path: string) {
+    this.notify.add(
+      {
+        summary: "File uploaded",
+        detail: ": " + path,
+        key: 'u',
+        data: url,
+        sticky:true
+      });
+  }
   // Determines if the upload task is active
   isActive(snapshot) {
     return (

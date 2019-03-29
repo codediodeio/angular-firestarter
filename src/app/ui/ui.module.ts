@@ -47,6 +47,7 @@ import { ToastModule } from 'primeng/toast';
 
 import { ButtonModule } from 'primeng/button';
 import { GixMdcSamplesComponent } from '../gix/gix-mdc-samples/gix-mdc-samples.component';
+import { NotificationToasterComponent } from './notification-toaster/notification-toaster.component';
 
 
 @NgModule({
@@ -84,12 +85,14 @@ import { GixMdcSamplesComponent } from '../gix/gix-mdc-samples/gix-mdc-samples.c
     UserProfileComponent,
     UserFormComponent,
     SsrPageComponent,
-    GixMdcSamplesComponent
+    GixMdcSamplesComponent,
+    NotificationToasterComponent
   ],
   exports: [
     MainNavComponent,
     LoadingSpinnerComponent,
     NotificationMessageComponent,
+    NotificationToasterComponent,
     UserProfileComponent,
     UserFormComponent,
     ReactiveFormsModule,

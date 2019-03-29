@@ -22,6 +22,9 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireFunctionsModule } from '@angular/fire/functions';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/components/common/messageservice';
+import { NotifyService } from './core/notify.service';
 
 // IMPORTANT
 // Add your own project credentials to environments/*.ts
@@ -41,11 +44,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AngularFireAuthModule,
     AngularFireStorageModule,
     AngularFireFunctionsModule,
+    ToastModule,
     ServiceWorkerModule.register('/ngsw-worker.js', {
       enabled: environment.production
     }),
     BrowserAnimationsModule
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers:[MessageService,NotifyService]
 })
-export class AppModule {}
+export class AppModule {
+ 
+}
