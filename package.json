@@ -1,9 +1,9 @@
 {
   "name": "firestarter",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --host 0.0.0.0 --port 4200 --disableHostCheck ",
     "build": "ng build --prod",
     "test": "ng test --watch false",
     "lint": "ng lint",
@@ -11,7 +11,12 @@
     "build:all": "ng build --prod && ng run firestarter:server && npm run webpack:prerender && npm run prerender",
     "serve:prerender": "http-server dist/firestarter -c-1",
     "webpack:prerender": "webpack --config webpack.prerender.config.js",
-    "prerender": "node dist/firestarter/prerender.js"
+    "prerender": "node dist/firestarter/prerender.js",
+    "dk:build": "docker build -t firestarter .",
+    "dk:run-fg": "docker run -it  -v ${PWD}:/usr/src/app  -v /usr/src/app/node_modules   -p 4200:4200   --rm   firestarter",
+    "dk:run-bg": "yarn dk:stop;docker run -d  -v ${PWD}:/usr/src/app -v /usr/src/app/node_modules -p 4200:4200 --name   firestarter-container firestarter",
+    "dk:run": "npm run dk:run-bg",
+    "dk:stop": "docker stop firestarter-container;docker rm firestarter-container"
   },
   "private": true,
   "dependencies": {
