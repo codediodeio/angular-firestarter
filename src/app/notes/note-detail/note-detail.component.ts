@@ -25,7 +25,8 @@ export class NoteDetailComponent {
   deleteNote(id: string) {
     this.notesService.deleteNote(id)
     .then((data)=>{
-      this.notifyService.add({severity:'info',summary: "Note removed", detail: "Note: \"" + id + "\" removed."});
+      this.notifyService.add({severity:'info',summary: "Note removed", detail: "Note: \"" + id + "\" removed.",
+    data: "NoteID: " + id});
   })
   .catch((err)=>{ this.notifyService.add({severity:'error',summary: "Note removal error " + err, detail: "Note: \"" + id + "\" FAILED to remove."});
 
