@@ -9,6 +9,26 @@
 ## PrimeNG
 * Toasting Service replacing the notification service
 
+## Docker
+* A image and script command to run in a docker container
+### Build
+```sh
+npm run dk:build
+yarn dk:build
+```
+### Run in Foreground
+```sh
+npm run dk:run-fg
+yarn dk:run-fg
+```
+### Run in Background
+```sh
+npm run dk:run-bg #Start
+yarn dk:run-bg #Start
+#
+npm run dk:stop #Stop
+yarn dk:stop #Stop
+```
 ---
 
 <p align="center">
