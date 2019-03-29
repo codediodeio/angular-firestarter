@@ -1,6 +1,8 @@
+import { MessageService } from 'primeng/components/common/messageservice';
+import { Message } from 'primeng/components/common/message';
+
 import { Injectable } from '@angular/core';
 
-import { Subject } from 'rxjs';
 
 /// Notify users about errors and other helpful stuff
 export interface Msg {
@@ -11,16 +13,49 @@ export interface Msg {
 @Injectable()
 export class NotifyService {
 
-  private _msgSource = new Subject<Msg | null>();
+  /**
+   *
+   */
+  constructor(public messageService: MessageService) {
 
-  msg = this._msgSource.asObservable();
+
+  }
+
 
   update(content: string, style: 'error' | 'info' | 'success') {
-    const msg: Msg = { content, style };
-    this._msgSource.next(msg);
+
+    this.add({ severity: style, summary: style + ' ', detail: content });
+
+    console.log("Notification  update:" + content);
   }
 
+
+
   clear() {
-    this._msgSource.next(null);
+    this.clearToast();
   }
+
+
+  //@feature Toasting Service
+
+  add(msg: Message,life: number=4200) {
+   if (!msg.life) msg.life=life;
+    this.messageService.add(msg);
+  }
+  clearToast() {
+    this.messageService.clear();
+  }
+  //
+
+  //@feature Toasting service
+
+  onConfirm() {
+    this.messageService.clear('');
+  }
+
+  onReject() {
+    this.messageService.clear('');
+  }
+
+
 }

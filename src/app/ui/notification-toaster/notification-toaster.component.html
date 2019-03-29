@@ -1,0 +1,66 @@
+
+<!--@feature Toasting Service-->
+<!-- <p-toast [style]="{marginTop: '80px'}"></p-toast>
+
+<p-toast [style]="{marginTop: '80px'}" position="top-left" key="tl"></p-toast>
+
+<p-toast [style]="{marginTop: '80px'}" position="top-center" key="tc"></p-toast>
+
+<p-toast [style]="{marginTop: '80px'}" styleClass="custom-toast" key="custom" position="bottom-center"></p-toast> -->
+
+<!--@feature formatted -->
+<p-toast position="top-right"   [baseZIndex]="5000" >
+    <ng-template let-message pTemplate="message"  >
+        <div style="text-align: center">
+            <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
+            <h3>{{message.summary}}</h3>
+             
+            <p>{{message.detail}}</p>
+        </div>
+        <div class="ui-g ui-fluid">
+          
+              
+        </div>
+      </ng-template>
+</p-toast>
+
+<!--@feature Ok/More -->
+<p-toast position="center" key="okmore"  [baseZIndex]="5000">
+    <ng-template let-message pTemplate="message">
+        <div style="text-align: center">
+            <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
+            <h3>{{message.summary}}</h3>
+            <h4>:)</h4>
+            <p>{{message.detail}}</p>
+        </div>
+        <div class="ui-g ui-fluid">
+          <div class="ui-g-6">
+                <button type="button" pButton (click)="onConfirm()" label="Ok" class="ui-button-success"></button>
+              </div>
+            <div class="ui-g-6">
+              <button type="button" pButton (click)="onReject()" label="More" class="ui-button-secondary"></button>
+            </div>
+        </div>
+      </ng-template>
+</p-toast>
+
+<!--@feature YES/No Center Screen Modal-->
+
+<p-toast position="center" key="c" (onClose)="onReject()" [modal]="true" [baseZIndex]="5000">
+    <ng-template let-message pTemplate="message">
+        <div style="text-align: center">
+            <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
+            <h3>{{message.summary}}</h3>
+            <h4>:)</h4>
+            <p>{{message.detail}}</p>
+        </div>
+        <div class="ui-g ui-fluid">
+            <div class="ui-g-6">
+                <button type="button" pButton (click)="onConfirm()" label="Yes" class="ui-button-success"></button>
+            </div>
+            <div class="ui-g-6">
+                <button type="button" pButton (click)="onReject()" label="No" class="ui-button-secondary"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-toast>
