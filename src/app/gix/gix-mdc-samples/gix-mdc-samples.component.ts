@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { NotifyService } from 'src/app/core/notify.service';
 
+
 @Component({
   selector: 'gix-mdc-samples',
   templateUrl: './gix-mdc-samples.component.html',
@@ -12,6 +13,8 @@ export class GixMdcSamplesComponent implements OnInit {
 
 
   constructor(public notifyService: NotifyService) { }
+
+
 
   ngOnInit() {
   }

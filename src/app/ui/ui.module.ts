@@ -51,6 +51,9 @@ import { NotificationToasterComponent } from './notification-toaster/notificatio
 
 import {MatStepperModule} from '@angular/material/stepper';
 
+import {MatDialogModule} from '@angular/material/dialog';
+import { GixDialogSampleComponent } from '../gix/gix-dialog-sample/gix-dialog-sample.component';
+
 @NgModule({
   imports: [CommonModule, RouterModule, ReactiveFormsModule,
     MatGridListModule,
@@ -76,7 +79,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     ConfirmDialogModule,
     ToastModule,
     ButtonModule,
-    MatStepperModule
+    MatStepperModule,
+    MatDialogModule
   ],
   declarations: [
     UserLoginComponent,
@@ -88,7 +92,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     UserFormComponent,
     SsrPageComponent,
     GixMdcSamplesComponent,
-    NotificationToasterComponent
+    NotificationToasterComponent,
+    GixDialogSampleComponent
   ],
   exports: [
     MainNavComponent,
@@ -97,6 +102,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     NotificationToasterComponent,
     UserProfileComponent,
     UserFormComponent,
+    //
+    GixDialogSampleComponent,
     ReactiveFormsModule,
     MatGridListModule,
     MatIconModule,
@@ -121,7 +128,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     ToastModule,
     ButtonModule,
     MatButtonModule,
-    MatStepperModule
+    MatStepperModule,
+    MatDialogModule
   ]
 })
 export class UiModule { }

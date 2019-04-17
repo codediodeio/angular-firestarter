@@ -14,7 +14,9 @@
 <hr>
 
 <button mat-raised-button color="primary" class="gix-button-shadow gix-cornecto-button"
-  (click)="showNotification('creating clicked')">
+  (click)="showNotification('creating clicked')"
+  matTooltip="A rounded button using Material Design"
+  aria-label="A Rounded button using material design">
   <mat-icon>add</mat-icon>
   <span class="gix-button-cornecto-label">Create</span>
 </button>
@@ -30,18 +32,45 @@
 <h2>Toast Notifications</h2>
 
 <h3 class="first">Severities</h3>
-<button type="button" pButton (click)="showSuccess()" label="Success" class="ui-button-success"></button>
-<button type="button" pButton (click)="showInfo()" label="Info" class="ui-button-info"></button>
-<button type="button" pButton (click)="showWarn()" label="Warn" class="ui-button-warning"></button>
-<p-button (click)="showWarnSticky()" label="Warn Sticky" class="ui-button-warning"></p-button>
-<button type="button" pButton (click)="showError()" label="Error" class="ui-button-danger"></button>
+<button type="button" pButton (click)="showSuccess()" label="Success" class="ui-button-success"
+  matTooltip="Show a SUCCESS notification toast"
+  aria-label="Button that displays a success notification toast"></button>
+<button type="button" pButton (click)="showInfo()" label="Info" class="ui-button-info"
+  matTooltip="Show a INFORMATION notification toast"
+  aria-label="Button that displays an Info notification toast"></button>
+<button type="button" pButton (click)="showWarn()" label="Warn" class="ui-button-warning"
+  matTooltip="Show a WARNING notification toast"
+  aria-label="Button that displays a warning notification toast"></button>
+<p-button (click)="showWarnSticky()" label="Warn Sticky" class="ui-button-warning"
+  matTooltip="Show a WARNING notification toast that will stick until closed"
+  aria-label="Button that displays a warning sticking notification toast"></p-button>
+<button type="button" pButton (click)="showError()" label="Error" class="ui-button-danger"
+  matTooltip="Show an ERROR notification toast "
+  aria-label="Button that displays a error notification toast"></button>
 
+  <hr>
+
+
+  <h2>Button Labels</h2>
+  <button mat-raised-button matTooltip="Info about the action"
+    aria-label="Button that displays a tooltip when focused or hovered over">
+    Action
+  </button>
+  
+  <hr>
+  
+  
+  
 <hr>
 <br>
 <h3>Material Resources</h3>
 <ul>
   <li>
     <a href="https://material.angular.io/components/button/examples">Angular/Material/Components/button/examples</a>
+
+  </li>
+  <li>
+    <a href="https://www.primefaces.org/primeng/#/">PrimeNG</a>
 
   </li>
   <li>
