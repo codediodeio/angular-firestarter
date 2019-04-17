@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { NotifyService } from 'src/app/core/notify.service';
 
 
+import {MatDialog, MatDialogConfig} from '@angular/material';
+import { GixDialogSampleComponent } from '../gix-dialog-sample/gix-dialog-sample.component';
+
 @Component({
   selector: 'gix-mdc-samples',
   templateUrl: './gix-mdc-samples.component.html',
@@ -12,9 +15,24 @@ import { NotifyService } from 'src/app/core/notify.service';
 export class GixMdcSamplesComponent implements OnInit {
 
 
-  constructor(public notifyService: NotifyService) { }
+  constructor(public notifyService: NotifyService,public dialog: MatDialog) { }
 
 
+  openDialog() {
+
+    
+    const dialogRef = this.dialog.open(GixDialogSampleComponent,{
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      height: '100%',
+      width: '100%'
+    });
+    
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 
   ngOnInit() {
   }
