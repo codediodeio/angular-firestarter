@@ -1,11 +1,12 @@
 export const environment = {
   production: true,
-  firebase: {
-    apiKey: 'AIzaSyAc9Tt8pQQF3ntu2Tz66iUKl_fXHtdhIyc',
-    authDomain: 'firestarter-96e46.firebaseapp.com',
-    databaseURL: 'https://firestarter-96e46.firebaseio.com',
-    projectId: 'firestarter-96e46',
-    storageBucket: 'firestarter-96e46.appspot.com',
-    messagingSenderId: '581326886241'
+  firebase:  {
+    apiKey: 'AIzaSyAKlEX5a8PQaadYNSrohqfl33O37Kjkv1Y',
+    authDomain: 'angular-voxer.firebaseapp.com',
+    databaseURL: 'https://angular-voxer.firebaseio.com',
+    projectId: 'angular-voxer',
+    storageBucket: 'angular-voxer.appspot.com',
+    messagingSenderId: '122050526979',
+    appId: '1:122050526979:web:529304dce5ffca7a'
   }
 };

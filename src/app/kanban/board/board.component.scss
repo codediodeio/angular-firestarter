@@ -1,0 +1,32 @@
+.outer-card {
+    margin: 10px;
+    min-width: 300px;
+    max-width: 300px;
+    padding: 10px;
+    background: #212121;
+  }
+  
+  .inner-card {
+      margin: 5px 0;
+      cursor: pointer;
+  }
+
+  .cdk-drag-animating {
+    transition: transform 300ms ease;
+  }
+  
+  .tasks.cdk-drop-list-dragging .cdk-drag {
+    transition: transform 300ms ease;
+  }
+
+.cdk-drag-placeholder {
+  opacity: 0.5;
+}
+
+.blue { background: #71deff; color: black; }
+.green { background: #36e9b6; color: black;  }
+.yellow { background: #ffcf44; color: black; }
+.purple { background: #b15cff; }
+.red { background: #e74a4a; }
+
+.gray { background: gray; text-decoration: line-through; }
