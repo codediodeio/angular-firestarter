@@ -1,0 +1,16 @@
+button {
+    // background: red;
+    // background-image: url('/assets/google-signin.png');
+    img {
+        width: 1.25em;
+    }
+}
+
+
+:host {
+    text-align: center;
+}
+
+.logout {
+    padding-top: 5em;
+}

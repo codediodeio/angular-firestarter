@@ -1,0 +1,82 @@
+
+
+
+// THIS --> https://material.io/design/color/#tools-for-picking-colors
+// https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=fa8242
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+@import url("https://use.typekit.net/jnq3uxd.css");
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+$custom-typography: mat-typography-config(
+    $font-family: 'sofia-pro'
+);
+
+
+@include mat-core($custom-typography);
+
+$custom-orange: (
+    50: #fff3e0,
+    100: #ffe0b2,
+    200: #ffcc80,
+    300: #ffb74d,
+    400: #ffa726,
+    500: #ff9800,
+    600: #fb8c00,
+    700: #f57c00,
+    800: #ef6c00,
+    900: #e65100,
+    A100: #ffd180,
+    A200: #ffab40,
+    A400: #ff9100,
+    A700: #ff6d00,
+    contrast: (
+        50: $black-87-opacity,
+        100: $black-87-opacity,
+        200: $black-87-opacity,
+        300: $black-87-opacity,
+        400: $black-87-opacity,
+        500: white,
+        600: white,
+        700: white,
+        800: white,
+        900: white,
+        A100: $black-87-opacity,
+        A200: $black-87-opacity,
+        A400: $black-87-opacity,
+        A700: white,
+    )
+);
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$firestarter-primary: mat-palette($custom-orange);
+$firestarter-accent: mat-palette($mat-green, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$firestarter-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$firestarter-theme: mat-dark-theme($firestarter-primary, $firestarter-accent, $firestarter-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($firestarter-theme);
+
+/* You can add global styles to this file, and also import other style files */
+
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: sofia-pro, sans-serif; }
+a {
+    color: white;
+    text-decoration: none;
+}
