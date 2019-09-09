@@ -68,10 +68,20 @@
     <mat-error class="server-error">{{ serverMessage }}</mat-error>
 
     <button
+      *ngIf="isPasswordReset"
+      mat-stroked-button
+      type="submit"
+      [disabled]="loading"
+    >
+      Send Reset Email
+    </button>
+
+    <button
+      *ngIf="!isPasswordReset"
       mat-raised-button
       color="accent"
       type="submit"
-      [disabled]="form.invalid || !passwordDoesMatch"
+      [disabled]="form.invalid || !passwordDoesMatch || loading"
     >
       Submit
     </button>

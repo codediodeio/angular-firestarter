@@ -1,6 +1,5 @@
 <button mat-button color="warn" (click)="canDelete ? deleteBoard() : prepareForDelete()">
     <mat-icon>delete</mat-icon>
-    <!-- <span class="confirm" *ngIf="canDelete">confirm {{ (canDelete | async) }}</span> -->
     <span *ngIf="canDelete">confirm</span> 
 </button>
 

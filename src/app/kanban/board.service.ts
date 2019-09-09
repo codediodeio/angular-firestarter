@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
 import { switchMap, map } from 'rxjs/operators';
-import { Board, Task } from './board.models';
+import { Board, Task } from './board.model';
 
 @Injectable({
   providedIn: 'root'
@@ -32,14 +32,14 @@ export class BoardService {
         if (user) {
           return this.db
             .collection<Board>('boards', ref =>
-              ref.where('uid', '==', user.uid)
+              ref.where('uid', '==', user.uid).orderBy('priority')
             )
             .valueChanges({ idField: 'id' });
         } else {
           return [];
         }
       }),
-      map(boards => boards.sort((a, b) => a.priority - b.priority))
+      // map(boards => boards.sort((a, b) => a.priority - b.priority))
     );
   }
 

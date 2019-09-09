@@ -44,7 +44,7 @@ export class TaskDialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<TaskDialogComponent>,
-    private ps: BoardService,
+    private boardService: BoardService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -53,7 +53,7 @@ export class TaskDialogComponent {
   }
 
   handleTaskDelete() {
-    this.ps.removeTask(this.data.boardId, this.data.task);
+    this.boardService.removeTask(this.data.boardId, this.data.task);
     this.dialogRef.close();
   }
 }

@@ -3,7 +3,6 @@ import {
   FormBuilder,
   FormGroup,
   Validators,
-  AbstractControl
 } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
 
