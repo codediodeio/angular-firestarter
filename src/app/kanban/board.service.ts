@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
-import * as firebase from 'firebase/app';
+import firebase from 'firebase/app';
 import { switchMap, map } from 'rxjs/operators';
 import { Board, Task } from './board.model';
 
@@ -15,7 +15,7 @@ export class BoardService {
    * Creates a new board for the current user
    */
   async createBoard(data: Board) {
-    const user = await this.afAuth.auth.currentUser;
+    const user = await this.afAuth.currentUser;
     return this.db.collection('boards').add({
       ...data,
       uid: user.uid,
