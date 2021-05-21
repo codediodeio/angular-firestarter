@@ -1,9 +1,3 @@
-<p align="center">
-
-<a href="https://circleci.com/gh/codediodeio/angular-firestarter"><img src="https://circleci.com/gh/codediodeio/angular-firestarter.svg?style=svg"></a>
-
-</p>
-
 # FireStarter
 
 Firestarter is an Angular PWA powered by Firebase.
