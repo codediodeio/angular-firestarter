@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import firebase from 'firebase/app';
 import { switchMap, map } from 'rxjs/operators';
 import { Board, Task } from './board.model';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +37,7 @@ export class BoardService {
             )
             .valueChanges({ idField: 'id' });
         } else {
-          return [];
+          return of([]);
         }
       }),
       // map(boards => boards.sort((a, b) => a.priority - b.priority))
