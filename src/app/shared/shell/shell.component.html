@@ -8,8 +8,7 @@
      
       <a mat-list-item routerLink="/" (click)="drawer.close()">Home</a>
       <a mat-list-item routerLink="/login" (click)="drawer.close()">Login</a>
-      <a mat-list-item routerLink="/kanban" (click)="drawer.close()">Kanban Demo</a>
-      <a mat-list-item routerLink="/customers" (click)="drawer.close()">SSR Demo</a>
+      <a mat-list-item routerLink="/kanban" (click)="drawer.close()">Kanban Library</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -28,8 +27,8 @@
 
       <span class="fill-space"></span>
       <div *ngIf="!(isHandset$ | async)">
-        <a mat-button routerLink="/kanban">🍱 Kanban Demo</a>
-        <a mat-button routerLink="/customers">⚡ SSR Demo</a>
+        <a mat-button routerLink="/kanban">🍱 Kanban Library</a>
+   
 
         <a mat-button routerLink="/login" *ngIf="!(afAuth.authState | async)">🔑 Login</a>
         <a mat-button routerLink="/login" *ngIf="afAuth.authState | async as user" >
@@ -51,15 +50,6 @@
         <a mat-menu-item href="https://github.com/codediodeio/angular-firestarter">
           <i>💾</i>
           <span>Code on Github</span>
-        </a>
-        <a mat-menu-item href="https://fireship.io/courses/angular">
-          <i>🔥</i>
-          <span>Full Course on Fireship</span>
-        </a>
-
-        <a mat-menu-item href="https://www.youtube.com/channel/UCsBjURrPoezykLs9EqgamOA">
-          <i>📺</i>
-          <span>Watch on the YouTube</span>
         </a>
       </mat-menu>
     </mat-toolbar>
